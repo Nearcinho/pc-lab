@@ -70,17 +70,6 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        <motion.div
-          initial={reduced ? false : { opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={reduced ? undefined : { duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
-          className="mt-10"
-        >
-          <span className="badge-polygon inline-block bg-brand px-5 py-2 font-bebas text-base font-semibold uppercase tracking-[0.22em] text-[#051018]">
-            Diseñado para ti · Construido para rendir
-          </span>
-        </motion.div>
-
         {reduced && (
           <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-end pr-8">
             <Image
