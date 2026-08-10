@@ -38,7 +38,7 @@ export function Footer() {
           <div className="max-w-sm">
             <Brand />
             <p className="mt-5 text-sm leading-relaxed text-muted-2">
-              Un estudio de Madrid que diseña, ensambla y certifica PCs a medida. Nada de catálogo: cada equipo se
+              Un estudio de Madrid que diseña y ensambla PCs a medida. Nada de catálogo: cada equipo se
               piensa para lo que tú vas a hacer con él.
             </p>
           </div>

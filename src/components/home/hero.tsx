@@ -53,7 +53,7 @@ export function Hero() {
           transition={reduced ? undefined : { delay: 0.25 }}
           className="mt-8 max-w-xl text-lg leading-relaxed text-muted-2 sm:text-xl"
         >
-          No vendemos torres de catálogo. Escuchamos tu presupuesto, tus juegos, tu trabajo y tu futuro, y diseñamos, ensamblamos y certificamos la máquina exacta que necesitas.
+          No vendemos torres de catálogo. Escuchamos tu presupuesto, tus juegos, tu trabajo y tu futuro, y diseñamos y ensamblamos la máquina exacta que necesitas.
         </motion.p>
 
         <motion.div

@@ -2,11 +2,11 @@ export const brand = {
   positioning:
     "PC LAB no es un catálogo de ordenadores: es el estudio que diseña el ordenador perfecto alrededor de tus necesidades — tu presupuesto, tus juegos, tu trabajo y tu futuro.",
   promise:
-    "No compras un ordenador. Contratas a un experto que diseña, construye y certifica la máquina exacta que necesitas — y que te acompaña después de la entrega.",
+    "No compras un ordenador. Contratas a un experto que diseña y construye la máquina exacta que necesitas — y que te acompaña después de la entrega.",
   hero: {
     eyebrow: "Estudio de consultoría de PC a medida",
     title: "No vendemos ordenadores. Diseñamos el tuyo.",
-    lead: "Cada equipo PC LAB nace de una conversación: tu presupuesto, lo que juegas, lo que creas y lo que planeas. Nuestros ingenieros diseñan, ensamblan y certifican la máquina perfecta para ti. Sin catálogos, sin piezas de más.",
+    lead: "Cada equipo PC LAB nace de una conversación: tu presupuesto, lo que juegas, lo que creas y lo que planeas. Nuestros ingenieros diseñan y ensamblan la máquina perfecta para ti. Sin catálogos, sin piezas de más.",
     primary: "Empezar mi consultoría",
     secondary: "Ver builds recientes",
   },
@@ -17,10 +17,10 @@ export const brand = {
     },
     {
       title: "Ingeniería artesanal",
-      text: "Diseño del circuito, gestión térmica, cable management de nivel show y ensamblado a mano por técnicos certificados.",
+      text: "Diseño del circuito, gestión térmica, cable management de nivel show y ensamblado a mano pieza a pieza.",
     },
     {
-      title: "Certificación transparente",
+      title: "Pruebas transparentes",
       text: "Test de estrés, temperaturas, ruido y benchmarks — todo medido y documentado en un informe que te entregamos. Sin letra pequeña.",
     },
   ],

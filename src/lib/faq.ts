@@ -15,7 +15,7 @@ export const faqGroups: FaqEntry[] = [
       {
         question: "¿Hacéis envíos a toda España?",
         answer:
-          "Sí. Enviamos a toda España y Portugal con seguros incluidos y embalaje antiestático certificado. Los envíos a Península son gratis en configuraciones superiores a 899€; a Islas aplicamos un suplemento sin sorpresas.",
+          "Sí. Enviamos a toda España y Portugal con seguros incluidos y embalaje antiestático de transporte. Los envíos a Península son gratis en configuraciones superiores a 899€; a Islas aplicamos un suplemento sin sorpresas.",
       },
       {
         question: "¿Puedo fraccionar el pago?",

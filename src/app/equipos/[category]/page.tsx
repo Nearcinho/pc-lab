@@ -13,7 +13,7 @@ const meta: Record<string, { title: string; description: string; hero: string; l
   },
   workstation: {
     title: "Workstations para crear | PC LAB Custom PC",
-    description: "Workstations de gama pro para render, edición, IA y desarrollo. Certificación de estabilidad 24/7 y entrega en Madrid.",
+    description: "Workstations de gama pro para render, edición, IA y desarrollo. Test de estabilidad 24/7 y entrega en Madrid.",
     hero: "Workstations",
     lede: "Rendimiento sin concesiones para render, edición, IA y desarrollo. Máquinas estables 24/7 con VRAM abundante y memoria de sobra.",
   },

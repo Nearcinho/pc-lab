@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/reveal";
 export const metadata: Metadata = {
   title: "Soluciones PC LAB | Diseño a medida para gaming, creación y streaming",
   description:
-    "No elegimos de catálogo: diseñamos cada PC según tu caso. Gaming, workstations y streaming con consultoría, ensamble premium y certificación de 24 h.",
+    "No elegimos de catálogo: diseñamos cada PC según tu caso. Gaming, workstations y streaming con consultoría, ensamble premium y test de 24 h.",
   alternates: { canonical: "/equipos" },
 };
 
@@ -26,7 +26,7 @@ const solutions = [
     title: "Workstations de creación",
     description:
       "Render, edición 4K/8K, IA y desarrollo: VRAM y núcleos justos para tu pipeline real, no para la hoja de marketing.",
-    bullets: ["Render y compilación al máximo", "VRAM y RAM según tu carga", "Estabilidad certificada 24/7"],
+    bullets: ["Render y compilación al máximo", "VRAM y RAM según tu carga", "Estabilidad probada 24/7"],
   },
   {
     slug: "streaming",

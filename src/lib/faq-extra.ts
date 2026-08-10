@@ -14,7 +14,7 @@ export const insurance = [
 ];
 
 export const envioDetails = [
-  "Embalaje certificado ISTA 3A y espumas a medida",
+  "Embalaje antiestático y espumas a medida",
   "Seguro de transporte incluido hasta 5.000 €",
   "Envíos a España peninsular gratis desde 899 €",
   "Islas Baleares y Canarias con suplemento transparente",

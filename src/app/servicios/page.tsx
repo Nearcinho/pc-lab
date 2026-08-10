@@ -57,7 +57,7 @@ const services = [
   {
     title: "Workstations de desarrollo",
     description: "Compilación, contenedores, bases de datos y entornos donde el tiempo vale oro.",
-    features: ["Núcleos y caché equilibrados", "Estabilidad 24/7 certificada", "Almacenamiento NVMe Gen4/5"],
+    features: ["Núcleos y caché equilibrados", "Estabilidad 24/7 probada", "Almacenamiento NVMe Gen4/5"],
   },
   {
     title: "Workstations de IA",
