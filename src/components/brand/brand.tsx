@@ -25,7 +25,7 @@ export function Brand({ className, showText = true, ...props }: BrandProps) {
           <span className="font-display text-[19px] font-semibold tracking-[0.2em] text-foreground">
             PC LAB<span className="text-muted-2">·Estudio</span>
           </span>
-          <span className="mt-1 hidden font-bebas text-[10px] font-normal uppercase tracking-[0.18em] text-brand sm:block">
+          <span className="mt-1 hidden font-bebas text-xs font-normal uppercase tracking-[0.18em] text-brand sm:block">
             Diseñado para ti · Construido para rendir
           </span>
         </span>
