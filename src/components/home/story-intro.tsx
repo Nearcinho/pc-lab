@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { asset } from "@/lib/base";
 
 const steps = [
   {
@@ -106,7 +107,7 @@ export function StoryIntro() {
           >
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-[#0a0a0a]/10 bg-[#0b0b0f]">
               <Image
-                src="/cases/tu-pc.jpg"
+                src={asset("/cases/tu-pc.jpg")}
                 alt="Equipo PC LAB diseñado y ensamblado a medida"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"

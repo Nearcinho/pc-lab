@@ -3,31 +3,32 @@
 import * as React from "react";
 import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
+import { asset } from "@/lib/base";
 
 const useCases = [
   {
     n: "01",
     title: "Gaming",
     text: "Máximo rendimiento para jugar como quieres.",
-    image: "/cases/gaming.jpg",
+    image: asset("/cases/gaming.jpg"),
   },
   {
     n: "02",
     title: "Creación",
     text: "Potencia para editar, diseñar y crear sin límites.",
-    image: "/cases/creacion.jpg",
+    image: asset("/cases/creacion.jpg"),
   },
   {
     n: "03",
     title: "Trabajo",
     text: "Una estación de trabajo diseñada para tu día a día.",
-    image: "/cases/trabajo.jpg",
+    image: asset("/cases/trabajo.jpg"),
   },
   {
     n: "04",
     title: "IA & Desarrollo",
     text: "Rendimiento para código, datos e inteligencia artificial.",
-    image: "/cases/ia-desarrollo.jpg",
+    image: asset("/cases/ia-desarrollo.jpg"),
   },
 ];
 

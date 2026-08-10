@@ -2,12 +2,13 @@
 
 import * as React from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { asset } from "@/lib/base";
 
 const details = [
-  { kicker: "Cable Management", text: "Orden por dentro. Precisión en cada conexión.", video: "/videos/cable-management.mp4" },
-  { kicker: "Compatibilidad", text: "Cada componente elegido para trabajar en conjunto.", video: "/videos/compatibility.mp4" },
-  { kicker: "Optimización", text: "BIOS, drivers y configuración preparados para rendir.", video: "/videos/optimizacion.mp4" },
-  { kicker: "Testing", text: "Probamos el equipo antes de entregarlo.", video: "/videos/testing.mp4" },
+  { kicker: "Cable Management", text: "Orden por dentro. Precisión en cada conexión.", video: asset("/videos/cable-management.mp4") },
+  { kicker: "Compatibilidad", text: "Cada componente elegido para trabajar en conjunto.", video: asset("/videos/compatibility.mp4") },
+  { kicker: "Optimización", text: "BIOS, drivers y configuración preparados para rendir.", video: asset("/videos/optimizacion.mp4") },
+  { kicker: "Testing", text: "Probamos el equipo antes de entregarlo.", video: asset("/videos/testing.mp4") },
 ];
 
 export function Craftsmanship() {
@@ -70,7 +71,7 @@ export function Craftsmanship() {
                   key={detail.video}
                   ref={videoRef}
                   src={detail.video}
-                  poster="/builds/apex.svg"
+                  poster={asset("/builds/apex.svg")}
                   autoPlay
                   muted
                   playsInline

@@ -1,3 +1,5 @@
+import { asset } from "@/lib/base";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -22,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-05-18",
     readTime: "7 min",
     author: "Equipo PC LAB",
-    cover: "/blog/ram.svg",
+    cover: asset("/blog/ram.svg"),
     gradient: "from-brand/25 to-brand-2/25",
     tags: ["RAM", "DDR5", "Guía"],
     content: [
@@ -50,7 +52,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-06-02",
     readTime: "9 min",
     author: "PC LAB",
-    cover: "/blog/cpu.svg",
+    cover: asset("/blog/cpu.svg"),
     gradient: "from-violet-500/20 to-cyan-500/20",
     tags: ["CPU", "AMD", "Intel", "Comparativa"],
     content: [
@@ -77,7 +79,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-04-20",
     readTime: "8 min",
     author: "PC LAB",
-    cover: "/blog/loop.svg",
+    cover: asset("/blog/loop.svg"),
     gradient: "from-cyan-500/20 to-blue-600/25",
     tags: ["Custom Loop", "Refrigeración"],
     content: [
@@ -103,7 +105,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-03-10",
     readTime: "6 min",
     author: "PC LAB",
-    cover: "/blog/stream.svg",
+    cover: asset("/blog/stream.svg"),
     gradient: "from-rose-500/20 to-violet-600/20",
     tags: ["Streaming", "Gaming", "NVENC"],
     content: [
@@ -126,7 +128,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-02-12",
     readTime: "9 min",
     author: "PC LAB",
-    cover: "/blog/workstation.svg",
+    cover: asset("/blog/workstation.svg"),
     gradient: "from-amber-500/20 to-orange-600/20",
     tags: ["Workstation", "Comparativa"],
     content: [
@@ -149,7 +151,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-02-01",
     readTime: "4 min",
     author: "PC LAB",
-    cover: "/blog/ship.svg",
+    cover: asset("/blog/ship.svg"),
     gradient: "from-emerald-500/20 to-teal-600/20",
     tags: ["Envíos", "Servicio"],
     content: [

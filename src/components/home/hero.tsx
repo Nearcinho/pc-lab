@@ -6,6 +6,7 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { asset } from "@/lib/base";
 
 const reveal = {
   hidden: { opacity: 0, y: 32 },
@@ -23,10 +24,10 @@ export function Hero() {
           muted
           loop
           playsInline
-          poster="/builds/mono.svg"
+          poster={asset("/builds/mono.svg")}
           className="h-full w-full object-cover"
         >
-          <source src="/hero-cinematic.mp4" type="video/mp4" />
+          <source src={asset("/hero-cinematic.mp4")} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[radial-gradient(70%_55%_at_50%_0%,rgba(79,209,255,0.09),transparent_70%)]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#050505]/95 via-[#050505]/60 to-[#050505]/15" />
@@ -73,7 +74,7 @@ export function Hero() {
         {reduced && (
           <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-end pr-8">
             <Image
-              src="/builds/mono.svg"
+              src={asset("/builds/mono.svg")}
               alt="Equipo PC LAB diseñado y ensamblado a medida"
               width={480}
               height={280}

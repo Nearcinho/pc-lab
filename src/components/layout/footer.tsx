@@ -41,7 +41,6 @@ export function Footer() {
               Un estudio de Madrid que diseña, ensambla y certifica PCs a medida. Nada de catálogo: cada equipo se
               piensa para lo que tú vas a hacer con él.
             </p>
-            <p className="mt-3 text-sm text-muted">{siteConfig.address}</p>
           </div>
 
           <nav aria-label="Navegación" className="grid grid-cols-2 gap-x-16 gap-y-3 sm:grid-cols-3 lg:grid-cols-2">

@@ -1,3 +1,5 @@
+import { asset } from "@/lib/base";
+
 export interface ShowcaseProject {
   slug: string;
   code: string;
@@ -21,7 +23,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     tagline: "Potencia equilibrada sin exceso de presupuesto.",
     story:
       "Un PC de compra lista para jugar en 1440p con todo en épico. El equilibrio perfecto entre CPU y GPU para años de juego fluido sin tocar el techo de gasto.",
-    image: "/builds/apex.svg",
+    image: asset("/builds/apex.svg"),
     budget: "≈ 1.650 €",
     focus: [
       { label: "Objetivo", value: "1440p épico · 240 Hz" },
@@ -43,7 +45,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     tagline: "Edición 4K y render sin tiempo muerto.",
     story:
       "Pensado para quien vive del timeline: render, edición 4K multicámara e IA aplicada a vídeo con headroom para crecer. Cada núcleo trabaja.",
-    image: "/builds/forge.svg",
+    image: asset("/builds/forge.svg"),
     budget: "≈ 2.199 €",
     focus: [
       { label: "Objetivo", value: "Render y edición 4K" },
@@ -64,7 +66,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     tagline: "Compila, entrénalo local y no te barra compilar.",
     story:
       "Para desarrollo e IA: compilación rápida, VRAM abundante para modelos locales y silencio durante horas de entrenamiento.",
-    image: "/builds/cascade.svg",
+    image: asset("/builds/cascade.svg"),
     budget: "≈ 2.499 €",
     focus: [
       { label: "Objetivo", value: "Código y IA local" },
@@ -85,7 +87,7 @@ export const showcaseProjects: ShowcaseProject[] = [
     tagline: "El techo de rendimiento, sin conmersiones.",
     story:
       "4K ultra con ray tracing, frecuencias de referencia y una torre que respira: el proyecto donde cada componente está en su punto máximo.",
-    image: "/builds/titan.svg",
+    image: asset("/builds/titan.svg"),
     budget: "≈ 2.749 €",
     focus: [
       { label: "Objetivo", value: "4K ultra + RT" },

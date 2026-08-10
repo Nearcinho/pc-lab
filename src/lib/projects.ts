@@ -1,3 +1,5 @@
+import { asset } from "@/lib/base";
+
 export interface Project {
   slug: string;
   name: string;
@@ -18,7 +20,7 @@ export const projects: Project[] = [
     brief: "Streaming 1080p60, edición 4K en Premiere y comunidad en paralelo: máquina que aguanta días de directo sin estrés.",
     purpose: "PC de streaming para creadora de contenido",
     profile: "Streamer y editora · directos largos",
-    image: "/builds/mono.svg",
+    image: asset("/builds/mono.svg"),
     hardware: [
       { label: "CPU", value: "Ryzen 7 7800X3D" },
       { label: "GPU", value: "RTX 4070 Ti Super 16 GB" },
@@ -44,7 +46,7 @@ export const projects: Project[] = [
     brief: "Simulación y esports 4K al máximo detalle: la GPU y la caché 3D mandan por delante de cualquier marketing de CPU.",
     purpose: "PC gaming 4K para simuladores",
     profile: "Creador de simulación · 4K ultra + ray tracing",
-    image: "/builds/titan.svg",
+    image: asset("/builds/titan.svg"),
     hardware: [
       { label: "CPU", value: "Ryzen 7 9800X3D" },
       { label: "GPU", value: "RTX 4090 24 GB" },
@@ -70,7 +72,7 @@ export const projects: Project[] = [
     brief: "Render 3D, edición 4K/8K e IA con los tiempos de pipeline recortados: 64 GB, 16 núcleos y VRAM para mantener escenas en memoria.",
     purpose: "Workstation de render 3D y creación",
     profile: "Estudio de creación · render + IA",
-    image: "/builds/forge.svg",
+    image: asset("/builds/forge.svg"),
     hardware: [
       { label: "CPU", value: "Ryzen 9 9950X (16 núcleos)" },
       { label: "GPU", value: "RTX 4080 Super 16 GB" },
@@ -96,7 +98,7 @@ export const projects: Project[] = [
     brief: "Un PC familiar que comparte dos jugadores y un adulto que trabaja con música: multitarea, 32 GB y espacio de sobra.",
     purpose: "Gaming y estudio para toda la casa",
     profile: "Familia multiusuario · 2+1",
-    image: "/builds/apex.svg",
+    image: asset("/builds/apex.svg"),
     hardware: [
       { label: "CPU", value: "Ryzen 7 9700X" },
       { label: "GPU", value: "RTX 4070 Super 12 GB" },
@@ -122,7 +124,7 @@ export const projects: Project[] = [
     brief: "Emisión estable 4K60 con AV1, juego fluido y silencioso: la build pensada para el día a día de un streamer serio.",
     purpose: "PC de streaming orientado a 4K60",
     profile: "Streamer de largo recorrido · 4K60 AV1",
-    image: "/builds/mono.svg",
+    image: asset("/builds/mono.svg"),
     hardware: [
       { label: "CPU", value: "Ryzen 7 9700X" },
       { label: "GPU", value: "RTX 4070 Ti Super 16 GB" },

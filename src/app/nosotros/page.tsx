@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { founder } from "@/lib/brand";
+import { asset } from "@/lib/base";
 import { siteConfig } from "@/lib/site";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
@@ -48,7 +49,7 @@ export default function NosotrosPage() {
                 <div className="pointer-events-none absolute -inset-x-6 -top-10 h-40 bg-[radial-gradient(closest-side,var(--brand-alpha),transparent)] opacity-50" aria-hidden />
                 <div className="relative flex size-24 items-center justify-center overflow-hidden rounded-2xl border border-brand/25 bg-brand/10 font-display text-3xl font-bold text-gradient">
                   <Image
-                    src="/founder/portrait.jpg"
+                    src={asset("/founder/portrait.jpg")}
                     alt={`Retrato de ${founder.name}`}
                     fill
                     sizes="96px"

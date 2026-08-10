@@ -1,4 +1,6 @@
-﻿export interface CatalogSpec {
+import { asset } from "@/lib/base";
+
+export interface CatalogSpec {
   cpu: string;
   gpu: string;
   ram: string;
@@ -33,7 +35,7 @@ export const pcs: PcBuild[] = [
     oldPrice: 2999,
     category: "gaming",
     tier: "Configuración tope de gama",
-    image: "/builds/titan.svg",
+    image: asset("/builds/titan.svg"),
     description:
       "Sin concesiones. Toda la potencia de la RTX 4090 y el mejor procesador gaming del mercado en una torre de referencia. Diseñada para 4K ultra, competición y años de headroom.",
     highlights: ["RTX 4090 24GB", "Ryzen 7 9800X3D", "32GB DDR5 6000", "AIO 360mm", "1000W Platinum"],
@@ -54,7 +56,7 @@ export const pcs: PcBuild[] = [
     price: 1649,
     category: "gaming",
     tier: "Rendimiento alto",
-    image: "/builds/apex.svg",
+    image: asset("/builds/apex.svg"),
     description:
       "El equilibrio perfecto entre rendimiento y precio. 1440p fluido con todo en épico y ray tracing encendido, sin sacrificar presupuesto para periféricos.",
     highlights: ["RTX 4070 Super 12GB", "Ryzen 7 7800X3D", "32GB DDR5 6000", "AIO 240mm", "850W Gold"],
@@ -75,7 +77,7 @@ export const pcs: PcBuild[] = [
     price: 1149,
     category: "gaming",
     tier: "Sin competencia",
-    image: "/builds/pulse.svg",
+    image: asset("/builds/pulse.svg"),
     description:
       "Pensada para competición: frecuencias altísimas en los esports más exigentes y latencia mínima. Gráfica sólida y CPU exprimido para el 1% low.",
     highlights: ["RTX 4060 Ti 8GB", "Ryzen 5 9600X", "32GB DDR5 6000", "Aire premium", "650W Gold"],
@@ -95,7 +97,7 @@ export const pcs: PcBuild[] = [
     oldPrice: 3499,
     category: "workstation",
     tier: "Pro creación",
-    image: "/builds/forge.svg",
+    image: asset("/builds/forge.svg"),
     description:
       "El rey de los dioses en forma de workstation: render, edición 4K/8K y cargas pesadas de IA sin interrupciones. 16 núcleos, 64GB de RAM y una gráfica lista para trabajo profesional.",
     highlights: ["Ryzen 9 9950X", "RTX 4080 Super 16GB", "64GB DDR5", "NVMe Gen5 2TB", "1200W Platinum"],
@@ -116,7 +118,7 @@ export const pcs: PcBuild[] = [
     price: 2199,
     category: "workstation",
     tier: "Productividad",
-    image: "/builds/cascade.svg",
+    image: asset("/builds/cascade.svg"),
     description:
       "Para desarrolladores, diseñadores y analistas que viven en la multitarea. Compila más rápido, virtualiza sin límites y olvídate de qué es un «lag».",
     highlights: ["Ryzen 9 7900X", "RTX 4070 Super", "64GB DDR5", "1TB + 2TB NVMe", "850W Gold"],
@@ -134,7 +136,7 @@ export const pcs: PcBuild[] = [
     price: 1899,
     category: "streaming",
     tier: "Flagship streamer",
-    image: "/builds/mono.svg",
+    image: asset("/builds/mono.svg"),
     description:
       "Crea, juega y emite a 4K60 con NVENC AV1. Montaje impecable, silencio absoluto y cableado personalizado. La máquina definitiva del streamer.",
     highlights: ["RTX 4070 Ti Super 16GB", "Ryzen 7 7800X3D", "32GB DDR5", "Captura 4K60", "850W Gold"],

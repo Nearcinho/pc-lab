@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Clock, MapPin, Mail, Phone, MessageCircle } from "lucide-react";
+import { Clock, Mail, Phone, MessageCircle } from "lucide-react";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { Reveal } from "@/components/ui/reveal";
@@ -17,7 +17,6 @@ const channels = [
   { icon: Phone, label: "Teléfono", value: siteConfig.phone, href: `tel:${siteConfig.phone.replace(/\s/g, "")}` },
   { icon: MessageCircle, label: "Discord", value: "nexa.pc", href: siteConfig.social.discord },
   { icon: Clock, label: "Horario", value: "Lun–Vie · 10:00–19:00" },
-  { icon: MapPin, label: "Taller", value: siteConfig.address },
 ];
 
 export default function ContactoPage() {

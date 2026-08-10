@@ -32,11 +32,11 @@ export function FounderStory() {
 
             <div className="mt-10">
               <p className="font-mono text-sm text-muted-2">Todos los equipos PC LAB incluyen</p>
-              <p className="mt-4 font-display text-6xl font-medium leading-none tracking-tight sm:text-7xl">
-                1 año
-              </p>
-              <p className="mt-3 text-sm leading-relaxed text-muted-2">
-                de garantía en el ensamblado, más la garantía de cada componente que entrega el fabricante.
+              <p className="mt-4 font-display text-6xl font-medium leading-[1.04] tracking-tight sm:text-7xl">
+                1 año de garantía
+                <span className="ml-4 inline-block align-baseline font-sans text-sm font-normal leading-relaxed tracking-normal text-muted-2">
+                  en el ensamblado, más la garantía de cada componente que entrega el fabricante.
+                </span>
               </p>
             </div>
 

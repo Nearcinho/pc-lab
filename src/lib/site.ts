@@ -8,7 +8,6 @@ export const siteConfig = {
   email: "info@nexa-gaming.es",
   phone: "+34 910 123 456",
   whatsapp: "+34 600 123 456",
-  address: "Calle Gran Vía 28, 28013 Madrid, España",
   hours: "Lun – Vie · 10:00 – 19:00",
   social: {
     instagram: "https://instagram.com/nexa.pc",
