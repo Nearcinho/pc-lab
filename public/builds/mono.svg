@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <linearGradient id="monoBg" x1="0" y1="0" x2="600" y2="600">
+      <stop stop-color="#080810"/>
+      <stop offset="1" stop-color="#101020"/>
+    </linearGradient>
+    <linearGradient id="monoGlass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0f0ff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#c4b5fd" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#monoBg)"/>
+  <circle cx="300" cy="300" r="205" stroke="#e4e4ff" stroke-opacity="0.08" stroke-width="1"/>
+  <g transform="translate(300,300)">
+    <rect x="-120" y="-130" width="240" height="270" rx="14" fill="#131318" stroke="#2c2c3c"/>
+    <rect x="-20" y="-120" width="240" height="180" rx="8" fill="#0a0a10" stroke="#26263a"/>
+    <path d="M60 -100 l40 20 v40 l-40 20 l-40 -20 v-40 z" fill="#1d1d2c"/>
+    <g stroke="#f0f0ff" stroke-opacity="0.5" stroke-width="3" fill="none">
+      <line x1="140" y1="-100" x2="180" y2="-100"/>
+      <line x1="140" y1="-70" x2="180" y2="-70"/>
+      <line x1="140" y1="-40" x2="180" y2="-40"/>
+    </g>
+    <rect x="-96" y="90" width="192" height="40" rx="6" fill="#181818" stroke="#333345"/>
+    <rect x="-60" y="40" width="120" height="34" rx="6" fill="#1d1d26" stroke="url(#monoGlass)" stroke-width="2"/>
+  </g>
+  <text x="300" y="540" text-anchor="middle" fill="#e8eaf2" font-family="Arial" font-size="21" font-weight="700" letter-spacing="8">NEXA MONO</text>
+</svg>

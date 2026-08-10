@@ -1,0 +1,605 @@
+export type Category =
+  | "cpu"
+  | "motherboard"
+  | "gpu"
+  | "ram"
+  | "storage"
+  | "cooling"
+  | "psu"
+  | "case"
+  | "os"
+  | "peripheral"
+  | "extra";
+
+export interface Part {
+  id: string;
+  category: Category;
+  brand: string;
+  name: string;
+  price: number;
+  power: number;
+  socket?: string;
+  chipset?: string;
+  wifi?: boolean;
+  cores?: number;
+  threads?: number;
+  boostGhz?: number;
+  cacheMb?: number;
+  vramGb?: number;
+  memoryGb?: number;
+  speed?: string;
+  capacityTb?: number;
+  type?: string;
+  height?: number;
+  radiatorSupport?: number;
+  watts?: number;
+  rating?: string;
+  form?: string;
+  maxGpuLength?: number;
+  maxCoolerHeight?: number;
+  fans?: string;
+  kind?: string;
+  monitorSize?: string;
+  noOs?: boolean;
+  perf?: number;
+  gaming?: number;
+  ai?: number;
+  render?: number;
+  features?: string[];
+  fps?: Record<string, number>;
+  recommended?: boolean;
+  best?: boolean;
+  // Wizard grouping fields
+  family?: string;
+  size?: string;
+  lengthMm?: number;
+  speedMhz?: number;
+  pcieGen?: "Gen 4" | "Gen 5";
+  ramMaxMhz?: number;
+  tier?: "mid" | "high";
+  formSupport?: string[];
+  radiatorMax?: number;
+  psuMin?: number;
+}
+
+export interface CategoryDef {
+  key: Category;
+  label: string;
+  icon: string;
+  description: string;
+}
+
+export const categories: Record<Category, CategoryDef> = {
+  cpu: { key: "cpu", label: "Procesador", icon: "cpu", description: "El cerebro del sistema" },
+  motherboard: { key: "motherboard", label: "Placa base", icon: "motherboard", description: "La plataforma que conecta todo" },
+  gpu: { key: "gpu", label: "Gráfica", icon: "gpu", description: "El corazón para jugar" },
+  ram: { key: "ram", label: "Memoria RAM", icon: "ram", description: "Multitarea sin límites" },
+  storage: { key: "storage", label: "Almacenamiento", icon: "storage", description: "Velocidad y espacio" },
+  cooling: { key: "cooling", label: "Refrigeración", icon: "cooling", description: "Mantén las temperaturas bajas" },
+  psu: { key: "psu", label: "Fuente de alimentación", icon: "psu", description: "Energía limpia y segura" },
+  case: { key: "case", label: "Caja", icon: "case", description: "El corazón de tu setup" },
+  os: { key: "os", label: "Sistema operativo", icon: "os", description: "El software que lo gobierna" },
+  peripheral: { key: "peripheral", label: "Periférico", icon: "peripheral", description: "Completa tu experiencia" },
+  extra: { key: "extra", label: "Extras", icon: "extra", description: "El toque premium" },
+};
+
+export const cpuParts: Part[] = [
+  {
+    id: "cpu-r5-7600",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 5",
+    name: "Ryzen 5 7600",
+    price: 209,
+    power: 65,
+    socket: "AM5",
+    cores: 6,
+    threads: 12,
+    boostGhz: 5.1,
+    cacheMb: 48,
+    perf: 62,
+    gaming: 66,
+    ai: 40,
+    fps: { valorant: 300, cs2: 320, fortnite: 210, apex: 250, overwatch: 280, cyberpunk: 105, warzone: 150, elden: 110, gta: 170 },
+  },
+  {
+    id: "cpu-r5-9600x",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 5",
+    name: "Ryzen 5 9600X",
+    price: 269,
+    power: 65,
+    socket: "AM5",
+    cores: 6,
+    threads: 12,
+    boostGhz: 5.4,
+    cacheMb: 48,
+    perf: 68,
+    gaming: 70,
+    ai: 45,
+    fps: { valorant: 250, csgo: 345, fortnite: 225, apex: 265, warzone: 120, cyberpunk: 112, gta: 185 },
+  },
+  {
+    id: "cpu-r7-7700x",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 7",
+    name: "Ryzen 7 7700X",
+    price: 329,
+    power: 105,
+    socket: "AM5",
+    cores: 8,
+    threads: 16,
+    boostGhz: 5.4,
+    cacheMb: 48,
+    perf: 78,
+    gaming: 78,
+    ai: 52,
+    fps: { valorant: 265, csgo: 360, fortnite: 240, apex: 280, cyberpunk: 118, elden: 120 },
+  },
+  {
+    id: "cpu-r7-9700x",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 7",
+    name: "Ryzen 7 9700X",
+    price: 399,
+    power: 105,
+    socket: "AM5",
+    cores: 8,
+    threads: 16,
+    boostGhz: 5.5,
+    cacheMb: 48,
+    perf: 85,
+    gaming: 80,
+    ai: 58,
+    fps: { valorant: 275, csgo: 375, fortnite: 250, apex: 290, warzone: 170, cyberpunk: 140, elden: 130 },
+  },
+  {
+    id: "cpu-r7-7800x3d",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 7",
+    name: "Ryzen 7 7800X3D",
+    price: 419,
+    power: 120,
+    socket: "AM5",
+    cores: 8,
+    threads: 16,
+    boostGhz: 5.0,
+    cacheMb: 96,
+    perf: 92,
+    gaming: 97,
+    ai: 55,
+    fps: { valorant: 310, csgo: 420, fortnite: 270, apex: 315, warzone: 195, cyberpunk: 155, elden: 140, gta: 210 },
+    best: true,
+    recommended: true,
+  },
+  {
+    id: "cpu-r7-9800x3d",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 7",
+    name: "Ryzen 7 9800X3D",
+    price: 515,
+    power: 120,
+    socket: "AM5",
+    cores: 8,
+    threads: 16,
+    boostGhz: 5.2,
+    cacheMb: 104,
+    perf: 98,
+    gaming: 100,
+    ai: 60,
+    fps: { valorant: 330, csgo: 440, fortnite: 280, apex: 330, warzone: 210, cyberpunk: 155, elden: 150, gta: 205 },
+    recommended: true,
+  },
+  {
+    id: "cpu-r9-7950x3d",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 9",
+    name: "Ryzen 9 7950X3D",
+    price: 589,
+    power: 120,
+    socket: "AM5",
+    cores: 16,
+    threads: 32,
+    boostGhz: 5.7,
+    cacheMb: 128,
+    perf: 105,
+    gaming: 92,
+    ai: 85,
+    fps: { valorant: 320, csgo: 430, fortnite: 275, apex: 320, warzone: 205, cyberpunk: 145, gta: 200 },
+  },
+  {
+    id: "cpu-r9-9950x",
+    category: "cpu",
+    brand: "AMD",
+    family: "Ryzen 9",
+    name: "Ryzen 9 9950X",
+    price: 629,
+    power: 170,
+    socket: "AM5",
+    cores: 16,
+    threads: 32,
+    boostGhz: 5.7,
+    cacheMb: 80,
+    perf: 118,
+    gaming: 85,
+    ai: 95,
+    fps: { valorant: 305, csgo: 410, fortnite: 260, apex: 300, warzone: 190, cyberpunk: 138, elden: 125 },
+  },
+  {
+    id: "cpu-i5-14600k",
+    category: "cpu",
+    brand: "Intel",
+    family: "Core i5",
+    name: "Core i5-14600K",
+    price: 259,
+    power: 181,
+    socket: "LGA1700",
+    cores: 14,
+    threads: 20,
+    boostGhz: 5.3,
+    cacheMb: 34,
+    perf: 82,
+    gaming: 84,
+    ai: 58,
+    fps: { valorant: 285, csgo: 390, fortnite: 245, apex: 290, warzone: 165, cyberpunk: 130, elden: 125 },
+  },
+  {
+    id: "cpu-i7-14700k",
+    category: "cpu",
+    brand: "Intel",
+    family: "Core i7",
+    name: "Core i7-14700K",
+    price: 379,
+    power: 253,
+    socket: "LGA1700",
+    cores: 20,
+    threads: 28,
+    boostGhz: 5.6,
+    cacheMb: 40,
+    perf: 95,
+    gaming: 90,
+    ai: 72,
+    fps: { valorant: 300, csgo: 400, fortnite: 255, apex: 300, warzone: 180, cyberpunk: 140, elden: 135 },
+  },
+  {
+    id: "cpu-i9-14900k",
+    category: "cpu",
+    brand: "Intel",
+    family: "Core i9",
+    name: "Core i9-14900K",
+    price: 549,
+    power: 253,
+    socket: "LGA1700",
+    cores: 24,
+    threads: 32,
+    boostGhz: 6.0,
+    cacheMb: 36,
+    perf: 108,
+    gaming: 92,
+    ai: 80,
+    fps: { valorant: 310, csgo: 415, fortnite: 345, apex: 305, warzone: 185, cyberpunk: 145, elden: 140 },
+  },
+];
+
+export const motherboardParts: Part[] = [
+  {
+    id: "mb-b650",
+    category: "motherboard",
+    brand: "ASUS",
+    name: "TUF Gaming B650 Plus",
+    price: 189,
+    power: 5,
+    socket: "AM5",
+    chipset: "B650",
+    form: "ATX",
+    ramMaxMhz: 6400,
+    pcieGen: "Gen 4",
+    tier: "mid",
+    wifi: false,
+    features: ["PCIe 5.0", "WiFi", "DDR5", "2.5GbE"],
+  },
+  {
+    id: "mb-b650e",
+    category: "motherboard",
+    brand: "MSI",
+    name: "B650 Tomahawk WiFi",
+    price: 239,
+    power: 5,
+    socket: "AM5",
+    chipset: "B650",
+    form: "ATX",
+    ramMaxMhz: 6400,
+    pcieGen: "Gen 4",
+    tier: "mid",
+    wifi: true,
+    features: ["PCIe 5.0", "WiFi 6E", "DDR5", "3x M.2"],
+  },
+  {
+    id: "mb-x670e",
+    category: "motherboard",
+    brand: "ASUS",
+    name: "ROG Strix X670E-E",
+    price: 499,
+    power: 5,
+    socket: "AM5",
+    chipset: "X670E",
+    form: "ATX",
+    ramMaxMhz: 8000,
+    pcieGen: "Gen 5",
+    tier: "high",
+    wifi: true,
+    features: ["PCIe 5.0", "WiFi 6E", "USB4", "4x M.2"],
+  },
+  {
+    id: "mb-x870e",
+    category: "motherboard",
+    brand: "Gigabyte",
+    name: "X870E Aorus Master",
+    price: 589,
+    power: 5,
+    socket: "AM5",
+    chipset: "X870E",
+    form: "EATX",
+    ramMaxMhz: 8000,
+    pcieGen: "Gen 5",
+    tier: "high",
+    wifi: true,
+    features: ["PCIe 5.0 x2", "WiFi 7", "USB4 40G", "5x M.2"],
+  },
+  {
+    id: "mb-z790",
+    category: "motherboard",
+    brand: "Gigabyte",
+    name: "Z790 Gaming X",
+    price: 229,
+    power: 5,
+    socket: "LGA1700",
+    chipset: "Z790",
+    form: "ATX",
+    ramMaxMhz: 6800,
+    pcieGen: "Gen 4",
+    tier: "mid",
+    wifi: false,
+    features: ["PCIe 5.0", "DDR5", "2x M.2"],
+  },
+  {
+    id: "mb-z790e",
+    category: "motherboard",
+    brand: "ASUS",
+    name: "ROG Strix Z790-E",
+    price: 419,
+    power: 5,
+    socket: "LGA1700",
+    chipset: "Z790",
+    form: "ATX",
+    ramMaxMhz: 8000,
+    pcieGen: "Gen 5",
+    tier: "high",
+    wifi: true,
+    features: ["PCIe 5.0", "WiFi 6E", "DDR5", "4x M.2"],
+  },
+];
+
+export const gpuParts: Part[] = [
+  {
+    id: "gpu-rtx4060",
+    category: "gpu",
+    brand: "NVIDIA",
+    family: "RTX 40",
+    name: "GeForce RTX 4060",
+    price: 299,
+    power: 115,
+    vramGb: 8,
+    lengthMm: 240,
+    psuMin: 550,
+    perf: 58,
+    gaming: 62,
+    ai: 70,
+    fps: {
+      "Cyberpunk 2077": 88,
+      "CS2": 330,
+      Fortnite: 140,
+      Apex: 190,
+      "Warzone": 100,
+      "Elden Ring": 70,
+      "RDR2": 110,
+    },
+  },
+  {
+    id: "gpu-rtx4070",
+    category: "gpu",
+    brand: "NVIDIA",
+    family: "RTX 40",
+    name: "GeForce RTX 4070",
+    price: 579,
+    power: 200,
+    vramGb: 12,
+    lengthMm: 300,
+    psuMin: 650,
+    perf: 76,
+    gaming: 78,
+    ai: 85,
+    fps: { "Cyberpunk 2077": 138, "CS 2": 380, Fortnite: 220, Apex: 260, "Warzone": 170, "Elden Ring": 110, "RDR2": 160 },
+  },
+  {
+    id: "gpu-rtx4070super",
+    category: "gpu",
+    brand: "NVIDIA",
+    family: "RTX 40",
+    name: "GeForce RTX 4070 Super",
+    price: 669,
+    power: 220,
+    vramGb: 12,
+    lengthMm: 305,
+    psuMin: 700,
+    perf: 82,
+    gaming: 83,
+    ai: 92,
+    fps: { "Cyberpunk 2077": 155, "CS 2": 400, Fortnite: 240, Valorant: 372, "Warzone": 190, "Elden Ring": 130, "RDR2": 175 },
+  },
+  {
+    id: "gpu-rtx4070ti-super",
+    category: "gpu",
+    brand: "NVIDIA",
+    family: "RTX 40",
+    name: "GeForce RTX 4070 Ti Super",
+    price: 879,
+    power: 285,
+    vramGb: 16,
+    lengthMm: 320,
+    psuMin: 750,
+    perf: 92,
+    gaming: 92,
+    ai: 105,
+    fps: { "Cyberpunk 2077": 185, "CS 2": 420, Fortnite: 270, Valorant: 400, "Warzone": 220, "Elden Ring": 155, "RDR2": 200 },
+  },
+  {
+    id: "gpu-rtx4080super",
+    category: "gpu",
+    brand: "NVIDIA",
+    family: "RTX 40",
+    name: "GeForce RTX 4080 Super",
+    price: 1099,
+    power: 320,
+    vramGb: 16,
+    lengthMm: 340,
+    psuMin: 850,
+    perf: 105,
+    gaming: 98,
+    ai: 125,
+    render: 95,
+    fps: { "Cyberpunk 2077": 228, "CS 2": 460, Fortnite: 330, Valorant: 500, "Warzone": 300, "Elden Ring": 190, "RDR2": 240 },
+  },
+  {
+    id: "gpu-rtx4090",
+    category: "gpu",
+    brand: "NVIDIA",
+    family: "RTX 40",
+    name: "GeForce RTX 4090",
+    price: 1949,
+    power: 320,
+    vramGb: 24,
+    lengthMm: 360,
+    psuMin: 1000,
+    perf: 125,
+    gaming: 100,
+    ai: 150,
+    render: 100,
+    fps: { "Cyberpunk 2077": 290, "CS 2": 500, Fortnite: 380, Valorant: 600, "Warzone": 360, "Elden Ring": 230, "RDR2": 290 },
+    best: true,
+  },
+  {
+    id: "gpu-rx7800xt",
+    category: "gpu",
+    brand: "AMD",
+    family: "RX 7000",
+    name: "Radeon RX 7800 XT",
+    price: 499,
+    power: 263,
+    vramGb: 16,
+    lengthMm: 330,
+    psuMin: 700,
+    perf: 80,
+    gaming: 84,
+    ai: 70,
+    fps: { "Cyberpunk 2077": 150, "CS 2": 350, Fortnite: 260, Valorant: 420, "Warzone": 210, "Elden Ring": 140, "RDR2": 190 },
+  },
+  {
+    id: "gpu-rx7900xtx",
+    category: "gpu",
+    brand: "AMD",
+    family: "RX 7000",
+    name: "Radeon RX 7900 XTX",
+    price: 999,
+    power: 355,
+    vramGb: 24,
+    lengthMm: 350,
+    psuMin: 1000,
+    perf: 104,
+    gaming: 97,
+    ai: 95,
+    fps: { "Cyberpunk 2077": 210, "CS 2": 420, Fortnite: 340, Valorant: 540, "Warzone": 285, "Elden Ring": 185, "RDR2": 235 },
+  },
+];
+
+export const ramParts: Part[] = [
+  { id: "ram-16", category: "ram", brand: "Corsair", name: "16 GB DDR5 6000", price: 74, memoryGb: 16, speed: "6000 CL30", speedMhz: 6000, power: 4 },
+  { id: "ram-32", category: "ram", brand: "G.Skill", name: "32 GB DDR5 6000 RGB", price: 139, memoryGb: 32, speed: "6000 CL30", speedMhz: 6000, power: 6 },
+  { id: "ram-64", category: "ram", brand: "Corsair", name: "64 GB DDR5 6400", price: 279, memoryGb: 64, speed: "6400 CL32", speedMhz: 6400, power: 8 },
+  { id: "ram-128", category: "ram", brand: "Crucial", name: "128 GB DDR5 5600", price: 549, memoryGb: 128, speed: "5600 CL46", speedMhz: 5600, power: 10 },
+];
+
+export const storageParts: Part[] = [
+  { id: "ssd-1tb", category: "storage", brand: "Western Digital", name: "1 TB NVMe Gen4", price: 59, capacityTb: 1, speed: "5150 MB/s", pcieGen: "Gen 4", power: 5 },
+  { id: "ssd-2tb", category: "storage", brand: "Samsung", name: "2 TB 990 Pro Gen4", price: 149, capacityTb: 2, speed: "7450 MB/s", pcieGen: "Gen 4", power: 6 },
+  { id: "ssd-2tb-gen5", category: "storage", brand: "Crucial", name: "2 TB T700 Gen5", price: 229, capacityTb: 2, speed: "12400 MB/s", pcieGen: "Gen 5", power: 8 },
+  { id: "ssd-4tb", category: "storage", brand: "Samsung", name: "4 TB 990 Pro Gen4", price: 349, capacityTb: 4, speed: "7450 MB/s", pcieGen: "Gen 4", power: 7 },
+];
+
+export const coolingParts: Part[] = [
+  { id: "cool-ax120", category: "cooling", brand: "Noctua", name: "NH-U12S redux", price: 54, power: 2, type: "air", height: 158, features: ["Silencioso", "Aire"] },
+  { id: "cool-aio240", category: "cooling", brand: "Corsair", name: "H100i RGB 240mm", price: 149, power: 8, type: "aio", radiatorSupport: 240, features: ["Liquid Cooling", "240mm"] },
+  { id: "cool-aio360", category: "cooling", brand: "NZXT", name: "Kraken 360 RGB", price: 289, power: 10, type: "aio", radiatorSupport: 360, features: ["Liquid Cooling", "360mm"] },
+  { id: "cool-custom-loop", category: "cooling", brand: "Custom", name: "Loop a medida distro", price: 899, power: 25, type: "custom", radiatorSupport: 480, features: ["Custom Loop", "Max rendimiento"] },
+];
+
+export const caseParts: Part[] = [
+  { id: "case-nxht", category: "case", brand: "NZXT", name: "H5 Flow RGB", price: 119, power: 0, maxGpuLength: 362, maxCoolerHeight: 165, size: "ATX", formSupport: ["ATX", "MATX"], radiatorMax: 240, features: ["Compacta", "Flujo"] },
+  { id: "case-lancool", category: "case", brand: "Lian Li", name: "Lancool 216", price: 149, power: 0, maxGpuLength: 392, maxCoolerHeight: 180, size: "ATX", formSupport: ["ATX", "MATX", "EATX"], radiatorMax: 360, features: ["Ventiladores incluidos"] },
+  { id: "case-o11", category: "case", brand: "Lian Li", name: "O11 Dynamic", price: 169, power: 0, maxGpuLength: 422, maxCoolerHeight: 159, size: "E-ATX", formSupport: ["ATX", "MATX", "EATX"], radiatorMax: 360, fans: "Sin ventiladores incluidos", features: ["Showcase"] },
+  { id: "case-tower900", category: "case", brand: "Thermaltake", name: "Tower 900", price: 289, power: 0, maxGpuLength: 440, maxCoolerHeight: 230, size: "E-ATX", formSupport: ["EATX", "ATX"], radiatorMax: 480, features: ["Big Tower"] },
+];
+
+export const psuParts: Part[] = [
+  { id: "psu-550", category: "psu", brand: "Corsair", name: "RM550x 80+ Gold", price: 119, power: 0, watts: 550, rating: "Gold", form: "ATX" },
+  { id: "psu-650", category: "psu", brand: "Seasonic", name: "Focus GX-650", price: 149, power: 0, watts: 650, rating: "Gold", form: "ATX" },
+  { id: "psu-750", category: "psu", brand: "be quiet!", name: "Pure Power 12 750W", price: 139, power: 0, watts: 750, rating: "Gold", form: "ATX" },
+  { id: "psu-850", category: "psu", brand: "Corsair", name: "RM850x Shift", price: 179, power: 0, watts: 850, rating: "Gold", form: "ATX" },
+  { id: "psu-1000", category: "psu", brand: "be quiet!", name: "Dark Power 13 1000W", price: 289, power: 0, watts: 1000, rating: "Platinum", form: "ATX" },
+  { id: "psu-1200p", category: "psu", brand: "Corsair", name: "HXi 1200W", price: 349, power: 0, watts: 1200, rating: "Platinum", form: "ATX" },
+];
+
+export const osParts: Part[] = [
+  { id: "os-none", category: "os", brand: "—", name: "Sin sistema operativo", price: 0, power: 0, noOs: true },
+  { id: "os-win-home", category: "os", brand: "Microsoft", name: "Windows 11 Home", price: 129, power: 0 },
+  { id: "os-win-pro", category: "os", brand: "Microsoft", name: "Windows 11 Pro", price: 219, power: 0 },
+  { id: "os-ubuntu", category: "os", brand: "Canonical", name: "Ubuntu 24.04 LTS", price: 0, power: 0 },
+];
+
+export const peripheralParts: Part[] = [
+  { id: "peri-monitor", category: "peripheral", brand: "Samsung", name: "Monitor Odyssey G9 OLED 49\"", price: 999, power: 60, features: ["240Hz", "5120x1440", ""] },
+];
+
+export const extraParts: Part[] = [
+  { id: "extra-rgb-kit", category: "extra", brand: "Corsair", name: "Kit ventiladores RGB + controlador", price: 89, power: 15 },
+  { id: "extra-capture", category: "extra", brand: "Elgato", name: "Tarjeta de captura HD60 X", price: 199, power: 0 },
+  { id: "extra-wifi", category: "extra", brand: "Intel", name: "Módulo Wi-Fi 7 BE200", price: 39, power: 2 },
+];
+
+export const allParts: Part[] = [
+  ...cpuParts,
+  ...motherboardParts,
+  ...gpuParts,
+  ...ramParts,
+  ...storageParts,
+  ...coolingParts,
+  ...psuParts,
+  ...caseParts,
+  ...osParts,
+  ...peripheralParts,
+  ...extraParts,
+];
+
+export function partById(id: string): Part | undefined {
+  return allParts.find((p) => p.id === id);
+}
+
+export function partsByCategory(cat: Category): Part[] {
+  return allParts.filter((p) => p.category === cat);
+}
