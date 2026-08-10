@@ -4,7 +4,7 @@ export const siteConfig = {
   domain: "https://nexa-gaming.es",
   tagline: "Diseñado para ti. Construido para rendir.",
   description:
-    "PC LAB es el estudio de consultoría que diseña, construye y certifica ordenadores a medida en España. Asesoría experta, ensamblaje artesanal y test de 24 h en cada equipo.",
+    "Diseñamos, ensamblamos y certificamos tu PC a medida en Madrid: gaming, streaming, creación, trabajo e IA. Test de 24 h y garantía de 1 año en cada equipo.",
   email: "info@nexa-gaming.es",
   phone: "+34 910 123 456",
   whatsapp: "+34 600 123 456",
