@@ -38,7 +38,7 @@ const services = [
     line: "GPU · CPU · RAM · SSD",
     cta: "Mejorar mi PC",
     href: "/contacto",
-    image: asset("/cases/creacion.jpg"),
+    image: asset("/cases/upgrade.png"),
     alt: "Mejora de rendimiento de un PC en PC LAB",
   },
   {
