@@ -287,9 +287,6 @@ export default function ServiciosPage() {
                   Empezar mi proyecto <ArrowRight className="size-4" aria-hidden />
                 </Button>
               </Link>
-              <Link href="/proyectos">
-                <Button size="lg" variant="outline">Ver proyectos</Button>
-              </Link>
             </div>
           </Reveal>
         </div>

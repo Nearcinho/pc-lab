@@ -66,9 +66,6 @@ export function Hero() {
           <Link href="/contacto">
             <Button size="lg" variant="brand">Empezar mi proyecto <ArrowRight className="size-4" aria-hidden /></Button>
           </Link>
-          <Link href="/proyectos">
-            <Button size="lg" variant="outline">Ver nuestro trabajo</Button>
-          </Link>
         </motion.div>
 
         {reduced && (

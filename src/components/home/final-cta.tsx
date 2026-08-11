@@ -60,11 +60,6 @@ export function FinalCta() {
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
             </span>
           </Link>
-          <Link href="/proyectos">
-            <span className="inline-flex items-center gap-2 rounded-full border border-border-strong px-10 py-4 text-sm font-semibold text-foreground transition-all duration-300 hover:border-brand/60 hover:text-brand">
-              Ver proyectos
-            </span>
-          </Link>
         </motion.div>
       </div>
     </section>

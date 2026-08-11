@@ -27,10 +27,9 @@ export type NavItem = {
 
 export const mainNav: NavItem[] = [
   {
-    label: "Proyectos",
-    href: "/proyectos",
+    label: "Equipos",
+    href: "/equipos",
     children: [
-      { label: "Builds recientes", href: "/proyectos", description: "Casos reales con objetivo y resultados" },
       { label: "Gaming", href: "/equipos/gaming", description: "Máximo rendimiento para tus juegos" },
       { label: "Workstations", href: "/equipos/workstation", description: "Creación, render e IA profesional" },
       { label: "Streaming", href: "/equipos/streaming", description: "Emite y graba sin esfuerzo" },
