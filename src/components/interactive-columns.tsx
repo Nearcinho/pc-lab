@@ -95,7 +95,7 @@ export function InteractiveColumns({
               initial={false}
               animate={isActive ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-brand/70 via-brand/30 to-transparent lg:inset-x-8"
+              className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-brand/70 via-brand/30 to-transparent"
               aria-hidden
             />
           </motion.button>
