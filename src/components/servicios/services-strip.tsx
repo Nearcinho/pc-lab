@@ -135,7 +135,7 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
 
       {/* Escritorio */}
       <div
-        className="hidden lg:flex justify-center"
+        className="hidden lg:block"
         onMouseEnter={() => {
           hovering.current = true;
         }}
@@ -145,8 +145,8 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
         }}
       >
         <div
-          className="relative w-auto overflow-hidden bg-[#050505]"
-          style={{ aspectRatio: "16 / 9", height: "min(70vh, 88vw * 9 / 16)" }}
+          className="relative w-full overflow-hidden bg-[#050505]"
+          style={{ aspectRatio: "16 / 9", maxHeight: "70vh" }}
         >
           <div className="absolute inset-0 flex gap-px">
             {services.map((s, i) => {
