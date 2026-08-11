@@ -6,6 +6,7 @@ import { Brand } from "@/components/brand/brand";
 import { siteConfig } from "@/lib/site";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "Configurador", href: "/configurador" },
   { label: "Servicios", href: "/servicios" },
   { label: "Quiénes somos", href: "/nosotros" },

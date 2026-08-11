@@ -26,15 +26,7 @@ export type NavItem = {
 };
 
 export const mainNav: NavItem[] = [
-  {
-    label: "Equipos",
-    href: "/equipos",
-    children: [
-      { label: "Gaming", href: "/equipos/gaming", description: "Máximo rendimiento para tus juegos" },
-      { label: "Workstations", href: "/equipos/workstation", description: "Creación, render e IA profesional" },
-      { label: "Streaming", href: "/equipos/streaming", description: "Emite y graba sin esfuerzo" },
-    ],
-  },
+  { label: "Home", href: "/" },
   { label: "Configurador", href: "/configurador" },
   { label: "Servicios", href: "/servicios" },
   { label: "Quiénes somos", href: "/nosotros" },
