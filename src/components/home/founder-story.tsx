@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, HelpCircle } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const promises = [
@@ -16,7 +16,7 @@ export function FounderStory() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="bg-background py-28 sm:py-40" aria-label="Confianza">
+    <section className="bg-[#0a0a0a] py-28 sm:py-40" aria-label="Confianza">
       <div className="container-x">
         <div className="grid gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           <motion.aside
@@ -24,7 +24,11 @@ export function FounderStory() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="m-0 flex flex-col justify-between border border-border bg-surface-2 p-8 sm:p-10"
+            className="m-0 flex flex-col justify-between rounded-xl border border-[#2b3f4d]/70 bg-[linear-gradient(180deg,#1d1d20_0%,#141416_100%)] p-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_30px_70px_-40px_rgba(0,0,0,0.9)] transition-colors duration-500 hover:border-brand/50 sm:p-12"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg,#1d1d20,#141416),repeating-linear-gradient(90deg,rgba(255,255,255,0.02) 0 1px,transparent 1px 3px)",
+            }}
           >
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               Garantía, por escrito
@@ -32,9 +36,9 @@ export function FounderStory() {
 
             <div className="mt-10">
               <p className="font-mono text-sm text-muted-2">Todos los equipos PC LAB incluyen</p>
-              <p className="mt-4 font-display text-6xl font-medium leading-[1.04] tracking-tight sm:text-7xl">
+              <p className="mt-4 font-display text-4xl font-medium leading-[1.06] tracking-tight text-foreground/90 sm:text-5xl">
                 1 año de garantía
-                <span className="ml-4 inline-block align-baseline font-sans text-sm font-normal leading-relaxed tracking-normal text-muted-2">
+                <span className="ml-3 inline-block align-baseline font-sans text-sm font-normal leading-relaxed tracking-normal text-muted-2">
                   en el ensamblado, más la garantía de cada componente que entrega el fabricante.
                 </span>
               </p>
@@ -42,10 +46,10 @@ export function FounderStory() {
 
             <Link
               href="/garantia"
-              className="group mt-10 inline-flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-foreground transition-colors hover:text-brand"
+              className="group mt-10 inline-flex items-center justify-center gap-3 rounded-sm border border-brand/50 px-6 py-3.5 text-[12px] font-semibold uppercase tracking-[0.22em] text-brand transition-all duration-300 hover:border-brand hover:bg-brand/10 hover:shadow-[0_0_24px_-6px_rgba(79,209,255,0.45)]"
             >
               Ver toda la garantía
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden />
+              <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
             </Link>
           </motion.aside>
 
@@ -55,9 +59,9 @@ export function FounderStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted"
+              className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-brand/80"
             >
-              <span className="inline-block h-px w-10 bg-border-strong" aria-hidden />
+              <span className="inline-block h-px w-10 bg-brand/60" aria-hidden />
               05 — Confianza
             </motion.p>
             <motion.h2
@@ -65,7 +69,7 @@ export function FounderStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-              className="mt-7 font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] sm:text-5xl lg:text-[3.2rem]"
+              className="mt-7 font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-5xl lg:text-[3.2rem]"
             >
               Detrás de cada PC hay experiencia.
             </motion.h2>
@@ -83,7 +87,7 @@ export function FounderStory() {
               encargamos.
             </motion.p>
 
-            <div className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
+            <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:gap-5">
               {promises.map((p, i) => (
                 <motion.div
                   key={p.n}
@@ -91,11 +95,15 @@ export function FounderStory() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.05 * i }}
-                  className="border-t border-border pt-4"
+                  className="group rounded-xl border border-border bg-[#121212] p-6 transition-colors duration-300 hover:border-brand/40"
                 >
-                  <span className="font-mono text-sm font-medium tracking-tight text-muted">{p.n}</span>
-                  <h4 className="mt-2 font-display text-base font-medium tracking-tight sm:text-lg">{p.title}</h4>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-2">{p.text}</p>
+                  <span className="font-mono text-sm font-medium tracking-tight text-muted transition-all duration-300 group-hover:text-brand group-hover:[text-shadow:0_0_14px_rgba(79,209,255,0.55)]">
+                    {p.n}
+                  </span>
+                  <h4 className="mt-3 font-display text-base font-semibold tracking-tight text-foreground/95 sm:text-lg">
+                    {p.title}
+                  </h4>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted-2">{p.text}</p>
                 </motion.div>
               ))}
             </div>
@@ -105,14 +113,15 @@ export function FounderStory() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: 0.26 }}
-              className="mt-9"
+              className="mt-12"
             >
               <Link
                 href="/faq"
                 className="group inline-flex items-center gap-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-foreground transition-colors hover:text-brand"
               >
+                <HelpCircle className="size-4 text-brand transition-transform duration-300 group-hover:rotate-6" aria-hidden />
                 Preguntas frecuentes
-                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden />
+                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
               </Link>
             </motion.div>
           </div>
