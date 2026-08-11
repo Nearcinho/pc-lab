@@ -10,8 +10,7 @@ export function FinalCta() {
 
   return (
     <section
-      className="light-section relative overflow-hidden bg-background py-36 sm:py-52"
-      style={{ "--bg": "#ffffff" } as React.CSSProperties}
+      className="relative overflow-hidden bg-background py-36 sm:py-52"
       aria-label="Empieza tu proyecto"
     >
       <div className="absolute inset-0 bg-[radial-gradient(70%_60%_at_50%_100%,rgba(22,143,204,0.07),transparent_70%)]" aria-hidden />

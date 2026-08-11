@@ -9,7 +9,7 @@ export function FounderStory() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="bg-[#0a0a0a] py-28 sm:py-40" aria-label="Confianza">
+    <section className="light-section bg-background py-28 sm:py-40" aria-label="Confianza">
       <div className="container-x">
         <div className="grid gap-14 lg:grid-cols-2 lg:items-center lg:gap-20">
           <div>

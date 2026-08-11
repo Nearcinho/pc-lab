@@ -31,7 +31,7 @@ export function Craftsmanship() {
   }, [active]);
 
   return (
-    <section className="light-section bg-background py-28 sm:py-36" aria-label="Artesanía">
+    <section className="bg-background py-28 sm:py-36" aria-label="Artesanía">
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
