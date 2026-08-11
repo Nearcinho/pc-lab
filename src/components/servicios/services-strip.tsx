@@ -27,7 +27,7 @@ const services = [
     line: "Montaje · Configuración · Testing",
     cta: "Ensamblar mi PC",
     href: "/contacto",
-    image: asset("/cases/gaming.jpg"),
+    image: asset("/cases/ensamblado.png"),
     alt: "Ensamblado profesional de un PC en PC LAB",
   },
   {
