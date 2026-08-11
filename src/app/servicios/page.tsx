@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
-import { asset } from "@/lib/base";
+import { ServicesStrip } from "@/components/servicios/services-strip";
 
 export const metadata: Metadata = {
   title: "Servicios de PC Personalizados en Madrid",
@@ -12,97 +11,6 @@ export const metadata: Metadata = {
     "Diseño, ensamblado, upgrades y mantenimiento de PCs en Madrid. PC LAB crea y prepara equipos personalizados según tus necesidades.",
   alternates: { canonical: "/servicios" },
 };
-
-const services = [
-  {
-    n: "01",
-    title: "Diseño del PC",
-    description:
-      "Definimos el equipo adecuado para ti según lo que haces, lo que necesitas y cuánto quieres invertir.",
-    line: "Gaming · Creación · Trabajo · IA",
-    cta: "Diseñar mi PC",
-    href: "/configurador",
-    image: asset("/cases/tu-pc.jpg"),
-    alt: "Diseño de un PC a medida en PC LAB",
-  },
-  {
-    n: "02",
-    title: "Ensamblado del PC",
-    description:
-      "Montamos tus componentes con precisión y dejamos el equipo configurado, optimizado y listo para rendir.",
-    line: "Montaje · Configuración · Testing",
-    cta: "Ensamblar mi PC",
-    href: "/contacto",
-    image: asset("/cases/gaming.jpg"),
-    alt: "Ensamblado profesional de un PC en PC LAB",
-  },
-  {
-    n: "03",
-    title: "Upgrades de PC",
-    description:
-      "Analizamos tu equipo actual y actualizamos solo lo que realmente necesitas para mejorar su rendimiento.",
-    line: "GPU · CPU · RAM · SSD",
-    cta: "Mejorar mi PC",
-    href: "/contacto",
-    image: asset("/cases/creacion.jpg"),
-    alt: "Mejora de rendimiento de un PC en PC LAB",
-  },
-  {
-    n: "04",
-    title: "Mantenimiento de PC",
-    description: "Cuida el rendimiento de tu equipo con limpieza, revisión y mantenimiento preventivo.",
-    line: undefined,
-    cta: "Mantener mi PC",
-    href: "/contacto",
-    image: asset("/cases/trabajo.jpg"),
-    alt: "Mantenimiento de un PC en PC LAB",
-  },
-] as const;
-
-function ServiceCard({ service }: { service: (typeof services)[number] }) {
-  return (
-    <Reveal className="h-full">
-      <article className="group flex h-full flex-col">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-border bg-surface-2">
-          <Image
-            src={service.image}
-            alt={service.alt}
-            fill
-            sizes="(max-width: 640px) 100vw, 50vw"
-            className="photo-grade object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/50 via-transparent to-transparent opacity-80" aria-hidden />
-          <div className="photo-tint" aria-hidden />
-          <div className="photo-grain" aria-hidden />
-          <span className="absolute left-5 top-5 font-mono text-sm font-medium tracking-[0.2em] text-white/70">
-            {service.n}
-          </span>
-        </div>
-
-        <div className="mt-8 flex flex-1 flex-col">
-          <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{service.title}</h2>
-          <p className="mt-4 max-w-md text-base leading-relaxed text-[#333333]">
-            {service.description}
-          </p>
-          {service.line && (
-            <p className="mt-5 font-mono text-xs uppercase tracking-[0.18em] text-[#666666]">
-              {service.line}
-            </p>
-          )}
-          <div className="mt-auto pt-8">
-            <Link
-              href={service.href}
-              className="group/link inline-flex items-center gap-2 text-sm font-semibold text-foreground transition-colors hover:text-brand"
-            >
-              {service.cta}
-              <ArrowRight className="size-4 transition-transform duration-300 group-hover/link:translate-x-1" aria-hidden />
-            </Link>
-          </div>
-        </div>
-      </article>
-    </Reveal>
-  );
-}
 
 export default function ServiciosPage() {
   return (
@@ -158,14 +66,8 @@ export default function ServiciosPage() {
       </section>
 
       {/* 02 — LOS CUATRO SERVICIOS */}
-      <section className="light-section bg-2 py-28 sm:py-40" aria-label="Servicios de PC LAB">
-        <div className="container-x">
-          <div className="grid gap-x-14 gap-y-20 sm:grid-cols-2">
-            {services.map((s) => (
-              <ServiceCard key={s.n} service={s} />
-            ))}
-          </div>
-        </div>
+      <section className="bg-background pb-32 sm:pb-40" aria-label="Servicios de PC LAB">
+        <ServicesStrip />
       </section>
     </>
   );
