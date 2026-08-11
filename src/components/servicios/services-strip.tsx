@@ -7,7 +7,19 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { asset } from "@/lib/base";
 
-const services = [
+type Service = {
+  n: string;
+  title: string;
+  description: string;
+  line?: string;
+  cta: string;
+  href: string;
+  image: string;
+  video?: string;
+  alt: string;
+};
+
+const services: Service[] = [
   {
     n: "01",
     title: "Diseño del PC",
@@ -17,6 +29,7 @@ const services = [
     cta: "Diseñar mi PC",
     href: "/configurador",
     image: asset("/cases/tu-pc.jpg"),
+    video: asset("/cases/diseno.mp4"),
     alt: "Diseño de un PC a medida en PC LAB",
   },
   {
@@ -51,7 +64,7 @@ const services = [
     image: asset("/cases/mantenimiento.png"),
     alt: "Mantenimiento de un PC en PC LAB",
   },
-] as const;
+];
 
 export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) {
   const reduced = useReducedMotion();
@@ -74,13 +87,26 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
         {services.map((s) => (
           <article key={s.n}>
             <div className="relative aspect-[16/10] overflow-hidden rounded-sm border border-border bg-surface-2">
-              <Image
-                src={s.image}
-                alt={s.alt}
-                fill
-                sizes="100vw"
-                className="photo-grade object-cover"
-              />
+              {s.video ? (
+                <video
+                  src={s.video}
+                  poster={s.image}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              ) : (
+                <Image
+                  src={s.image}
+                  alt={s.alt}
+                  fill
+                  sizes="100vw"
+                  className="photo-grade object-cover"
+                />
+              )}
               <div className="photo-tint" aria-hidden />
               <div className="photo-grain" aria-hidden />
               <span className="absolute left-5 top-5 font-mono text-sm font-medium tracking-[0.2em] text-white/70">
@@ -136,13 +162,26 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
                   <div
                     className={`absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? "scale-110" : "scale-100"}`}
                   >
-                    <Image
-                      src={s.image}
-                      alt={s.alt}
-                      fill
-                      sizes="(max-width: 1536px) 50vw, 33vw"
-                      className="photo-grade object-cover"
-                    />
+                    {s.video ? (
+                      <video
+                        src={s.video}
+                        poster={s.image}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="auto"
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <Image
+                        src={s.image}
+                        alt={s.alt}
+                        fill
+                        sizes="(max-width: 1536px) 50vw, 33vw"
+                        className="photo-grade object-cover"
+                      />
+                    )}
                   </div>
                   <div className="photo-tint" aria-hidden />
                   <div className="photo-grain" aria-hidden />
