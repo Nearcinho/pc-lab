@@ -166,7 +166,7 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
                             key="expanded"
                             initial={reduced ? false : { opacity: 0, y: 14 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 14 }}
+                            exit={{ opacity: 0, transition: { duration: 0.25, ease: "easeIn" } }}
                             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                           >
                             <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">{s.description}</p>
