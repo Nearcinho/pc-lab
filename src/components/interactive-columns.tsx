@@ -63,7 +63,7 @@ export function InteractiveColumns({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.06 * i }}
-            className={`group block min-h-56 cursor-pointer border-t border-white/20 p-6 text-left transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 focus-visible:ring-offset-0 lg:border-l lg:border-t-0 lg:min-h-72 lg:p-8 ${isActive ? "bg-white/[0.07] backdrop-blur-sm" : "hover:bg-white/[0.03]"}`}
+            className={`group relative block min-h-56 cursor-pointer border-t border-white/20 p-6 text-left transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 focus-visible:ring-offset-0 lg:border-l lg:border-t-0 lg:min-h-72 lg:p-8 ${isActive ? "bg-white/[0.07] backdrop-blur-sm" : "hover:bg-white/[0.03]"}`}
           >
             <span
               className={`font-mono text-[11px] font-medium uppercase tracking-[0.18em] transition-colors duration-300 ${isActive ? "text-brand" : "text-white/50"}`}
@@ -81,16 +81,23 @@ export function InteractiveColumns({
               {isActive && (
                 <motion.span
                   key="text"
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  initial={{ height: 0, opacity: 0, y: 8 }}
+                  animate={{ height: "auto", opacity: 1, y: 0 }}
+                  exit={{ height: 0, opacity: 0, y: 8 }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
                   className="block overflow-hidden"
                 >
                   <span className="block pt-4 text-sm leading-relaxed text-white/70">{d.text}</span>
                 </motion.span>
               )}
             </AnimatePresence>
+            <motion.span
+              initial={false}
+              animate={isActive ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-brand/70 via-brand/30 to-transparent lg:inset-x-8"
+              aria-hidden
+            />
           </motion.button>
         );
       })}
