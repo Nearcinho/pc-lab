@@ -78,9 +78,9 @@ export function FounderStory() {
             <p className="mt-10 font-mono text-sm text-muted-2">Todos los equipos PC LAB incluyen</p>
             <p className="mt-4 font-display text-4xl font-medium leading-[1.06] tracking-tight text-foreground/90 sm:text-5xl">
               1 año de garantía
-              <span className="ml-3 inline-block align-baseline font-sans text-sm font-normal leading-relaxed tracking-normal text-muted-2">
-                en el ensamblado, más la garantía de cada componente que entrega el fabricante.
-              </span>
+            </p>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-2">
+              En el ensamblado, más la garantía de cada componente que entrega el fabricante.
             </p>
 
             <Link
