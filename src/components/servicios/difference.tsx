@@ -20,7 +20,7 @@ const differences = [
   },
   {
     kicker: "Probado antes de entregar",
-    title: "Calidad asegurada.",
+    title: "Tranquilidad asegurada.",
     text: "Test de estabilidad y rendimiento bajo carga real. Tu equipo llega funcionando, no a medias.",
     video: asset("/videos/testing.mp4"),
   },
