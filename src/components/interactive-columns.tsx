@@ -9,7 +9,7 @@ export type DifferenceItem = {
   text: string;
 };
 
-const AUTO_INTERVAL = 3000;
+const AUTO_INTERVAL = 4000;
 const HOLD_AFTER_CLICK = 5000;
 
 export function InteractiveColumns({
