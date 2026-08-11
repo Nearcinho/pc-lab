@@ -98,11 +98,11 @@ export function ServicesStrip() {
       </div>
 
       {/* Escritorio */}
-      <div
-        className="hidden lg:block"
-        onMouseLeave={() => setActive(null)}
-      >
-        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#050505]">
+      <div className="hidden lg:flex justify-center" onMouseLeave={() => setActive(null)}>
+        <div
+          className="relative w-auto overflow-hidden bg-[#050505]"
+          style={{ aspectRatio: "16 / 9", height: "min(70vh, 88vw * 9 / 16)" }}
+        >
           <div className="absolute inset-0 flex gap-px">
             {services.map((s, i) => {
               const isActive = active === i;
