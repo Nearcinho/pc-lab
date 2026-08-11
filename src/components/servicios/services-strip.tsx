@@ -53,9 +53,19 @@ const services = [
   },
 ] as const;
 
-export function ServicesStrip() {
+export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) {
   const reduced = useReducedMotion();
-  const [active, setActive] = React.useState<number | null>(null);
+  const [active, setActive] = React.useState<number | null>(autoRotate ? 0 : null);
+  const hovering = React.useRef(false);
+
+  React.useEffect(() => {
+    if (!autoRotate || reduced) return;
+    const id = window.setInterval(() => {
+      if (hovering.current) return;
+      setActive((i) => (i === null ? 0 : (i + 1) % services.length));
+    }, 4000);
+    return () => window.clearInterval(id);
+  }, [autoRotate, reduced]);
 
   return (
     <>
@@ -98,7 +108,16 @@ export function ServicesStrip() {
       </div>
 
       {/* Escritorio */}
-      <div className="hidden lg:flex justify-center" onMouseLeave={() => setActive(null)}>
+      <div
+        className="hidden lg:flex justify-center"
+        onMouseEnter={() => {
+          hovering.current = true;
+        }}
+        onMouseLeave={() => {
+          hovering.current = false;
+          setActive(null);
+        }}
+      >
         <div
           className="relative w-auto overflow-hidden bg-[#050505]"
           style={{ aspectRatio: "16 / 9", height: "min(70vh, 88vw * 9 / 16)" }}

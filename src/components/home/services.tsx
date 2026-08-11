@@ -49,7 +49,7 @@ export function Services() {
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.12 }}
           className="mt-12"
         >
-          <ServicesStrip />
+          <ServicesStrip autoRotate />
         </motion.div>
       </div>
     </section>
