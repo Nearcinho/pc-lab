@@ -96,7 +96,7 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
                   loop
                   playsInline
                   preload="auto"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full scale-[1.06] object-cover"
                 />
               ) : (
                 <Image
@@ -171,7 +171,7 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
                         loop
                         playsInline
                         preload="auto"
-                        className="h-full w-full object-cover"
+                        className="h-full w-full scale-[1.06] object-cover"
                       />
                     ) : (
                       <Image
