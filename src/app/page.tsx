@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/home/hero";
 import { StoryIntro } from "@/components/home/story-intro";
 import { UseCases } from "@/components/home/use-cases";
+import { Services } from "@/components/home/services";
 import { Craftsmanship } from "@/components/home/craftsmanship";
 import { FounderStory } from "@/components/home/founder-story";
 import { FinalCta } from "@/components/home/final-cta";
@@ -55,6 +56,7 @@ export default function HomePage() {
       <Hero />
       <StoryIntro />
       <UseCases />
+      <Services />
       <Craftsmanship />
       <FounderStory />
       <FinalCta />
