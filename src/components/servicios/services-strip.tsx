@@ -48,7 +48,7 @@ const services = [
     line: undefined,
     cta: "Mantener mi PC",
     href: "/contacto",
-    image: asset("/cases/trabajo.jpg"),
+    image: asset("/cases/mantenimiento.png"),
     alt: "Mantenimiento de un PC en PC LAB",
   },
 ] as const;
