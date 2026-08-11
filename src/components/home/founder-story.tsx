@@ -24,7 +24,7 @@ export function FounderStory() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="m-0 flex flex-col justify-between rounded-xl border border-[#2b3f4d]/70 bg-[linear-gradient(180deg,#1d1d20_0%,#141416_100%)] p-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_30px_70px_-40px_rgba(0,0,0,0.9)] transition-colors duration-500 hover:border-brand/50 sm:p-12"
+            className="m-0 flex flex-col rounded-xl bg-[linear-gradient(180deg,#1d1d20_0%,#141416_100%)] p-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_30px_70px_-40px_rgba(0,0,0,0.9)] sm:p-12"
             style={{
               backgroundImage:
                 "linear-gradient(180deg,#1d1d20,#141416),repeating-linear-gradient(90deg,rgba(255,255,255,0.02) 0 1px,transparent 1px 3px)",
