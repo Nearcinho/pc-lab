@@ -21,7 +21,7 @@ const heroItems = [
   },
   {
     kicker: "Probado antes de entregar",
-    title: "Lo probamos antes de que lo veas.",
+    title: "Calidad asegurada.",
     text: "Test de estabilidad y rendimiento bajo carga real. Tu equipo llega funcionando, no a medias.",
   },
   {
