@@ -28,7 +28,7 @@ export function Services() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
               className="mt-7 font-display text-4xl font-medium leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-[3.4rem]"
             >
-              Todo lo que necesitas para tu PC.
+              Lo que hacemos en el taller.
             </motion.h2>
           </div>
           <motion.p
