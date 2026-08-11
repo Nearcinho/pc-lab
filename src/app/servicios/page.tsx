@@ -59,7 +59,7 @@ const services = [
   },
 ] as const;
 
-function ServiceCard({ service, light }: { service: (typeof services)[number]; light: boolean }) {
+function ServiceCard({ service }: { service: (typeof services)[number] }) {
   return (
     <Reveal className="h-full">
       <article className="group flex h-full flex-col">
@@ -81,11 +81,11 @@ function ServiceCard({ service, light }: { service: (typeof services)[number]; l
 
         <div className="mt-8 flex flex-1 flex-col">
           <h2 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">{service.title}</h2>
-          <p className={`mt-4 max-w-md text-base leading-relaxed ${light ? "text-[#333333]" : "text-muted-2"}`}>
+          <p className="mt-4 max-w-md text-base leading-relaxed text-[#333333]">
             {service.description}
           </p>
           {service.line && (
-            <p className={`mt-5 font-mono text-xs uppercase tracking-[0.18em] ${light ? "text-[#666666]" : "text-muted"}`}>
+            <p className="mt-5 font-mono text-xs uppercase tracking-[0.18em] text-[#666666]">
               {service.line}
             </p>
           )}
@@ -147,29 +147,18 @@ export default function ServiciosPage() {
         </div>
       </section>
 
-      {/* 02 — SERVICIOS 01 + 02 */}
-      <section className="light-section bg-2 py-28 sm:py-40" aria-label="Diseño y ensamblado de PC">
+      {/* 02 — LOS CUATRO SERVICIOS */}
+      <section className="light-section bg-2 py-28 sm:py-40" aria-label="Servicios de PC LAB">
         <div className="container-x">
           <div className="grid gap-x-14 gap-y-20 sm:grid-cols-2">
-            {services.slice(0, 2).map((s) => (
-              <ServiceCard key={s.n} service={s} light />
+            {services.map((s) => (
+              <ServiceCard key={s.n} service={s} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* 03 — SERVICIOS 03 + 04 */}
-      <section className="bg-background py-28 sm:py-40" aria-label="Upgrades y mantenimiento de PC">
-        <div className="container-x">
-          <div className="grid gap-x-14 gap-y-20 sm:grid-cols-2">
-            {services.slice(2).map((s) => (
-              <ServiceCard key={s.n} service={s} light={false} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 04 — FINAL CTA */}
+      {/* 03 — FINAL CTA */}
       <section className="relative overflow-hidden bg-background py-32 sm:py-44" aria-label="Empieza tu proyecto">
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-[24rem] bg-[radial-gradient(50%_70%_at_50%_100%,rgba(79,209,255,0.07),transparent_70%)]"
