@@ -9,6 +9,9 @@ export type DifferenceItem = {
   text: string;
 };
 
+const AUTO_INTERVAL = 3000;
+const HOLD_AFTER_CLICK = 5000;
+
 export function InteractiveColumns({
   items,
   active: controlledActive,
@@ -21,11 +24,30 @@ export function InteractiveColumns({
   const reduced = useReducedMotion();
   const [internal, setInternal] = React.useState(0);
   const active = controlledActive ?? internal;
+  const holdUntilRef = React.useRef(0);
+  const onSelectRef = React.useRef(onSelect);
+  onSelectRef.current = onSelect;
 
-  const select = (i: number) => {
-    setInternal(i);
-    onSelect?.(i);
-  };
+  const select = React.useCallback(
+    (i: number, holdMs: number) => {
+      holdUntilRef.current = Date.now() + holdMs;
+      setInternal(i);
+      onSelectRef.current?.(i);
+    },
+    []
+  );
+
+  React.useEffect(() => {
+    const id = window.setInterval(() => {
+      if (Date.now() < holdUntilRef.current) return;
+      setInternal((i) => {
+        const next = (i + 1) % items.length;
+        onSelectRef.current?.(next);
+        return next;
+      });
+    }, AUTO_INTERVAL);
+    return () => window.clearInterval(id);
+  }, [items.length]);
 
   return (
     <div className="grid gap-px sm:grid-cols-2 lg:grid-cols-4">
@@ -35,7 +57,7 @@ export function InteractiveColumns({
           <motion.button
             key={d.kicker}
             type="button"
-            onClick={() => select(i)}
+            onClick={() => select(i, HOLD_AFTER_CLICK)}
             aria-pressed={isActive}
             initial={reduced ? false : { opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
