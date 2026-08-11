@@ -53,11 +53,27 @@ const services = [
   },
 ] as const;
 
-const SKEW = 5;
+function clipFor(i: number, s: number) {
+  if (i === 0) return `polygon(0px 0%, calc(100% + ${s}px) 0%, calc(100% - ${s}px) 100%, 0px 100%)`;
+  if (i === 3) return `polygon(${s}px 0%, 100% 0%, 100% 100%, -${s}px 100%)`;
+  return `polygon(${s}px 0%, calc(100% + ${s}px) 0%, calc(100% - ${s}px) 100%, -${s}px 100%)`;
+}
 
 export function ServicesStrip() {
   const reduced = useReducedMotion();
   const [active, setActive] = React.useState<number | null>(null);
+  const [slant, setSlant] = React.useState(40);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const update = () => setSlant(Math.max(20, Math.min(80, Math.round(el.clientWidth * 0.035))));
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   return (
     <>
@@ -101,14 +117,12 @@ export function ServicesStrip() {
 
       {/* Escritorio */}
       <div
+        ref={containerRef}
         className="hidden lg:block"
         onMouseLeave={() => setActive(null)}
       >
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#050505]">
-          <div
-            className="absolute inset-0 flex"
-            style={{ transform: `skewY(-${SKEW}deg)` }}
-          >
+          <div className="absolute inset-0 flex">
             {services.map((s, i) => {
               const isActive = active === i;
               return (
@@ -117,7 +131,8 @@ export function ServicesStrip() {
                   href={s.href}
                   onMouseEnter={() => setActive(i)}
                   aria-expanded={isActive}
-                  className={`relative h-full cursor-pointer overflow-hidden text-left transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 ${isActive ? "flex-[2.6]" : "flex-1"}`}
+                  style={{ clipPath: clipFor(i, slant) }}
+                  className={`relative h-full cursor-pointer text-left transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 ${isActive ? "flex-[2.6]" : "flex-1"}`}
                 >
                   <div
                     className={`absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? "scale-110" : "scale-100"}`}
@@ -136,10 +151,7 @@ export function ServicesStrip() {
                     className="absolute inset-0 bg-gradient-to-t from-[#050505]/95 via-[#050505]/25 to-transparent"
                     aria-hidden
                   />
-                  <div
-                    className="absolute inset-x-0 bottom-0"
-                    style={{ transform: `skewY(${SKEW}deg)`, transformOrigin: "left bottom" }}
-                  >
+                  <div className="absolute inset-x-0 bottom-0">
                     <div className="p-6 xl:p-8">
                       <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
                         {s.n}
