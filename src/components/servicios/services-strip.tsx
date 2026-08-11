@@ -53,15 +53,7 @@ const services = [
   },
 ] as const;
 
-const SLANT = 6;
-
-function clipFor(i: number) {
-  const t = i * 25;
-  const n = (i + 1) * 25;
-  if (i === 0) return `polygon(0% 0%, ${n + SLANT}% 0%, ${n - SLANT}% 100%, 0% 100%)`;
-  if (i === 3) return `polygon(${t + SLANT}% 0%, 100% 0%, 100% 100%, ${t - SLANT}% 100%)`;
-  return `polygon(${t + SLANT}% 0%, ${n + SLANT}% 0%, ${n - SLANT}% 100%, ${t - SLANT}% 100%)`;
-}
+const SKEW = 5;
 
 export function ServicesStrip() {
   const reduced = useReducedMotion();
@@ -108,71 +100,83 @@ export function ServicesStrip() {
       </div>
 
       {/* Escritorio */}
-      <div className="hidden lg:block" onMouseLeave={() => setActive(null)}>
-        <div className="relative flex aspect-[16/9] w-full">
-          {services.map((s, i) => {
-            const isActive = active === i;
-            return (
-              <Link
-                key={s.n}
-                href={s.href}
-                onMouseEnter={() => setActive(i)}
-                aria-expanded={isActive}
-                className={`relative h-full cursor-pointer overflow-hidden text-left transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 ${isActive ? "flex-[2.6]" : "flex-1"}`}
-                style={{ clipPath: clipFor(i) }}
-              >
-                <div
-                  className={`absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? "scale-110" : "scale-100"}`}
+      <div
+        className="hidden lg:block"
+        onMouseLeave={() => setActive(null)}
+      >
+        <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#050505]">
+          <div
+            className="absolute inset-0 flex"
+            style={{ transform: `skewY(-${SKEW}deg)` }}
+          >
+            {services.map((s, i) => {
+              const isActive = active === i;
+              return (
+                <Link
+                  key={s.n}
+                  href={s.href}
+                  onMouseEnter={() => setActive(i)}
+                  aria-expanded={isActive}
+                  className={`relative h-full cursor-pointer overflow-hidden text-left transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 ${isActive ? "flex-[2.6]" : "flex-1"}`}
                 >
-                  <Image
-                    src={s.image}
-                    alt={s.alt}
-                    fill
-                    sizes="(max-width: 1536px) 50vw, 33vw"
-                    className="photo-grade object-cover"
-                  />
-                </div>
-                <div className="photo-tint" aria-hidden />
-                <div className="photo-grain" aria-hidden />
-                <div
-                  className="absolute inset-0 bg-gradient-to-t from-[#050505]/95 via-[#050505]/25 to-transparent"
-                  aria-hidden
-                />
-                <div className="absolute inset-x-0 bottom-0 p-6 xl:p-8">
-                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
-                    {s.n}
-                  </p>
-                  <h2
-                    className={`mt-2 font-display font-semibold tracking-tight text-white transition-all duration-500 ${isActive ? "text-3xl" : "text-xl"}`}
+                  <div
+                    className={`absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? "scale-110" : "scale-100"}`}
                   >
-                    {s.title}
-                  </h2>
-                  <AnimatePresence initial={false}>
-                    {isActive && (
-                      <motion.div
-                        key="expanded"
-                        initial={reduced ? false : { opacity: 0, y: 14 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 14 }}
-                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    <Image
+                      src={s.image}
+                      alt={s.alt}
+                      fill
+                      sizes="(max-width: 1536px) 50vw, 33vw"
+                      className="photo-grade object-cover"
+                    />
+                  </div>
+                  <div className="photo-tint" aria-hidden />
+                  <div className="photo-grain" aria-hidden />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-[#050505]/95 via-[#050505]/25 to-transparent"
+                    aria-hidden
+                  />
+                  <div
+                    className="absolute inset-x-0 bottom-0"
+                    style={{ transform: `skewY(${SKEW}deg)`, transformOrigin: "left bottom" }}
+                  >
+                    <div className="p-6 xl:p-8">
+                      <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-white/60">
+                        {s.n}
+                      </p>
+                      <h2
+                        className={`mt-2 font-display font-semibold tracking-tight text-white transition-all duration-500 ${isActive ? "text-3xl" : "text-xl"}`}
                       >
-                        <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">{s.description}</p>
-                        {s.line && (
-                          <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand">
-                            {s.line}
-                          </p>
+                        {s.title}
+                      </h2>
+                      <AnimatePresence initial={false}>
+                        {isActive && (
+                          <motion.div
+                            key="expanded"
+                            initial={reduced ? false : { opacity: 0, y: 14 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 14 }}
+                            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                          >
+                            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">{s.description}</p>
+                            {s.line && (
+                              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand">
+                                {s.line}
+                              </p>
+                            )}
+                            <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                              {s.cta}
+                              <ArrowRight className="size-4" aria-hidden />
+                            </span>
+                          </motion.div>
                         )}
-                        <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
-                          {s.cta}
-                          <ArrowRight className="size-4" aria-hidden />
-                        </span>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </Link>
-            );
-          })}
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>
