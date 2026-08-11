@@ -134,7 +134,17 @@ export default function ServiciosPage() {
                 Desde diseñar tu equipo desde cero hasta mejorarlo y mantenerlo en perfecto estado.
               </p>
             </Reveal>
-            <Reveal delay={0.24}>
+            <Reveal delay={0.2}>
+              <ul className="mt-9 flex flex-wrap gap-x-8 gap-y-3">
+                {["Diseño de PC", "Ensamblado de PC", "Upgrades de PC", "Mantenimiento de PC"].map((item) => (
+                  <li key={item} className="flex items-center gap-2.5 text-sm font-medium text-muted-2">
+                    <span className="size-1.5 shrink-0 rounded-full bg-brand" aria-hidden />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={0.28}>
               <div className="mt-12">
                 <Link href="/contacto">
                   <Button size="lg" variant="brand">
