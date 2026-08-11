@@ -21,7 +21,7 @@ const heroItems = [
   },
   {
     kicker: "Probado antes de entregar",
-    title: "Si falla, se queda en el taller.",
+    title: "Lo probamos antes de que lo veas.",
     text: "Test de estabilidad y rendimiento bajo carga real. Tu equipo llega funcionando, no a medias.",
   },
   {
