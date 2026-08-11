@@ -69,14 +69,14 @@ export function FounderStory() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="flex flex-col self-start justify-self-stretch rounded-xl bg-[linear-gradient(180deg,#1d1d20_0%,#141416_100%)] p-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_30px_70px_-40px_rgba(0,0,0,0.9)] sm:p-12"
+            className="rounded-2xl border border-border bg-surface p-8 sm:p-10"
           >
             <p className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-brand">
               Garantía, por escrito
             </p>
 
-            <p className="mt-10 font-mono text-sm text-muted-2">Todos los equipos PC LAB incluyen</p>
-            <p className="mt-4 font-display text-4xl font-medium leading-[1.06] tracking-tight text-foreground/90 sm:text-5xl">
+            <p className="mt-8 font-mono text-sm text-muted-2">Todos los equipos PC LAB incluyen</p>
+            <p className="mt-4 font-display text-4xl font-medium leading-[1.06] tracking-tight sm:text-5xl">
               1 año de garantía
             </p>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-muted-2">
@@ -85,7 +85,7 @@ export function FounderStory() {
 
             <Link
               href="/garantia"
-              className="group mt-10 inline-flex items-center justify-center gap-3 rounded-sm border border-brand/50 px-6 py-3.5 text-[12px] font-semibold uppercase tracking-[0.22em] text-brand transition-all duration-300 hover:border-brand hover:bg-brand/10 hover:shadow-[0_0_24px_-6px_rgba(79,209,255,0.45)]"
+              className="group mt-10 inline-flex items-center gap-2 rounded-full border border-border-strong px-7 py-3.5 text-sm font-semibold text-foreground transition-all duration-300 hover:border-brand/60 hover:text-brand"
             >
               Ver toda la garantía
               <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
