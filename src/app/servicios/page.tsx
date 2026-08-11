@@ -157,35 +157,6 @@ export default function ServiciosPage() {
           </div>
         </div>
       </section>
-
-      {/* 03 — FINAL CTA */}
-      <section className="relative overflow-hidden bg-background py-32 sm:py-44" aria-label="Empieza tu proyecto">
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-[24rem] bg-[radial-gradient(50%_70%_at_50%_100%,rgba(79,209,255,0.07),transparent_70%)]"
-          aria-hidden
-        />
-        <div className="container-x relative text-center">
-          <Reveal>
-            <h2 className="mx-auto max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl">
-              ¿Qué necesita tu PC?
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-muted-2 sm:text-xl">
-              Cuéntanos qué tienes, qué quieres conseguir y cuánto quieres invertir.
-            </p>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <div className="mt-12">
-              <Link href="/contacto">
-                <Button size="lg" variant="brand">
-                  Hablar con PC LAB <ArrowRight className="size-4" aria-hidden />
-                </Button>
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }
