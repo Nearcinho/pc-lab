@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
+import { Difference } from "@/components/servicios/difference";
 import { asset } from "@/lib/base";
 
 export const metadata: Metadata = {
@@ -167,6 +168,9 @@ export default function ServiciosPage() {
           </div>
         </div>
       </section>
+
+      {/* 03 — LA DIFERENCIA */}
+      <Difference />
     </>
   );
 }
