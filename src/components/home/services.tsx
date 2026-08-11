@@ -7,7 +7,7 @@ export function Services() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="bg-background py-28 sm:py-36" aria-label="Servicios">
+    <section className="light-section bg-background py-28 sm:py-36" aria-label="Servicios">
       <div className="container-x">
         <div className="flex flex-wrap items-end justify-between gap-6 border-b border-border pb-10">
           <div>
