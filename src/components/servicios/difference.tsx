@@ -9,7 +9,7 @@ const differences = [
   {
     kicker: "Diseño a medida",
     title: "Cada PC empieza por ti.",
-    text: "No vendemos torres de catálogo. Escuchamos tu uso, tu presupuesto y tu futuro antes de elegir un solo componente.",
+    text: "No vendemos torres de catálogo. Escuchamos tu presupuesto, tus juegos, tu trabajo y tu futuro, y diseñamos y ensamblamos la máquina exacta que necesitas.",
     video: asset("/videos/compatibility.mp4"),
   },
   {
