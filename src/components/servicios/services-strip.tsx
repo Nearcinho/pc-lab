@@ -53,27 +53,9 @@ const services = [
   },
 ] as const;
 
-function clipFor(i: number, s: number) {
-  if (i === 0) return `polygon(0px 0%, calc(100% + ${s}px) 0%, calc(100% - ${s}px) 100%, 0px 100%)`;
-  if (i === 3) return `polygon(${s}px 0%, 100% 0%, 100% 100%, -${s}px 100%)`;
-  return `polygon(${s}px 0%, calc(100% + ${s}px) 0%, calc(100% - ${s}px) 100%, -${s}px 100%)`;
-}
-
 export function ServicesStrip() {
   const reduced = useReducedMotion();
   const [active, setActive] = React.useState<number | null>(null);
-  const [slant, setSlant] = React.useState(40);
-  const containerRef = React.useRef<HTMLDivElement>(null);
-
-  React.useLayoutEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const update = () => setSlant(Math.max(20, Math.min(80, Math.round(el.clientWidth * 0.035))));
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
 
   return (
     <>
@@ -117,12 +99,11 @@ export function ServicesStrip() {
 
       {/* Escritorio */}
       <div
-        ref={containerRef}
         className="hidden lg:block"
         onMouseLeave={() => setActive(null)}
       >
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#050505]">
-          <div className="absolute inset-0 flex">
+          <div className="absolute inset-0 flex gap-px">
             {services.map((s, i) => {
               const isActive = active === i;
               return (
@@ -131,8 +112,7 @@ export function ServicesStrip() {
                   href={s.href}
                   onMouseEnter={() => setActive(i)}
                   aria-expanded={isActive}
-                  style={{ clipPath: clipFor(i, slant) }}
-                  className={`relative h-full cursor-pointer text-left transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 ${isActive ? "flex-[2.6]" : "flex-1"}`}
+                  className={`relative h-full cursor-pointer overflow-hidden text-left transition-[flex-grow] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/60 ${isActive ? "flex-[2.6]" : "flex-1"}`}
                 >
                   <div
                     className={`absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? "scale-110" : "scale-100"}`}
