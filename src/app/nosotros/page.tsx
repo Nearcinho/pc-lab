@@ -97,18 +97,18 @@ export default function NosotrosPage() {
               </Reveal>
 
               <Reveal delay={0.14}>
-                <p className="mt-10 max-w-xl text-justify text-lg leading-[1.8] text-muted-2 sm:text-xl">
+                <p className="mt-10 max-w-xl text-lg leading-[1.8] text-muted-2 sm:text-xl">
                   Hay miles de configuraciones posibles. Pero eso no significa que todas tengan sentido para
                   ti.
                 </p>
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="mt-8 border-t border-[#0a0a0a]/10 pt-8">
-                  <p className="max-w-lg text-justify text-base leading-[1.8] text-muted-2 sm:text-lg">
+                  <p className="max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
                     Tu presupuesto, tus juegos, tu trabajo y la forma en que utilizas tu ordenador deberían
                     decidir qué componentes lleva. No al revés.
                   </p>
-                  <p className="mt-6 max-w-lg text-justify text-base leading-[1.8] text-muted-2 sm:text-lg">
+                  <p className="mt-6 max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
                     Por eso PC LAB empieza por entenderte antes de recomendarte una configuración.
                   </p>
                 </div>
