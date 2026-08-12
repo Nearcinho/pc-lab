@@ -20,6 +20,8 @@ export const RESOLUTIONS: { key: Resolution; label: string }[] = [
 export const GPU_REL: Record<string, number> = {
   "gpu-rtx4060": 32, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4060.c4107
   "gpu-rx7600xt": 32, // https://www.techpowerup.com/gpu-specs/radeon-rx-7600-xt.c4190
+  "gpu-rtx5060": 39, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5060.c4219
+  "gpu-rx9060xt": 44, // https://www.techpowerup.com/gpu-specs/radeon-rx-9060-xt-16-gb.c4293
   "gpu-rtx5060ti": 46, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5060-ti-16-gb.c4292
   "gpu-rx7800xt": 51, // https://www.techpowerup.com/gpu-specs/radeon-rx-7800-xt.c3839
   "gpu-rtx4070": 53, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070.c3924
