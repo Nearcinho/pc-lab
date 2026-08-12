@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { asset } from "@/lib/base";
 
@@ -199,28 +199,22 @@ export function ServicesStrip({ autoRotate = false }: { autoRotate?: boolean }) 
                       >
                         {s.title}
                       </h2>
-                      <AnimatePresence initial={false}>
-                        {isActive && (
-                          <motion.div
-                            key="expanded"
-                            initial={reduced ? false : { opacity: 0, y: 14 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }}
-                            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                          >
-                            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">{s.description}</p>
-                            {s.line && (
-                              <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand">
-                                {s.line}
-                              </p>
-                            )}
-                            <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
-                              {s.cta}
-                              <ArrowRight className="size-4" aria-hidden />
-                            </span>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
+                      <div
+                        className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${isActive ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+                      >
+                        <div className="min-h-0 overflow-hidden">
+                          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/75">{s.description}</p>
+                          {s.line && (
+                            <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-brand">
+                              {s.line}
+                            </p>
+                          )}
+                          <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand">
+                            {s.cta}
+                            <ArrowRight className="size-4" aria-hidden />
+                          </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </Link>
