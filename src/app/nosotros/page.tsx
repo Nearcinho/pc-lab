@@ -47,7 +47,7 @@ export default function NosotrosPage() {
                 </p>
               </Reveal>
               <Reveal delay={0.08}>
-                <h1 className="mt-8 max-w-4xl font-display text-[2.1rem] font-semibold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.3rem]">
+                <h1 className="mt-8 max-w-4xl font-display text-[2.3rem] font-semibold leading-[1.12] tracking-tight sm:text-5xl lg:text-[2.6rem]">
                   <span className="text-brand">"</span>
                   Ensamblo cada PC con el mismo cuidado como{" "}
                   <span className="text-gradient">si fuera el mío.</span>
