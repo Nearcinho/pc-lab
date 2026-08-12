@@ -49,7 +49,7 @@ export default function NosotrosPage() {
               <Reveal delay={0.08}>
                 <h1 className="mt-8 max-w-3xl font-display text-[2.2rem] font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-[2.75rem]">
                   <span className="text-brand">"</span>
-                  Ensamblo cada PC con el mismo cuidado como
+                  Ensamblo cada PC con el mismo cuidado como{" "}
                   <span className="text-gradient">si fuera el mío.</span>
                   <span className="text-brand">"</span>
                 </h1>
