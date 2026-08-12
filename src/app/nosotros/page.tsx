@@ -64,7 +64,7 @@ export default function NosotrosPage() {
               <Reveal delay={0.08}>
                 <h1 className="mt-8 max-w-3xl font-display text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-[4.2rem]">
                   Tu PC merece el mismo cuidado que
-                  <span className="block text-gradient">tendría el nuestro.</span>
+                  <span className="block text-gradient">tendría el mío.</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.16}>
