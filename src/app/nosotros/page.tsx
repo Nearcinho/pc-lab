@@ -48,8 +48,10 @@ export default function NosotrosPage() {
               </Reveal>
               <Reveal delay={0.08}>
                 <h1 className="mt-8 max-w-2xl font-display text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-[4.1rem]">
+                  <span className="text-brand">"</span>
                   Tu PC merece el mismo cuidado que
                   <span className="block text-gradient">tendría el mío.</span>
+                  <span className="text-brand">"</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.16}>
@@ -65,11 +67,6 @@ export default function NosotrosPage() {
                 </p>
               </Reveal>
               <Reveal delay={0.28}>
-                <p className="mt-9 max-w-xl border-l-2 border-brand pl-5 font-display text-2xl font-semibold leading-snug tracking-tight sm:text-3xl">
-                  Cada PC lo trato como si fuera mío.
-                </p>
-              </Reveal>
-              <Reveal delay={0.34}>
                 <p className="mt-9 max-w-xl border-t border-border pt-6 text-sm leading-[1.8] text-muted">
                   Experiencia en hardware, gaming y esports, incluyendo la final de la LLA de Riot Games 2023 en
                   Chile, Argentina Game Show, Red Bull Campus Clutch, Arena BK Chile y PCs para influencers y
