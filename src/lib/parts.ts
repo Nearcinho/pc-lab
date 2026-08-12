@@ -753,12 +753,22 @@ export const caseParts: Part[] = [
 ];
 
 export const psuParts: Part[] = [
-  { id: "psu-550", category: "psu", brand: "Corsair", name: "RM550x 80+ Gold", price: 119, power: 0, watts: 550, rating: "Gold", form: "ATX" },
-  { id: "psu-650", category: "psu", brand: "Seasonic", name: "Focus GX-650", price: 149, power: 0, watts: 650, rating: "Gold", form: "ATX" },
-  { id: "psu-750", category: "psu", brand: "be quiet!", name: "Pure Power 12 750W", price: 139, power: 0, watts: 750, rating: "Gold", form: "ATX" },
-  { id: "psu-850", category: "psu", brand: "Corsair", name: "RM850x Shift", price: 179, power: 0, watts: 850, rating: "Gold", form: "ATX" },
-  { id: "psu-1000", category: "psu", brand: "be quiet!", name: "Dark Power 13 1000W", price: 289, power: 0, watts: 1000, rating: "Platinum", form: "ATX" },
-  { id: "psu-1200p", category: "psu", brand: "Corsair", name: "HXi 1200W", price: 349, power: 0, watts: 1200, rating: "Platinum", form: "ATX" },
+  { id: "psu-bronze-550", category: "psu", brand: "Corsair", name: "550 W · 80+ Bronze", price: 79, power: 0, watts: 550, rating: "Bronze", form: "ATX" },
+  { id: "psu-bronze-650", category: "psu", brand: "Corsair", name: "650 W · 80+ Bronze", price: 99, power: 0, watts: 650, rating: "Bronze", form: "ATX" },
+  { id: "psu-bronze-750", category: "psu", brand: "Corsair", name: "750 W · 80+ Bronze", price: 109, power: 0, watts: 750, rating: "Bronze", form: "ATX" },
+  { id: "psu-bronze-850", category: "psu", brand: "Corsair", name: "850 W · 80+ Bronze", price: 129, power: 0, watts: 850, rating: "Bronze", form: "ATX" },
+  { id: "psu-gold-550", category: "psu", brand: "Seasonic", name: "550 W · 80+ Gold", price: 109, power: 0, watts: 550, rating: "Gold", form: "ATX" },
+  { id: "psu-gold-650", category: "psu", brand: "Seasonic", name: "650 W · 80+ Gold", price: 139, power: 0, watts: 650, rating: "Gold", form: "ATX" },
+  { id: "psu-gold-750", category: "psu", brand: "Seasonic", name: "750 W · 80+ Gold", price: 149, power: 0, watts: 750, rating: "Gold", form: "ATX" },
+  { id: "psu-gold-850", category: "psu", brand: "Seasonic", name: "850 W · 80+ Gold", price: 179, power: 0, watts: 850, rating: "Gold", form: "ATX" },
+  { id: "psu-gold-1000", category: "psu", brand: "Seasonic", name: "1000 W · 80+ Gold", price: 229, power: 0, watts: 1000, rating: "Gold", form: "ATX" },
+  { id: "psu-platinum-750", category: "psu", brand: "be quiet!", name: "750 W · 80+ Platinum", price: 189, power: 0, watts: 750, rating: "Platinum", form: "ATX" },
+  { id: "psu-platinum-850", category: "psu", brand: "be quiet!", name: "850 W · 80+ Platinum", price: 209, power: 0, watts: 850, rating: "Platinum", form: "ATX" },
+  { id: "psu-platinum-1000", category: "psu", brand: "be quiet!", name: "1000 W · 80+ Platinum", price: 249, power: 0, watts: 1000, rating: "Platinum", form: "ATX" },
+  { id: "psu-platinum-1200", category: "psu", brand: "be quiet!", name: "1200 W · 80+ Platinum", price: 329, power: 0, watts: 1200, rating: "Platinum", form: "ATX" },
+  { id: "psu-titanium-1000", category: "psu", brand: "Corsair", name: "1000 W · 80+ Titanium", price: 319, power: 0, watts: 1000, rating: "Titanium", form: "ATX" },
+  { id: "psu-titanium-1200", category: "psu", brand: "Corsair", name: "1200 W · 80+ Titanium", price: 379, power: 0, watts: 1200, rating: "Titanium", form: "ATX" },
+  { id: "psu-titanium-1600", category: "psu", brand: "Corsair", name: "1600 W · 80+ Titanium", price: 519, power: 0, watts: 1600, rating: "Titanium", form: "ATX" },
 ];
 
 export const osParts: Part[] = [
