@@ -12,24 +12,6 @@ export const metadata: Metadata = {
 
 const portraitAlt = "Nicolás Sánchez Negrete, fundador de PC LAB";
 
-const steps = [
-  {
-    n: "01",
-    label: "Selección",
-    text: "La configuración se revisa antes de comprar cualquier componente.",
-  },
-  {
-    n: "02",
-    label: "Ensamblaje",
-    text: "El montaje se realiza con especial atención al cableado, la refrigeración y el acabado.",
-  },
-  {
-    n: "03",
-    label: "Comprobación",
-    text: "El equipo se prueba antes de entregarlo para verificar estabilidad, temperaturas y funcionamiento.",
-  },
-];
-
 export default function NosotrosPage() {
   return (
     <>
@@ -95,74 +77,50 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* 02 — CÓMO SE CONSTRUYE Y QUÉ RECIBE EL CLIENTE */}
-      <section className="light-section bg-background py-28 sm:py-36" aria-label="Cómo se construye cada PC">
+      {/* 02 — POR QUÉ EXISTE PC LAB */}
+      <section className="light-section bg-background py-32 sm:py-44" aria-label="Por qué existe PC LAB">
         <div className="container-x">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
-            <Reveal y={36} className="relative">
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm border border-[#0a0a0a]/10 bg-surface-2">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  poster={asset("/cases/ensamblado.png")}
-                  className="h-full w-full object-cover"
-                >
-                  <source src={asset("/videos/cable-management.mp4")} type="video/mp4" />
-                </video>
-                <div className="photo-tint" aria-hidden />
-                <div className="photo-grain" aria-hidden />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/60 via-transparent to-transparent" aria-hidden />
-                <span className="absolute bottom-5 left-5 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-white/70">
-                  Taller PC LAB · Ensamblaje
-                </span>
-                <span className="absolute bottom-5 right-5 size-2 rounded-full bg-brand" aria-hidden />
-              </div>
+          <Reveal>
+            <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[#6a6a6a]">
+              <span className="inline-block h-px w-10 bg-[#0a0a0a]/30" aria-hidden />
+              Por qué existe PC LAB
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.08}>
+            <h2 className="mt-10 max-w-3xl font-display text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.6rem]">
+              No necesitas el PC más caro.
+              <span className="block">Necesitas el <span className="text-brand">PC correcto.</span></span>
+            </h2>
+          </Reveal>
+
+          <div className="mt-16 grid gap-10 lg:grid-cols-[1fr_0.7fr] lg:gap-20">
+            <Reveal delay={0.14}>
+              <p className="max-w-xl text-lg leading-[1.8] text-muted-2 sm:text-xl">
+                Hay miles de configuraciones posibles. Pero eso no significa que todas tengan sentido para ti.
+              </p>
             </Reveal>
-
             <div>
-              <Reveal>
-                <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-2">
-                  <span className="inline-block h-px w-10 bg-[#0a0a0a]/30" aria-hidden />
-                  Lo que recibes
+              <Reveal delay={0.2}>
+                <p className="max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
+                  Tu presupuesto, tus juegos, tu trabajo y la forma en que utilizas tu ordenador deberían
+                  decidir qué componentes lleva. No al revés.
                 </p>
               </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="mt-7 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
-                  Cada PC pasa por mis manos.
-                </h2>
-              </Reveal>
-              <Reveal delay={0.14}>
-                <p className="mt-6 max-w-lg text-base leading-[1.75] text-muted-2 sm:text-lg">
-                  No ensamblamos PCs en serie. Cada equipo se monta individualmente, revisando cada
-                  componente, cada conexión y cada detalle antes de entregarlo.
-                </p>
-              </Reveal>
-
-              <div className="mt-10 border-t border-[#0a0a0a]/10">
-                {steps.map((s, i) => (
-                  <Reveal key={s.n} delay={0.05 * i}>
-                    <div className="grid gap-2 border-b border-[#0a0a0a]/10 py-6 sm:grid-cols-[3.5rem_1fr] sm:gap-6">
-                      <span className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-2">{s.n}</span>
-                      <div>
-                        <h3 className="font-display text-xl font-medium tracking-tight sm:text-2xl">{s.label}</h3>
-                        <p className="mt-1.5 max-w-md text-sm leading-[1.75] text-muted-2">{s.text}</p>
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
-
-              <Reveal delay={0.12}>
-                <p className="mt-10 text-xl font-medium leading-[1.5] text-foreground sm:text-2xl">
-                  El objetivo no es que solo funcione.
-                  <span className="block">Es que <span className="text-brand">puedas confiar en él.</span></span>
+              <Reveal delay={0.26}>
+                <p className="mt-6 max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
+                  Por eso PC LAB empieza por entenderte antes de recomendarte una configuración.
                 </p>
               </Reveal>
             </div>
           </div>
+
+          <Reveal delay={0.2}>
+            <p className="mt-24 max-w-2xl text-xl font-medium leading-[1.5] text-foreground sm:text-2xl">
+              No buscamos construir el PC más caro.
+              <span className="block">Buscamos construir el <span className="text-brand">PC correcto.</span></span>
+            </p>
+          </Reveal>
         </div>
       </section>
     </>
