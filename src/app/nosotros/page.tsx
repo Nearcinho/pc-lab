@@ -113,13 +113,6 @@ export default function NosotrosPage() {
                   </p>
                 </div>
               </Reveal>
-
-              <Reveal delay={0.26}>
-                <p className="mt-14 max-w-2xl text-xl font-medium leading-[1.5] text-foreground sm:text-2xl">
-                  No buscamos el PC perfecto para todo el mundo.
-                  <span className="block">Buscamos el <span className="text-brand">perfecto para ti.</span></span>
-                </p>
-              </Reveal>
             </div>
 
             <Reveal y={36} className="relative">
