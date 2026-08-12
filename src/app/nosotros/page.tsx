@@ -77,50 +77,74 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* 02 — POR QUÉ EXISTE PC LAB */}
+      {/* 02 — NUESTRA FILOSOFÍA */}
       <section className="light-section bg-background py-32 sm:py-44" aria-label="Por qué existe PC LAB">
         <div className="container-x">
-          <Reveal>
-            <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[#6a6a6a]">
-              <span className="inline-block h-px w-10 bg-[#0a0a0a]/30" aria-hidden />
-              Por qué existe PC LAB
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.08}>
-            <h2 className="mt-10 max-w-3xl font-display text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.6rem]">
-              No necesitas el PC más caro.
-              <span className="block">Necesitas el <span className="text-brand">PC correcto.</span></span>
-            </h2>
-          </Reveal>
-
-          <div className="mt-16 grid gap-10 lg:grid-cols-[1fr_0.7fr] lg:gap-20">
-            <Reveal delay={0.14}>
-              <p className="max-w-xl text-lg leading-[1.8] text-muted-2 sm:text-xl">
-                Hay miles de configuraciones posibles. Pero eso no significa que todas tengan sentido para ti.
-              </p>
-            </Reveal>
+          <div className="grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
             <div>
-              <Reveal delay={0.2}>
-                <p className="max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
-                  Tu presupuesto, tus juegos, tu trabajo y la forma en que utilizas tu ordenador deberían
-                  decidir qué componentes lleva. No al revés.
+              <Reveal>
+                <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[#6a6a6a]">
+                  <span className="inline-block h-px w-10 bg-[#0a0a0a]/30" aria-hidden />
+                  Nuestra filosofía
                 </p>
               </Reveal>
+
+              <Reveal delay={0.08}>
+                <h2 className="mt-10 max-w-2xl font-display text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
+                  No necesitas el PC más caro.
+                  <span className="block">Necesitas el <span className="text-brand">PC correcto.</span></span>
+                </h2>
+              </Reveal>
+
+              <Reveal delay={0.14}>
+                <p className="mt-10 max-w-lg text-lg leading-[1.8] text-muted-2 sm:text-xl">
+                  Hay miles de configuraciones posibles. Pero eso no significa que todas tengan sentido para
+                  ti.
+                </p>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <div className="mt-8 border-t border-[#0a0a0a]/10 pt-8">
+                  <p className="max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
+                    Tu presupuesto, tus juegos, tu trabajo y la forma en que utilizas tu ordenador deberían
+                    decidir qué componentes lleva. No al revés.
+                  </p>
+                  <p className="mt-6 max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
+                    Por eso PC LAB empieza por entenderte antes de recomendarte una configuración.
+                  </p>
+                </div>
+              </Reveal>
+
               <Reveal delay={0.26}>
-                <p className="mt-6 max-w-md text-base leading-[1.8] text-muted-2 sm:text-lg">
-                  Por eso PC LAB empieza por entenderte antes de recomendarte una configuración.
+                <p className="mt-14 max-w-2xl text-xl font-medium leading-[1.5] text-foreground sm:text-2xl">
+                  No buscamos construir el PC más caro.
+                  <span className="block">Buscamos construir el <span className="text-brand">PC correcto.</span></span>
                 </p>
               </Reveal>
             </div>
-          </div>
 
-          <Reveal delay={0.2}>
-            <p className="mt-24 max-w-2xl text-xl font-medium leading-[1.5] text-foreground sm:text-2xl">
-              No buscamos construir el PC más caro.
-              <span className="block">Buscamos construir el <span className="text-brand">PC correcto.</span></span>
-            </p>
-          </Reveal>
+            <Reveal y={36} className="relative">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm border border-[#0a0a0a]/10 bg-surface-2">
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="auto"
+                  poster={asset("/cases/ensamblado.png")}
+                  className="h-full w-full object-cover"
+                >
+                  <source src={asset("/videos/cable-management.mp4")} type="video/mp4" />
+                </video>
+                <div className="photo-tint" aria-hidden />
+                <div className="photo-grain" aria-hidden />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0e0e0e]/60 via-transparent to-transparent" aria-hidden />
+                <span className="absolute bottom-5 left-5 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-white/70">
+                  PC LAB · Filosofía
+                </span>
+                <span className="absolute bottom-5 right-5 size-2 rounded-full bg-brand" aria-hidden />
+              </div>
+            </Reveal>
+          </div>
         </div>
       </section>
     </>
