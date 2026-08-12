@@ -80,7 +80,7 @@ export default function NosotrosPage() {
       {/* 02 — NUESTRA FILOSOFÍA */}
       <section className="light-section bg-background py-32 sm:py-44" aria-label="Por qué existe PC LAB">
         <div className="container-x">
-          <div className="grid items-center gap-16 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
+          <div className="grid items-center gap-16 lg:grid-cols-[1.25fr_0.75fr] lg:gap-20">
             <div>
               <Reveal>
                 <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[#6a6a6a]">
