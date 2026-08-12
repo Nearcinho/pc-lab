@@ -4,7 +4,7 @@ import * as React from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Cpu, CircuitBoard, Gauge, MemoryStick, HardDrive, Wind, PlugZap, Box, Disc,
-  Headphones, Sparkles, Check, AlertTriangle, Info, Rocket, ChevronRight, RotateCcw,
+  Headphones, Sparkles, Check, AlertTriangle, Info, Rocket, ChevronRight, RotateCcw, Monitor,
 } from "lucide-react";
 import {
   categories, Category, Part, partById,
@@ -12,12 +12,14 @@ import {
   coolingParts, psuParts, caseParts, osParts, peripheralParts, extraParts, allParts,
 } from "@/lib/parts";
 import { computeBuild, BuildSelection, BuildIssue } from "@/lib/build-engine";
+import type { Resolution } from "@/lib/benchmarks";
+import { FpsPanel } from "@/components/builder/fps-panel";
 import { cn, formatNumber } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
 
-type StepKey = "cpu" | "motherboard" | "gpu" | "ram" | "storage" | "cooling" | "psu" | "case" | "os";
+type StepKey = "cpu" | "motherboard" | "gpu" | "ram" | "storage" | "cooling" | "psu" | "case" | "os" | "monitor";
 
 interface StepMeta {
   key: StepKey;
@@ -38,6 +40,7 @@ const STEPS: StepMeta[] = [
   { key: "psu", label: "Fuente", short: "Fuente", desc: "Energía limpia y holgada para tu consumo.", stages: ["Potencia"], icon: PlugZap },
   { key: "case", label: "Caja", short: "Caja", desc: "Formato y compatibilidad total con todo lo elegido.", stages: ["Tamaño", "Modelo"], icon: Box },
   { key: "os", label: "Sistema", short: "SO", desc: "El software que lo gobierna todo.", stages: ["Sistema"], icon: Disc },
+  { key: "monitor", label: "Monitor", short: "Monitor", desc: "Opcional: la pantalla define la resolución de los FPS estimados.", stages: ["Modelo"], icon: Monitor },
 ];
 const ORDER: StepKey[] = STEPS.map((s) => s.key);
 const stepMeta = (k: StepKey) => STEPS.find((s) => s.key === k)!;
@@ -54,6 +57,7 @@ const PICK_COUNT: Record<StepKey, number> = {
   psu: 1,
   case: 2,
   os: 1,
+  monitor: 1,
 };
 
 interface ChoiceGroup {
@@ -110,6 +114,8 @@ function specLine(p: Part): string {
       return `GPU máx ${p.maxGpuLength} mm · ${p.size ?? ""}`;
     case "os":
       return p.noOs ? "Instálalo tú mismo" : "Licencia + instalación";
+    case "peripheral":
+      return [p.monitorSize, p.displayRes, p.refreshHz ? `${p.refreshHz} Hz` : ""].filter(Boolean).join(" · ");
     default:
       return "";
   }
@@ -154,6 +160,9 @@ function chainFromSel(sel: BuildSelection): Partial<Record<StepKey, string[]>> {
         break;
       case "os":
         res.os = [p.id];
+        break;
+      case "monitor":
+        res.monitor = [p.id];
         break;
       default:
         break;
@@ -345,6 +354,9 @@ function stepView(key: StepKey, chain: string[], sel: BuildSelection): StepView 
     case "os": {
       return { parts: osParts, notes: [] };
     }
+    case "monitor": {
+      return { parts: peripheralParts.filter((p) => p.kind === "monitor"), notes: [] };
+    }
     default:
       return { groups: [], notes: [] };
   }
@@ -363,6 +375,8 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
   const [chain, setChain] = React.useState<Partial<Record<StepKey, string[]>>>(() => chainFromSel(initial ?? {}));
   const [active, setActive] = React.useState<StepKey>("cpu");
   const calc = computeBuild(sel);
+  const monitorRes: Resolution =
+    (sel.monitor ? partById(sel.monitor)?.displayRes : undefined) ?? "1440p";
   const reduced = useReducedMotion();
   const perfRef = React.useRef<HTMLDivElement>(null);
 
@@ -567,6 +581,41 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
           {view.parts && (
             <div className="grid gap-3 sm:grid-cols-2">
               <AnimatePresence initial={false}>
+                {active === "monitor" && (
+                  <motion.button
+                    key="monitor-none"
+                    initial={reduced ? false : { opacity: 0, scale: 0.97 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.25 }}
+                    onClick={() => handlePick(active, "none")}
+                    aria-pressed={sel.monitor === "none"}
+                    className={cn(
+                      "group flex flex-col rounded-2xl border p-4 text-left transition-all duration-300",
+                      sel.monitor === "none"
+                        ? "border-brand/60 bg-brand/5 shadow-glow-sm"
+                        : "border-border bg-surface-2/40 hover:border-border-strong hover:bg-surface-2/70"
+                    )}
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <span className="rounded-md border border-border bg-surface-2/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted">
+                        Opcional
+                      </span>
+                      <span
+                        className={cn(
+                          "flex size-5 shrink-0 items-center justify-center rounded-full border transition-all",
+                          sel.monitor === "none" ? "border-brand bg-brand text-white" : "border-border text-transparent"
+                        )}
+                      >
+                        <Check className="size-3" strokeWidth={3} aria-hidden />
+                      </span>
+                    </div>
+                    <p className="mt-2.5 font-display text-[15px] font-semibold leading-snug">Sin monitor</p>
+                    <p className="mt-1 text-[11px] text-muted">Solo el equipo: los FPS se estiman a 1440p.</p>
+                    <span className="mt-2 text-[10px] uppercase tracking-wide text-muted/60">
+                      Seleccionar
+                    </span>
+                  </motion.button>
+                )}
                 {view.parts.map((p) => {
                   const selected = sel[active as keyof BuildSelection] === p.id;
                   const badgeText =
@@ -652,7 +701,7 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
                 </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                {[...peripheralParts, ...extraParts].map((p) => {
+                {[...peripheralParts.filter((p) => p.kind !== "monitor"), ...extraParts].map((p) => {
                   const slot: "peripheral" | "extra" = p.category === "peripheral" ? "peripheral" : "extra";
                   const selected = sel[slot] === p.id;
                   return (
@@ -773,13 +822,14 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
         </div>
       )}
 
-      <PerformancePanel ref={perfRef} calc={calc} />
+      <PerformancePanel ref={perfRef} calc={calc} monitorRes={monitorRes} />
     </div>
   );
 }
 
-function PerformancePanel({ calc, ref }: {
+function PerformancePanel({ calc, monitorRes, ref }: {
   calc: Awaited<ReturnType<typeof computeBuild>>;
+  monitorRes: Resolution;
   ref: React.Ref<HTMLDivElement>;
 }) {
   return (
@@ -801,20 +851,7 @@ function PerformancePanel({ calc, ref }: {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-border bg-surface/50 p-6 backdrop-blur">
-          <h4 className="font-display text-sm font-semibold">FPS estimados · 1440p Alto</h4>
-          <div className="mt-5 grid gap-2">
-            {Object.entries(calc.fps).map(([game, fps]) => (
-              <div key={game} className="flex items-center justify-between rounded-xl bg-surface-2/50 px-4 py-2.5 text-sm">
-                <span className="text-foreground/90">{game}</span>
-                <span className="font-display font-semibold text-brand">{formatNumber(fps)} fps</span>
-              </div>
-            ))}
-            {Object.keys(calc.fps).length === 0 && (
-              <p className="text-sm text-muted">Completa el wizard para ver estimaciones de rendimiento.</p>
-            )}
-          </div>
-        </div>
+        <FpsPanel fps={calc.fps} defaultRes={monitorRes} />
       </div>
     </section>
   );

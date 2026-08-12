@@ -1,4 +1,5 @@
 import { Part, partById, Category } from "@/lib/parts";
+import { estimateFps, FpsResult, Resolution, RESOLUTIONS } from "@/lib/benchmarks";
 
 export interface BuildSelection {
   cpu?: string;
@@ -11,6 +12,7 @@ export interface BuildSelection {
   case?: string;
   os?: string;
   peripheral?: string;
+  monitor?: string;
   extra?: string;
 }
 
@@ -36,7 +38,7 @@ export interface BuildComputation {
   wattage: number;
   psuRecommended: number;
   performance: PerformanceMetric;
-  fps: Record<string, number>;
+  fps: Record<Resolution, FpsResult[]>;
   issues: BuildIssue[];
   missing: Category[];
   complete: boolean;
@@ -75,7 +77,7 @@ export function computeBuild(sel: BuildSelection): BuildComputation {
   }
 
   // Optional add-ons
-  for (const key of ["peripheral", "extra"]) {
+  for (const key of ["peripheral", "monitor", "extra"]) {
     const id = sel[key as keyof BuildSelection];
     if (id) {
       const part = partById(id);
@@ -122,7 +124,7 @@ export function computeBuild(sel: BuildSelection): BuildComputation {
   }
 
   if (casePart && gpu && casePart.maxGpuLength) {
-    const gpuLen = 340;
+    const gpuLen = gpu.lengthMm ?? 340;
     if (gpuLen > casePart.maxGpuLength) {
       issues.push({
         severity: "error",
@@ -169,16 +171,9 @@ export function computeBuild(sel: BuildSelection): BuildComputation {
   const productivity = clampScore(0.5 * cpuPerf + 0.25 * gpuPerf + 0.25 * ramMb);
   const overall = clampScore((gaming + streaming + render + ai + productivity) / 5);
 
-  const fps: Record<string, number> = {};
-  if (gpu?.fps) {
-    for (const game of ["Cyberpunk 2077", "CS 2", "Fortnite", "Valorant", "Warzone", "Elden Ring", "RDR2"]) {
-      const base = gpu.fps[game];
-      if (!base) continue;
-      const cpuMult = 0.85 + ((cpu && game in (cpu.fps ?? {}) ? (cpu.fps![game] ?? 100) : 100) / 100) * 0.15;
-      const ramMult = ram?.memoryGb && ram.memoryGb >= 32 ? 1.03 : 1;
-      fps[game] = Math.round(base * cpuMult * ramMult);
-    }
-  }
+  const fps = Object.fromEntries(
+    RESOLUTIONS.map((r) => [r.key, estimateFps(gpu?.id, cpu?.id, r.key)])
+  ) as Record<Resolution, FpsResult[]>;
 
   return {
     total,

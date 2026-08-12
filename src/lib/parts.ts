@@ -9,6 +9,7 @@ export type Category =
   | "case"
   | "os"
   | "peripheral"
+  | "monitor"
   | "extra";
 
 export interface Part {
@@ -40,13 +41,14 @@ export interface Part {
   fans?: string;
   kind?: string;
   monitorSize?: string;
+  displayRes?: "1080p" | "1440p" | "4k";
+  refreshHz?: number;
   noOs?: boolean;
   perf?: number;
   gaming?: number;
   ai?: number;
   render?: number;
   features?: string[];
-  fps?: Record<string, number>;
   recommended?: boolean;
   best?: boolean;
   // Wizard grouping fields
@@ -80,6 +82,7 @@ export const categories: Record<Category, CategoryDef> = {
   case: { key: "case", label: "Caja", icon: "case", description: "El corazón de tu setup" },
   os: { key: "os", label: "Sistema operativo", icon: "os", description: "El software que lo gobierna" },
   peripheral: { key: "peripheral", label: "Periférico", icon: "peripheral", description: "Completa tu experiencia" },
+  monitor: { key: "monitor", label: "Monitor", icon: "monitor", description: "La ventana a tus juegos" },
   extra: { key: "extra", label: "Extras", icon: "extra", description: "El toque premium" },
 };
 
@@ -100,7 +103,6 @@ export const cpuParts: Part[] = [
     perf: 62,
     gaming: 66,
     ai: 40,
-    fps: { valorant: 300, cs2: 320, fortnite: 210, apex: 250, overwatch: 280, cyberpunk: 105, warzone: 150, elden: 110, gta: 170 },
   },
   {
     id: "cpu-r5-9600x",
@@ -118,7 +120,6 @@ export const cpuParts: Part[] = [
     perf: 68,
     gaming: 70,
     ai: 45,
-    fps: { valorant: 250, csgo: 345, fortnite: 225, apex: 265, warzone: 120, cyberpunk: 112, gta: 185 },
   },
   {
     id: "cpu-r7-7700x",
@@ -136,7 +137,6 @@ export const cpuParts: Part[] = [
     perf: 78,
     gaming: 78,
     ai: 52,
-    fps: { valorant: 265, csgo: 360, fortnite: 240, apex: 280, cyberpunk: 118, elden: 120 },
   },
   {
     id: "cpu-r7-9700x",
@@ -154,7 +154,6 @@ export const cpuParts: Part[] = [
     perf: 85,
     gaming: 80,
     ai: 58,
-    fps: { valorant: 275, csgo: 375, fortnite: 250, apex: 290, warzone: 170, cyberpunk: 140, elden: 130 },
   },
   {
     id: "cpu-r7-7800x3d",
@@ -172,7 +171,6 @@ export const cpuParts: Part[] = [
     perf: 92,
     gaming: 97,
     ai: 55,
-    fps: { valorant: 310, csgo: 420, fortnite: 270, apex: 315, warzone: 195, cyberpunk: 155, elden: 140, gta: 210 },
     best: true,
     recommended: true,
   },
@@ -192,7 +190,6 @@ export const cpuParts: Part[] = [
     perf: 98,
     gaming: 100,
     ai: 60,
-    fps: { valorant: 330, csgo: 440, fortnite: 280, apex: 330, warzone: 210, cyberpunk: 155, elden: 150, gta: 205 },
     recommended: true,
   },
   {
@@ -211,7 +208,6 @@ export const cpuParts: Part[] = [
     perf: 105,
     gaming: 92,
     ai: 85,
-    fps: { valorant: 320, csgo: 430, fortnite: 275, apex: 320, warzone: 205, cyberpunk: 145, gta: 200 },
   },
   {
     id: "cpu-r9-9950x",
@@ -229,7 +225,6 @@ export const cpuParts: Part[] = [
     perf: 118,
     gaming: 85,
     ai: 95,
-    fps: { valorant: 305, csgo: 410, fortnite: 260, apex: 300, warzone: 190, cyberpunk: 138, elden: 125 },
   },
   {
     id: "cpu-i5-14600k",
@@ -247,7 +242,6 @@ export const cpuParts: Part[] = [
     perf: 82,
     gaming: 84,
     ai: 58,
-    fps: { valorant: 285, csgo: 390, fortnite: 245, apex: 290, warzone: 165, cyberpunk: 130, elden: 125 },
   },
   {
     id: "cpu-i7-14700k",
@@ -265,7 +259,6 @@ export const cpuParts: Part[] = [
     perf: 95,
     gaming: 90,
     ai: 72,
-    fps: { valorant: 300, csgo: 400, fortnite: 255, apex: 300, warzone: 180, cyberpunk: 140, elden: 135 },
   },
   {
     id: "cpu-i9-14900k",
@@ -283,7 +276,6 @@ export const cpuParts: Part[] = [
     perf: 108,
     gaming: 92,
     ai: 80,
-    fps: { valorant: 310, csgo: 415, fortnite: 345, apex: 305, warzone: 185, cyberpunk: 145, elden: 140 },
   },
 ];
 
@@ -482,15 +474,6 @@ export const gpuParts: Part[] = [
     perf: 58,
     gaming: 62,
     ai: 70,
-    fps: {
-      "Cyberpunk 2077": 88,
-      "CS2": 330,
-      Fortnite: 140,
-      Apex: 190,
-      "Warzone": 100,
-      "Elden Ring": 70,
-      "RDR2": 110,
-    },
   },
   {
     id: "gpu-rx7600xt",
@@ -506,7 +489,6 @@ export const gpuParts: Part[] = [
     perf: 63,
     gaming: 67,
     ai: 55,
-    fps: { "Cyberpunk 2077": 95, "CS2": 360, Fortnite: 160, Valorant: 300, "Warzone": 118, "Elden Ring": 82, "RDR2": 128 },
   },
   {
     id: "gpu-rx7800xt",
@@ -522,7 +504,6 @@ export const gpuParts: Part[] = [
     perf: 80,
     gaming: 84,
     ai: 70,
-    fps: { "Cyberpunk 2077": 150, "CS 2": 350, Fortnite: 260, Valorant: 420, "Warzone": 210, "Elden Ring": 140, "RDR2": 190 },
   },
   {
     id: "gpu-rtx5060ti",
@@ -538,7 +519,6 @@ export const gpuParts: Part[] = [
     perf: 78,
     gaming: 80,
     ai: 88,
-    fps: { "Cyberpunk 2077": 122, "CS2": 405, Fortnite: 205, Valorant: 355, "Warzone": 155, "Elden Ring": 108, "RDR2": 150 },
   },
   {
     id: "gpu-rtx4070",
@@ -554,7 +534,6 @@ export const gpuParts: Part[] = [
     perf: 76,
     gaming: 78,
     ai: 85,
-    fps: { "Cyberpunk 2077": 138, "CS 2": 380, Fortnite: 220, Apex: 260, "Warzone": 170, "Elden Ring": 110, "RDR2": 160 },
   },
   {
     id: "gpu-rtx5070",
@@ -570,7 +549,6 @@ export const gpuParts: Part[] = [
     perf: 88,
     gaming: 89,
     ai: 100,
-    fps: { "Cyberpunk 2077": 178, "CS2": 440, Fortnite: 280, Valorant: 470, "Warzone": 235, "Elden Ring": 168, "RDR2": 208 },
   },
   {
     id: "gpu-rtx4070super",
@@ -586,7 +564,6 @@ export const gpuParts: Part[] = [
     perf: 82,
     gaming: 83,
     ai: 92,
-    fps: { "Cyberpunk 2077": 155, "CS 2": 400, Fortnite: 240, Valorant: 372, "Warzone": 190, "Elden Ring": 130, "RDR2": 175 },
   },
   {
     id: "gpu-rtx5070ti",
@@ -602,7 +579,6 @@ export const gpuParts: Part[] = [
     perf: 98,
     gaming: 94,
     ai: 112,
-    fps: { "Cyberpunk 2077": 202, "CS2": 465, Fortnite: 315, Valorant: 525, "Warzone": 262, "Elden Ring": 188, "RDR2": 232 },
   },
   {
     id: "gpu-rtx4070ti-super",
@@ -618,7 +594,6 @@ export const gpuParts: Part[] = [
     perf: 92,
     gaming: 92,
     ai: 105,
-    fps: { "Cyberpunk 2077": 185, "CS 2": 420, Fortnite: 270, Valorant: 400, "Warzone": 220, "Elden Ring": 155, "RDR2": 200 },
   },
   {
     id: "gpu-rx9070xt",
@@ -634,7 +609,6 @@ export const gpuParts: Part[] = [
     perf: 96,
     gaming: 93,
     ai: 100,
-    fps: { "Cyberpunk 2077": 195, "CS2": 445, Fortnite: 335, Valorant: 545, "Warzone": 278, "Elden Ring": 178, "RDR2": 228 },
   },
   {
     id: "gpu-rtx4080super",
@@ -651,7 +625,6 @@ export const gpuParts: Part[] = [
     gaming: 98,
     ai: 125,
     render: 95,
-    fps: { "Cyberpunk 2077": 228, "CS 2": 460, Fortnite: 330, Valorant: 500, "Warzone": 300, "Elden Ring": 190, "RDR2": 240 },
   },
   {
     id: "gpu-rtx5080",
@@ -668,7 +641,6 @@ export const gpuParts: Part[] = [
     gaming: 98,
     ai: 128,
     render: 96,
-    fps: { "Cyberpunk 2077": 262, "CS2": 505, Fortnite: 368, Valorant: 585, "Warzone": 322, "Elden Ring": 218, "RDR2": 268 },
   },
   {
     id: "gpu-rx7900xtx",
@@ -684,7 +656,6 @@ export const gpuParts: Part[] = [
     perf: 104,
     gaming: 97,
     ai: 95,
-    fps: { "Cyberpunk 2077": 210, "CS 2": 420, Fortnite: 340, Valorant: 540, "Warzone": 285, "Elden Ring": 185, "RDR2": 235 },
   },
   {
     id: "gpu-rtx4090",
@@ -701,7 +672,6 @@ export const gpuParts: Part[] = [
     gaming: 100,
     ai: 150,
     render: 100,
-    fps: { "Cyberpunk 2077": 290, "CS 2": 500, Fortnite: 380, Valorant: 600, "Warzone": 360, "Elden Ring": 230, "RDR2": 290 },
     best: true,
   },
   {
@@ -719,7 +689,6 @@ export const gpuParts: Part[] = [
     gaming: 100,
     ai: 155,
     render: 100,
-    fps: { "Cyberpunk 2077": 338, "CS2": 552, Fortnite: 442, Valorant: 705, "Warzone": 402, "Elden Ring": 262, "RDR2": 322 },
     best: true,
   },
 ];
@@ -779,7 +748,12 @@ export const osParts: Part[] = [
 ];
 
 export const peripheralParts: Part[] = [
-  { id: "peri-monitor", category: "peripheral", brand: "Samsung", name: "Monitor Odyssey G9 OLED 49\"", price: 999, power: 60, features: ["240Hz", "5120x1440", ""] },
+  { id: "mon-aoc-24g2sp", category: "peripheral", brand: "AOC", name: "24G2SP 24\" 165 Hz", price: 139, power: 32, kind: "monitor", monitorSize: "24\"", displayRes: "1080p", refreshHz: 165, features: ["IPS", "1 ms", "FreeSync"] },
+  { id: "mon-lg-27gp850", category: "peripheral", brand: "LG", name: "UltraGear 27GP850-B 27\" 165 Hz", price: 329, power: 40, kind: "monitor", monitorSize: "27\"", displayRes: "1440p", refreshHz: 165, features: ["Nano IPS", "1 ms", "G-Sync Compatible"] },
+  { id: "mon-msi-271qrx", category: "peripheral", brand: "MSI", name: "MPG 271QRX QD-OLED 27\" 360 Hz", price: 749, power: 48, kind: "monitor", monitorSize: "27\"", displayRes: "1440p", refreshHz: 360, features: ["QD-OLED", "0,03 ms", "HDR"] },
+  { id: "mon-gigabyte-m28u", category: "peripheral", brand: "Gigabyte", name: "M28U 28\" 4K 144 Hz", price: 499, power: 45, kind: "monitor", monitorSize: "28\"", displayRes: "4k", refreshHz: 144, features: ["IPS", "HDMI 2.1", "1 ms"] },
+  { id: "mon-asus-pg32ucdm", category: "peripheral", brand: "ASUS", name: "ROG Swift PG32UCDM 32\" 4K 240 Hz", price: 1199, power: 65, kind: "monitor", monitorSize: "32\"", displayRes: "4k", refreshHz: 240, features: ["QD-OLED", "0,03 ms", "HDR"] },
+  { id: "peri-monitor", category: "peripheral", brand: "Samsung", name: "Odyssey G9 OLED 49\"", price: 999, power: 60, kind: "monitor", monitorSize: "49\"", displayRes: "1440p", refreshHz: 240, features: ["240 Hz", "5120x1440", "OLED"] },
 ];
 
 export const extraParts: Part[] = [

@@ -9,6 +9,7 @@ import {
 import { USE_CASES, BUDGET_TIERS, UseCase, BudgetTier, PROFILES } from "@/lib/profiles";
 import { categories, Category, partById } from "@/lib/parts";
 import { computeBuild, BuildSelection } from "@/lib/build-engine";
+import { FpsPanel } from "@/components/builder/fps-panel";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -213,6 +214,10 @@ export function UsageBuilder({ onUseHardware }: { onUseHardware: (sel: BuildSele
               ))}
             </ul>
           )}
+
+          <div className="mt-6">
+            <FpsPanel fps={calc.fps} />
+          </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
             <Button asChild size="lg">
