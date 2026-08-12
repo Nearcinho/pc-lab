@@ -68,9 +68,9 @@ export default function NosotrosPage() {
               </Reveal>
               <Reveal delay={0.28}>
                 <p className="mt-9 max-w-xl border-t border-border pt-6 text-sm leading-[1.8] text-muted">
-                  Experiencia en hardware, gaming y esports, incluyendo la final de la LLA de Riot Games 2023 en
-                  Chile, Argentina Game Show, Red Bull Campus Clutch, Arena BK Chile y PCs para influencers y
-                  creadores.
+                  Una pasión que comenzó de pequeño y que, con los años, me llevó a trabajar en GIGABYTE y a
+                  construir PCs para algunos de los equipos y escenarios más exigentes del gaming y los
+                  esports.
                 </p>
               </Reveal>
             </div>
