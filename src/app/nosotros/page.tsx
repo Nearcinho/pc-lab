@@ -91,8 +91,8 @@ export default function NosotrosPage() {
 
               <Reveal delay={0.08}>
                 <h2 className="mt-10 max-w-2xl font-display text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
-                  No necesitas el PC más caro.
-                  <span className="block">Necesitas el <span className="text-brand">PC correcto.</span></span>
+                  No existe un PC perfecto para todo el mundo.
+                  <span className="block">Pero existe uno <span className="text-brand">perfecto para ti.</span></span>
                 </h2>
               </Reveal>
 
@@ -116,8 +116,8 @@ export default function NosotrosPage() {
 
               <Reveal delay={0.26}>
                 <p className="mt-14 max-w-2xl text-xl font-medium leading-[1.5] text-foreground sm:text-2xl">
-                  No buscamos construir el PC más caro.
-                  <span className="block">Buscamos construir el <span className="text-brand">PC correcto.</span></span>
+                  No buscamos el PC perfecto para todo el mundo.
+                  <span className="block">Buscamos el <span className="text-brand">perfecto para ti.</span></span>
                 </p>
               </Reveal>
             </div>
