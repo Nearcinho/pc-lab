@@ -38,7 +38,7 @@ export default function NosotrosPage() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[28rem] bg-[radial-gradient(60%_60%_at_50%_0%,rgba(79,209,255,0.08),transparent_70%)]" aria-hidden />
 
         <div className="container-x relative">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24">
+          <div className="grid items-center gap-14 lg:grid-cols-[1.3fr_0.7fr] lg:gap-24">
             <div>
               <Reveal>
                 <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand">
@@ -47,7 +47,7 @@ export default function NosotrosPage() {
                 </p>
               </Reveal>
               <Reveal delay={0.08}>
-                <h1 className="mt-8 max-w-3xl font-display text-[2.2rem] font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-[2.75rem]">
+                <h1 className="mt-8 max-w-4xl font-display text-[2.1rem] font-semibold leading-[1.12] tracking-tight sm:text-4xl lg:text-[2.3rem]">
                   <span className="text-brand">"</span>
                   Ensamblo cada PC con el mismo cuidado como{" "}
                   <span className="text-gradient">si fuera el mío.</span>
