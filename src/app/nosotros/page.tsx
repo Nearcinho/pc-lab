@@ -4,40 +4,45 @@ import Link from "next/link";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { asset } from "@/lib/base";
 import { Reveal } from "@/components/ui/reveal";
-import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Quiénes somos | PC LAB",
   description:
-    "Conoce por qué existe PC LAB y cómo la trayectoria de su fundador — hardware, gaming e industria tecnológica — se convierte en criterio a tu favor. Consultoría antes que comisión.",
+    "PC LAB aplica a tu ordenador el mismo cuidado que pondría en el suyo: diseño a medida, montaje cuidadoso, configuración y pruebas antes de entregar.",
   alternates: { canonical: "/nosotros" },
 };
 
 const portraitAlt = "Nicolás Sánchez Negrete, fundador de PC LAB";
 
-const experience = [
+const principles = [
   {
-    label: "MADBOX PC",
-    title: "Reviews y análisis de hardware",
-    text: "El análisis de componentes de PC permitió conocer el hardware más allá de las especificaciones: entender qué ofrece realmente cada componente y para quién tiene sentido.",
+    n: "01",
+    title: "Pensado para ti",
+    text: "Una configuración basada en tu uso real, no en una lista genérica de componentes.",
   },
   {
-    label: "GIGABYTE · AORUS",
-    title: "Experiencia dentro de la industria tecnológica",
-    text: "Trabajo en marketing y estrategia de marca dentro del ecosistema de hardware y gaming, colaborando con partners, comunidades y profesionales de distintos mercados.",
+    n: "02",
+    title: "Montado con cuidado",
+    text: "Cada componente se instala y organiza pensando en rendimiento, temperatura, estabilidad y mantenimiento.",
   },
   {
-    label: "HOY · PC LAB",
-    title: "Todo ese conocimiento, aplicado a una persona",
-    text: "PC LAB nace para convertir esa experiencia en algo más cercano: ayudarte a tomar una decisión técnica que tenga sentido para ti y para tu presupuesto.",
+    n: "03",
+    title: "Configurado para rendir",
+    text: "BIOS, drivers y configuración preparados para que el hardware trabaje como debe.",
+  },
+  {
+    n: "04",
+    title: "Probado antes de entregarlo",
+    text: "Comprobamos el funcionamiento del equipo antes de que llegue a ti.",
   },
 ];
 
-const principles = [
-  "Tu presupuesto importa.",
-  "Tu forma de usar el ordenador importa.",
-  "Los juegos que juegas importan.",
-  "Lo que quieres hacer mañana también importa.",
+const experience = [
+  { year: "2023", event: "Final de la LLA · Riot Games", place: "Chile" },
+  { year: undefined, event: "Finales de Counter-Strike 2", place: "Argentina Game Show" },
+  { year: undefined, event: "Red Bull Campus Clutch", place: undefined },
+  { year: undefined, event: "Arena BK", place: "Chile" },
+  { year: undefined, event: "PCs para influencers y creadores", place: undefined },
 ];
 
 export default function NosotrosPage() {
@@ -51,19 +56,21 @@ export default function NosotrosPage() {
           <div className="grid items-end gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
             <div>
               <Reveal>
-                <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand">
-                  Quién está detrás
+                <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand">
+                  <span className="inline-block h-px w-10 bg-brand/40" aria-hidden />
+                  Quién está detrás de PC LAB
                 </p>
               </Reveal>
               <Reveal delay={0.08}>
-                <h1 className="mt-7 max-w-3xl font-display text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-[4.4rem]">
-                  Detrás de PC LAB hay una forma distinta de entender los ordenadores.
+                <h1 className="mt-8 max-w-3xl font-display text-[2.6rem] font-semibold leading-[1.04] tracking-tight text-balance sm:text-6xl lg:text-[4.2rem]">
+                  Tu PC merece el mismo cuidado que
+                  <span className="block text-gradient">tendría el nuestro.</span>
                 </h1>
               </Reveal>
               <Reveal delay={0.16}>
                 <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-2 sm:text-xl">
-                  No empezamos con una lista de piezas. Empezamos contigo: lo que haces, lo que necesitas y lo
-                  que quieres conseguir.
+                  PC LAB nació de una pasión por los ordenadores que empezó mucho antes de convertirse en un
+                  trabajo.
                 </p>
               </Reveal>
               <Reveal delay={0.24}>
@@ -71,7 +78,7 @@ export default function NosotrosPage() {
                   href="#filosofia"
                   className="group mt-10 inline-flex items-center gap-3 rounded-full border border-border-strong px-7 py-3.5 text-sm font-semibold text-foreground transition-colors duration-300 hover:border-brand/60 hover:text-brand"
                 >
-                  Conoce nuestra forma de trabajar
+                  Conoce cómo trabajamos
                   <ArrowDown className="size-4 transition-transform duration-300 group-hover:translate-y-1" aria-hidden />
                 </Link>
               </Reveal>
@@ -84,78 +91,87 @@ export default function NosotrosPage() {
                   alt={portraitAlt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="object-cover"
+                  className="photo-grade object-cover"
                   priority
                 />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/50 via-transparent to-transparent" aria-hidden />
+                <span className="absolute bottom-4 left-4 font-mono text-[10px] font-medium uppercase tracking-[0.28em] text-white/60">
+                  PC LAB · Madrid
+                </span>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* 02 — WHY PC LAB EXISTS */}
-      <section className="light-section bg-2 py-28 sm:py-40" aria-label="Por qué existe PC LAB">
+      {/* 02 — THE PHILOSOPHY */}
+      <section id="filosofia" className="light-section scroll-mt-24 bg-background py-28 sm:py-40" aria-label="La filosofía de PC LAB">
         <div className="container-x">
-          <div className="max-w-4xl">
-            <Reveal>
-              <h2 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl">
-                PC LAB nació de una idea sencilla.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p className="mt-10 max-w-2xl text-lg leading-[1.75] text-muted-2 sm:text-xl">
-                Hay miles de configuraciones posibles. Eso no significa que todas tengan sentido para la misma
-                persona.
+          <Reveal>
+            <h2 className="max-w-4xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl lg:text-[4.5rem]">
+              Cada ordenador tiene una razón para existir.
+            </h2>
+          </Reveal>
+
+          <div className="mt-16 grid gap-14 lg:grid-cols-[0.5fr_1fr] lg:gap-24">
+            <Reveal delay={0.08}>
+              <p className="font-display text-2xl font-medium leading-snug tracking-tight text-brand-2 sm:text-3xl">
+                No creemos en montar el PC más caro. Creemos en construir el PC correcto.
               </p>
             </Reveal>
-            <Reveal delay={0.18}>
-              <p className="mt-7 max-w-2xl text-lg leading-[1.75] text-muted-2 sm:text-xl">
-                Después de años trabajando cerca del hardware, el gaming y la industria tecnológica, entendí
-                algo: elegir un ordenador no debería consistir en comprar la lista con más especificaciones.
-                Debería consistir en encontrar la configuración que realmente encaja contigo.
-              </p>
-            </Reveal>
-            <Reveal delay={0.26}>
-              <p className="mt-12 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-                Por eso creamos PC LAB.
-              </p>
-            </Reveal>
-            <Reveal delay={0.32}>
-              <p className="mt-4 text-lg leading-relaxed text-muted-2">
-                Un estudio donde la recomendación viene antes que la venta.
-              </p>
-            </Reveal>
+            <div className="space-y-12">
+              <Reveal delay={0.12}>
+                <div className="border-t border-border pt-6">
+                  <p className="text-lg leading-[1.75] text-muted-2 sm:text-xl">
+                    Por eso empezamos por ti: lo que haces, lo que juegas, lo que necesitas y cuánto quieres
+                    invertir.
+                  </p>
+                </div>
+              </Reveal>
+              <Reveal delay={0.18}>
+                <div className="border-t border-border pt-6">
+                  <p className="text-lg leading-[1.75] text-muted-2 sm:text-xl">
+                    Cada componente tiene que tener sentido. Cada decisión tiene que estar justificada.
+                  </p>
+                </div>
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 03 — EXPERIENCE THAT MATTERS */}
-      <section className="bg-background py-28 sm:py-40" aria-label="Experiencia que importa">
+      {/* 03 — WHAT THE CUSTOMER ACTUALLY RECEIVES */}
+      <section className="bg-background py-28 sm:py-40" aria-label="Lo que recibes">
         <div className="container-x">
-          <Reveal>
-            <h2 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl">
-              La experiencia importa cuando se convierte en criterio.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-8 max-w-2xl text-lg leading-[1.75] text-muted-2 sm:text-xl">
-              La trayectoria detrás de PC LAB combina años cerca del hardware, el gaming y la industria
-              tecnológica. Pero lo importante no es dónde hemos trabajado. Es lo que esa experiencia nos
-              permite aportar cuando diseñamos tu equipo.
-            </p>
-          </Reveal>
+          <div className="flex flex-wrap items-end justify-between gap-6 border-b border-border pb-10">
+            <div>
+              <Reveal>
+                <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-muted">
+                  <span className="inline-block h-px w-10 bg-border-strong" aria-hidden />
+                  Incluido en cada PC LAB
+                </p>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <h2 className="mt-7 max-w-2xl font-display text-4xl font-medium leading-[1.04] tracking-[-0.02em] sm:text-5xl lg:text-[3.4rem]">
+                  Lo que recibes va más allá de un PC ensamblado.
+                </h2>
+              </Reveal>
+            </div>
+            <Reveal delay={0.14}>
+              <p className="max-w-xs text-sm leading-relaxed text-muted-2">
+                Recibes un equipo pensado para ti, construido con cuidado y revisado antes de llegar a tus
+                manos.
+              </p>
+            </Reveal>
+          </div>
 
-          <div className="mt-16 space-y-0 border-t border-border">
-            {experience.map((e, i) => (
-              <Reveal key={e.label} delay={i * 0.08}>
-                <article className="grid gap-4 border-b border-border py-10 sm:grid-cols-[0.4fr_0.6fr] sm:gap-10 sm:py-12">
-                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand">
-                    {e.label}
-                  </p>
-                  <div>
-                    <h3 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">{e.title}</h3>
-                    <p className="mt-3 max-w-xl text-base leading-[1.75] text-muted-2">{e.text}</p>
-                  </div>
+          <div className="mt-2 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-4">
+            {principles.map((p, i) => (
+              <Reveal key={p.n} delay={0.05 * i}>
+                <article className="border-t border-border py-10">
+                  <span className="font-mono text-sm font-medium tracking-tight text-muted">{p.n}</span>
+                  <h3 className="mt-5 font-display text-2xl font-medium tracking-tight sm:text-[1.7rem]">{p.title}</h3>
+                  <p className="mt-3 max-w-[30ch] text-sm leading-relaxed text-muted-2">{p.text}</p>
                 </article>
               </Reveal>
             ))}
@@ -163,48 +179,119 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* 04 — THE PHILOSOPHY */}
-      <section id="filosofia" className="light-section bg-2 py-28 sm:py-40" aria-label="La filosofía de PC LAB">
+      {/* 04 — THE EXPERIENCE */}
+      <section className="light-section bg-2 py-28 sm:py-40" aria-label="Experiencia">
         <div className="container-x">
-          <div className="max-w-4xl">
+          <Reveal>
+            <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-[#6a6a6a]">
+              <span className="inline-block h-px w-10 bg-[#0a0a0a]/30" aria-hidden />
+              Experiencia que se nota en cada detalle
+            </p>
+          </Reveal>
+          <Reveal delay={0.08}>
+            <h2 className="mt-8 max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl">
+              Antes de construir PCs para clientes, los construía para escenarios donde no había margen para
+              equivocarse.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="mt-8 max-w-2xl text-lg leading-[1.75] text-muted-2 sm:text-xl">
+              Desde pequeño, montar y entender ordenadores ha sido una pasión. Con el tiempo, esa pasión se
+              convirtió en experiencia profesional trabajando con hardware, gaming y tecnología.
+            </p>
+          </Reveal>
+
+          <div className="mt-16 border-t border-border">
+            {experience.map((e, i) => (
+              <Reveal key={e.event} delay={0.04 * i}>
+                <div className="grid gap-2 border-b border-border py-8 sm:grid-cols-[0.4fr_1fr_0.5fr] sm:items-baseline sm:gap-8 sm:py-10">
+                  <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand">
+                    {e.year ?? "—"}
+                  </p>
+                  <p className="font-display text-2xl font-medium tracking-tight sm:text-3xl">{e.event}</p>
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted sm:text-right">
+                    {e.place ?? "\u00A0"}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.1}>
+            <p className="mt-14 max-w-2xl text-base leading-[1.75] text-muted-2 sm:text-lg">
+              Trabajar en entornos donde un equipo tiene que funcionar sin margen de error te enseña una cosa:
+              que la atención al detalle no es opcional. Esa es la misma atención que aplicamos a cada PC que
+              construimos para ti.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 05 — THE DIFFERENCE */}
+      <section className="flex min-h-[70svh] items-center bg-background py-32 sm:py-40" aria-label="La diferencia" >
+        <div className="container-x">
+          <Reveal>
+            <h2 className="max-w-4xl font-display text-5xl font-semibold leading-[1.02] tracking-tight text-balance sm:text-7xl lg:text-[5.5rem]">
+              No queremos que recibas un PC.
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="mt-6 max-w-4xl font-display text-5xl font-semibold leading-[1.02] tracking-tight text-balance sm:text-7xl lg:text-[5.5rem]">
+              Queremos que recibas <span className="text-gradient">TU PC.</span>
+            </p>
+          </Reveal>
+          <Reveal delay={0.18}>
+            <p className="mt-10 max-w-xl text-lg leading-relaxed text-muted-2 sm:text-xl">
+              Uno que tenga sentido para lo que haces hoy y que siga teniendo sentido mañana.
+            </p>
+          </Reveal>
+          <Reveal delay={0.26}>
+            <p className="mt-14 font-mono text-xs uppercase tracking-[0.22em] text-muted">
+              Porque cuando un ordenador está bien diseñado, se nota.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 06 — THE FOUNDER */}
+      <section className="bg-[#0a0a0a] py-28 sm:py-36" aria-label="El fundador">
+        <div className="container-x">
+          <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <h2 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl">
-                No creemos en el PC perfecto. Creemos en el PC perfecto para ti.
+              <p className="inline-flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand">
+                <span className="inline-block h-px w-10 bg-brand/40" aria-hidden />
+                El fundador
+                <span className="inline-block h-px w-10 bg-brand/40" aria-hidden />
+              </p>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="mt-7 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+                Nicolás Sánchez Negrete
               </h2>
             </Reveal>
-
-            <div className="mt-14 space-y-5">
-              {principles.map((p, i) => (
-                <Reveal key={p} delay={i * 0.06}>
-                  <p className="font-display text-2xl font-medium leading-snug tracking-tight text-foreground/90 sm:text-4xl">
-                    {p}
-                  </p>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal delay={0.1}>
-              <p className="mt-14 max-w-2xl text-lg leading-[1.75] text-muted-2 sm:text-xl">
-                Por eso no empezamos recomendando componentes. Primero entendemos qué necesitas. Después
-                buscamos la configuración que mejor equilibre rendimiento, calidad y presupuesto.
-              </p>
+            <Reveal delay={0.12}>
+              <p className="mt-3 text-sm font-medium text-muted-2">Fundador de PC LAB</p>
             </Reveal>
 
-            <Reveal delay={0.18}>
-              <p className="mt-14 font-display text-3xl font-semibold tracking-tight text-brand-2 sm:text-5xl">
-                Consultoría antes que comisión.
-              </p>
-            </Reveal>
-
-            <div className="mt-10 max-w-2xl space-y-4">
-              <Reveal delay={0.24}>
-                <p className="text-lg leading-relaxed text-muted-2">
-                  Si una pieza más barata hace el trabajo igual de bien, te lo diremos.
+            <div className="mt-12 space-y-7 text-left sm:text-center">
+              <Reveal delay={0.16}>
+                <p className="text-base leading-[1.8] text-muted-2 sm:text-lg">
+                  Mi relación con los ordenadores empezó desde muy pequeño. Lo que comenzó como una pasión por
+                  entender, desmontar y montar hardware terminó convirtiéndose en una carrera alrededor de la
+                  tecnología, el gaming y el hardware.
                 </p>
               </Reveal>
-              <Reveal delay={0.3}>
-                <p className="text-lg leading-relaxed text-muted-2">
-                  Si gastar más no aporta una mejora real para tu uso, también te lo diremos.
+              <Reveal delay={0.22}>
+                <p className="text-base leading-[1.8] text-muted-2 sm:text-lg">
+                  Después de años trabajando con componentes, marcas, gaming y esports, decidí llevar esa
+                  experiencia a algo más personal: construir ordenadores que realmente tengan sentido para quien
+                  los va a utilizar.
+                </p>
+              </Reveal>
+              <Reveal delay={0.28}>
+                <p className="pt-4 font-display text-2xl font-semibold leading-snug tracking-tight text-foreground sm:text-3xl">
+                  PC LAB nace con una idea sencilla:{" "}
+                  <span className="text-brand">tratar cada ordenador como si fuera mío.</span>
                 </p>
               </Reveal>
             </div>
@@ -212,78 +299,12 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* 05 — THE PERSON BEHIND PC LAB */}
-      <section className="bg-background py-28 sm:py-40" aria-label="El fundador de PC LAB">
-        <div className="container-x">
-          <div className="grid gap-14 lg:grid-cols-2 lg:gap-20">
-            <Reveal className="relative order-1 lg:order-none">
-              <div className="lg:sticky lg:top-24">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm border border-border bg-surface-2">
-                  <Image
-                    src={asset("/founder/portrait.jpg")}
-                    alt={portraitAlt}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            </Reveal>
-
-            <div className="order-2">
-              <Reveal>
-                <p className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand">
-                  El fundador
-                </p>
-              </Reveal>
-              <Reveal delay={0.08}>
-                <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight sm:text-6xl">
-                  Nicolás Sánchez Negrete
-                </h2>
-              </Reveal>
-              <Reveal delay={0.14}>
-                <p className="mt-2 text-sm font-medium text-muted-2">Fundador de PC LAB</p>
-              </Reveal>
-
-              <div className="mt-9 space-y-6">
-                <Reveal delay={0.18}>
-                  <p className="text-base leading-[1.8] text-muted-2 sm:text-lg">
-                    Mi relación con el hardware comenzó mucho antes de PC LAB. La curiosidad por entender cómo
-                    funcionan los componentes me llevó a analizarlos, compararlos y aprender continuamente
-                    sobre ellos.
-                  </p>
-                </Reveal>
-                <Reveal delay={0.24}>
-                  <p className="text-base leading-[1.8] text-muted-2 sm:text-lg">
-                    Con el tiempo, esa curiosidad se convirtió en experiencia profesional dentro de la
-                    industria tecnológica y del gaming. Hoy utilizo todo ese aprendizaje desde una perspectiva
-                    diferente: no para venderte el ordenador más caro, sino para ayudarte a encontrar el que
-                    realmente necesitas.
-                  </p>
-                </Reveal>
-                <Reveal delay={0.3}>
-                  <p className="text-base leading-[1.8] text-muted-2 sm:text-lg">
-                    PC LAB es la forma de llevar esa experiencia a una conversación mucho más personal.
-                  </p>
-                </Reveal>
-              </div>
-
-              <Reveal delay={0.36}>
-                <p className="mt-10 border-t border-border pt-6 font-mono text-xs leading-relaxed tracking-wide text-muted">
-                  Administración y Marketing · MBA en curso · Hardware · Gaming · Tecnología
-                </p>
-              </Reveal>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 06 — FINAL CTA */}
-      <section className="light-section bg-2 py-32 sm:py-40" aria-label="Empieza tu proyecto">
+      {/* 07 — FINAL CTA */}
+      <section className="light-section bg-2 py-32 sm:py-44" aria-label="Empieza tu proyecto">
         <div className="container-x text-center">
           <Reveal>
             <h2 className="mx-auto max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl">
-              Tu ordenador empieza con una conversación.
+              Tu ordenador empieza contigo.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
@@ -292,17 +313,19 @@ export default function NosotrosPage() {
             </p>
           </Reveal>
           <Reveal delay={0.18}>
-            <p className="mt-3 text-base text-muted-2">Te responderemos con una propuesta pensada para ti.</p>
-          </Reveal>
-          <Reveal delay={0.26}>
             <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/contacto">
-                <Button size="lg" variant="brand">
-                  Empezar mi proyecto <ArrowRight className="size-4" aria-hidden />
-                </Button>
+              <Link
+                href="/contacto"
+                className="group inline-flex items-center gap-2 rounded-full bg-brand px-10 py-4 text-sm font-semibold text-[#051018] transition-all duration-300 hover:bg-[#8ae1ff]"
+              >
+                Empezar mi proyecto
+                <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
               </Link>
-              <Link href="/servicios">
-                <Button size="lg" variant="outline">Ver cómo trabajamos</Button>
+              <Link
+                href="/servicios"
+                className="group inline-flex items-center gap-2 rounded-full border border-border-strong px-10 py-4 text-sm font-semibold text-foreground transition-all duration-300 hover:border-brand/60 hover:text-brand"
+              >
+                Ver servicios
               </Link>
             </div>
           </Reveal>
