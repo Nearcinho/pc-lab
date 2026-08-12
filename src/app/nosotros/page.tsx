@@ -15,18 +15,18 @@ const portraitAlt = "Nicolás Sánchez Negrete, fundador de PC LAB";
 const principles = [
   {
     n: "01",
-    title: "Pensado para ti",
-    text: "Elegimos cada componente según tu uso, tu presupuesto y lo que realmente necesitas.",
+    title: "Elegido con criterio",
+    text: "Cada componente responde a tu presupuesto, tu uso y al resto del equipo.",
   },
   {
     n: "02",
-    title: "Construido con cuidado",
-    text: "Montamos cada equipo con atención a cada conexión, el cableado, la refrigeración y los pequeños detalles.",
+    title: "Ensamblado con cuidado",
+    text: "Cableado, refrigeración, conexiones y montaje realizados pensando en rendimiento y mantenimiento.",
   },
   {
     n: "03",
     title: "Probado antes de entregarlo",
-    text: "Configuramos y ponemos a prueba el equipo para comprobar estabilidad, temperaturas y funcionamiento.",
+    text: "Configuramos y comprobamos temperaturas, estabilidad y funcionamiento antes de que llegue a tus manos.",
   },
 ];
 
@@ -96,35 +96,38 @@ export default function NosotrosPage() {
       </section>
 
       {/* 02 — LO QUE RECIBE EL CLIENTE */}
-      <section className="light-section bg-background py-28 sm:py-32" aria-label="Lo que recibe el cliente">
+      <section className="light-section bg-background py-28 sm:py-32" aria-label="Lo que hay detrás de cada PC">
         <div className="container-x">
-          <Reveal>
-            <h2 className="max-w-3xl font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-6xl">
-              No solo recibes un PC.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted-2 sm:text-xl">
-              Recibes un equipo diseñado, construido y preparado alrededor de ti.
-            </p>
-          </Reveal>
+          <div className="max-w-3xl">
+            <Reveal>
+              <h2 className="text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
+                Lo que hay detrás de cada PC.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-6 max-w-xl text-base leading-[1.75] text-muted-2 sm:text-lg">
+                No se trata solo de ensamblar componentes. Se trata de tomar las decisiones correctas antes,
+                durante y después del montaje.
+              </p>
+            </Reveal>
+          </div>
 
-          <div className="mt-14 grid gap-x-10 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid gap-x-12 border-t border-[#0a0a0a]/10 pt-14 sm:grid-cols-2 lg:grid-cols-3">
             {principles.map((p, i) => (
               <Reveal key={p.n} delay={0.05 * i}>
-                <article className="border-t border-[#0a0a0a]/10 py-9 lg:py-10">
+                <article>
                   <span className="font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-brand-2">{p.n}</span>
-                  <h3 className="mt-5 font-display text-2xl font-medium tracking-tight sm:text-[1.7rem]">{p.title}</h3>
-                  <p className="mt-3 max-w-[32ch] text-sm leading-[1.75] text-muted-2">{p.text}</p>
+                  <h3 className="mt-4 font-display text-2xl font-medium tracking-tight sm:text-[1.65rem]">{p.title}</h3>
+                  <p className="mt-3 max-w-[34ch] text-sm leading-[1.8] text-muted-2">{p.text}</p>
                 </article>
               </Reveal>
             ))}
           </div>
 
           <Reveal delay={0.12}>
-            <p className="mt-20 max-w-2xl font-display text-3xl font-semibold leading-[1.15] tracking-tight text-brand-2 sm:text-5xl">
-              Porque un PC personalizado no consiste en juntar componentes. Consiste en hacer que todo tenga
-              sentido.
+            <p className="mt-24 max-w-2xl text-xl leading-[1.6] text-foreground sm:text-2xl">
+              No se trata de poner las mejores piezas.
+              <span className="block">Se trata de elegir <span className="font-semibold text-brand">las piezas correctas.</span></span>
             </p>
           </Reveal>
         </div>
