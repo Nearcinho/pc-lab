@@ -80,7 +80,7 @@ export default function NosotrosPage() {
       {/* 02 — NUESTRA FILOSOFÍA */}
       <section className="light-section bg-background py-32 sm:py-44" aria-label="Por qué existe PC LAB">
         <div className="container-x">
-          <div className="grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
+          <div className="grid items-center gap-16 lg:grid-cols-[1.35fr_0.65fr] lg:gap-20">
             <div>
               <Reveal>
                 <p className="flex items-center gap-3 font-mono text-[11px] font-medium uppercase tracking-[0.22em] text-[#6a6a6a]">
@@ -90,14 +90,14 @@ export default function NosotrosPage() {
               </Reveal>
 
               <Reveal delay={0.08}>
-                <h2 className="mt-10 max-w-2xl font-display text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
+                <h2 className="mt-10 max-w-3xl font-display text-4xl font-semibold leading-[1.08] tracking-tight text-balance sm:text-5xl lg:text-[3.4rem]">
                   No existe un PC perfecto para todo el mundo.
                   <span className="block text-brand">Pero existe uno perfecto para ti.</span>
                 </h2>
               </Reveal>
 
               <Reveal delay={0.14}>
-                <p className="mt-10 max-w-lg text-lg leading-[1.8] text-muted-2 sm:text-xl">
+                <p className="mt-10 max-w-xl text-lg leading-[1.8] text-muted-2 sm:text-xl">
                   Hay miles de configuraciones posibles. Pero eso no significa que todas tengan sentido para
                   ti.
                 </p>
