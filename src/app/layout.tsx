@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { WhatsappBubble } from "@/components/layout/whatsapp-bubble";
 import { PageTransition } from "@/components/layout/page-transition";
 import { ScrollProgress } from "@/components/effects/scroll-progress";
 import { siteConfig } from "@/lib/site";
@@ -105,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <PageTransition>{children}</PageTransition>
         </main>
         <Footer />
+        <WhatsappBubble />
       </body>
     </html>
   );
