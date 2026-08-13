@@ -43,6 +43,7 @@ export interface Part {
   monitorSize?: string;
   displayRes?: "1080p" | "1440p" | "4k";
   refreshHz?: number;
+  panel?: "IPS" | "VA" | "OLED";
   noOs?: boolean;
   perf?: number;
   gaming?: number;
@@ -56,7 +57,7 @@ export interface Part {
   size?: string;
   lengthMm?: number;
   speedMhz?: number;
-  pcieGen?: "Gen 4" | "Gen 5";
+  pcieGen?: "Gen 3" | "Gen 4" | "Gen 5";
   ramMaxMhz?: number;
   tier?: "mid" | "high";
   formSupport?: string[];
@@ -803,75 +804,73 @@ export const gpuParts: Part[] = [
   },
 ];
 
+// RAM genérica: sin marca, el cliente elige por capacidad y frecuencia.
 export const ramParts: Part[] = [
-  { id: "ram-16", category: "ram", brand: "Corsair", name: "16 GB DDR5 6000", price: 74, memoryGb: 16, speed: "6000 CL30", speedMhz: 6000, power: 4 },
-  { id: "ram-16-5200", category: "ram", brand: "Kingston", name: "Fury Beast 16 GB DDR5 5200", price: 55, memoryGb: 16, speed: "5200 CL40", speedMhz: 5200, power: 4 },
-  { id: "ram-32", category: "ram", brand: "G.Skill", name: "32 GB DDR5 6000 RGB", price: 139, memoryGb: 32, speed: "6000 CL30", speedMhz: 6000, power: 6 },
-  { id: "ram-32-5600", category: "ram", brand: "Kingston", name: "Fury Beast 32 GB DDR5 5600", price: 99, memoryGb: 32, speed: "5600 CL40", speedMhz: 5600, power: 6 },
-  { id: "ram-32-6000", category: "ram", brand: "Corsair", name: "Vengeance 32 GB DDR5 6000", price: 125, memoryGb: 32, speed: "6000 CL30", speedMhz: 6000, power: 6, recommended: true },
-  { id: "ram-32-6400", category: "ram", brand: "G.Skill", name: "Trident Z5 RGB 32 GB DDR5 6400", price: 155, memoryGb: 32, speed: "6400 CL32", speedMhz: 6400, power: 6 },
-  { id: "ram-64", category: "ram", brand: "Corsair", name: "64 GB DDR5 6400", price: 279, memoryGb: 64, speed: "6400 CL32", speedMhz: 6400, power: 8 },
-  { id: "ram-64-6000", category: "ram", brand: "G.Skill", name: "Trident Z5 64 GB DDR5 6000", price: 245, memoryGb: 64, speed: "6000 CL30", speedMhz: 6000, power: 8, recommended: true },
-  { id: "ram-96-5600", category: "ram", brand: "Corsair", name: "Vengeance 96 GB DDR5 5600", price: 319, memoryGb: 96, speed: "5600 CL40", speedMhz: 5600, power: 9 },
-  { id: "ram-128", category: "ram", brand: "Crucial", name: "128 GB DDR5 5600", price: 549, memoryGb: 128, speed: "5600 CL46", speedMhz: 5600, power: 10 },
+  { id: "ram-16-4800", category: "ram", brand: "—", name: "16 GB DDR5 · 4800 MT/s", price: 49, memoryGb: 16, speed: "4800 MT/s · CL40", speedMhz: 4800, power: 4 },
+  { id: "ram-16-5600", category: "ram", brand: "—", name: "16 GB DDR5 · 5600 MT/s", price: 59, memoryGb: 16, speed: "5600 MT/s · CL36", speedMhz: 5600, power: 4 },
+  { id: "ram-32-5600", category: "ram", brand: "—", name: "32 GB DDR5 · 5600 MT/s", price: 95, memoryGb: 32, speed: "5600 MT/s · CL36", speedMhz: 5600, power: 6 },
+  { id: "ram-32-6000", category: "ram", brand: "—", name: "32 GB DDR5 · 6000 MT/s", price: 115, memoryGb: 32, speed: "6000 MT/s · CL30", speedMhz: 6000, power: 6, recommended: true },
+  { id: "ram-32-6400", category: "ram", brand: "—", name: "32 GB DDR5 · 6400 MT/s", price: 139, memoryGb: 32, speed: "6400 MT/s · CL32", speedMhz: 6400, power: 6 },
+  { id: "ram-48-5600", category: "ram", brand: "—", name: "48 GB DDR5 · 5600 MT/s", price: 149, memoryGb: 48, speed: "5600 MT/s · CL38", speedMhz: 5600, power: 7 },
+  { id: "ram-48-6000", category: "ram", brand: "—", name: "48 GB DDR5 · 6000 MT/s", price: 169, memoryGb: 48, speed: "6000 MT/s · CL30", speedMhz: 6000, power: 7 },
+  { id: "ram-64-5600", category: "ram", brand: "—", name: "64 GB DDR5 · 5600 MT/s", price: 189, memoryGb: 64, speed: "5600 MT/s · CL38", speedMhz: 5600, power: 8 },
+  { id: "ram-64-6000", category: "ram", brand: "—", name: "64 GB DDR5 · 6000 MT/s", price: 219, memoryGb: 64, speed: "6000 MT/s · CL30", speedMhz: 6000, power: 8, recommended: true },
+  { id: "ram-96-5600", category: "ram", brand: "—", name: "96 GB DDR5 · 5600 MT/s", price: 299, memoryGb: 96, speed: "5600 MT/s · CL40", speedMhz: 5600, power: 9 },
+  { id: "ram-128-5600", category: "ram", brand: "—", name: "128 GB DDR5 · 5600 MT/s", price: 499, memoryGb: 128, speed: "5600 MT/s · CL46", speedMhz: 5600, power: 10 },
 ];
 
+// SSD genérico: sin marca, el cliente elige por capacidad y generación PCIe.
+// Velocidades típicas reales por generación (lectura secuencial).
 export const storageParts: Part[] = [
-  { id: "ssd-1tb", category: "storage", brand: "Western Digital", name: "1 TB NVMe Gen4", price: 59, capacityTb: 1, speed: "5150 MB/s", pcieGen: "Gen 4", power: 5 },
-  { id: "ssd-1tb-990evo", category: "storage", brand: "Samsung", name: "1 TB 990 EVO Gen4", price: 75, capacityTb: 1, speed: "5000 MB/s", pcieGen: "Gen 4", power: 5 },
-  { id: "ssd-1tb-sn850x", category: "storage", brand: "Western Digital", name: "1 TB Black SN850X Gen4", price: 95, capacityTb: 1, speed: "7300 MB/s", pcieGen: "Gen 4", power: 6 },
-  { id: "ssd-2tb", category: "storage", brand: "Samsung", name: "2 TB 990 Pro Gen4", price: 149, capacityTb: 2, speed: "7450 MB/s", pcieGen: "Gen 4", power: 6 },
-  { id: "ssd-2tb-kc3000", category: "storage", brand: "Kingston", name: "2 TB KC3000 Gen4", price: 125, capacityTb: 2, speed: "7000 MB/s", pcieGen: "Gen 4", power: 6 },
-  { id: "ssd-2tb-sn850x", category: "storage", brand: "Western Digital", name: "2 TB Black SN850X Gen4", price: 139, capacityTb: 2, speed: "7300 MB/s", pcieGen: "Gen 4", power: 7 },
-  { id: "ssd-2tb-gen5", category: "storage", brand: "Crucial", name: "2 TB T700 Gen5", price: 229, capacityTb: 2, speed: "12400 MB/s", pcieGen: "Gen 5", power: 8 },
-  { id: "ssd-2tb-t705", category: "storage", brand: "Crucial", name: "2 TB T705 Gen5", price: 279, capacityTb: 2, speed: "14500 MB/s", pcieGen: "Gen 5", power: 9 },
-  { id: "ssd-4tb", category: "storage", brand: "Samsung", name: "4 TB 990 Pro Gen4", price: 349, capacityTb: 4, speed: "7450 MB/s", pcieGen: "Gen 4", power: 7 },
-  { id: "ssd-4tb-990evo-plus", category: "storage", brand: "Samsung", name: "4 TB 990 EVO Plus Gen4", price: 269, capacityTb: 4, speed: "7250 MB/s", pcieGen: "Gen 4", power: 7 },
+  { id: "ssd-500gb-g3", category: "storage", brand: "—", name: "500 GB NVMe · PCIe 3.0", price: 39, capacityTb: 0.5, speed: "3500 MB/s", pcieGen: "Gen 3", type: "NVMe", power: 4 },
+  { id: "ssd-1tb-g3", category: "storage", brand: "—", name: "1 TB NVMe · PCIe 3.0", price: 49, capacityTb: 1, speed: "3500 MB/s", pcieGen: "Gen 3", type: "NVMe", power: 4 },
+  { id: "ssd-2tb-g3", category: "storage", brand: "—", name: "2 TB NVMe · PCIe 3.0", price: 89, capacityTb: 2, speed: "3500 MB/s", pcieGen: "Gen 3", type: "NVMe", power: 5 },
+  { id: "ssd-1tb-g4", category: "storage", brand: "—", name: "1 TB NVMe · PCIe 4.0", price: 65, capacityTb: 1, speed: "7000 MB/s", pcieGen: "Gen 4", type: "NVMe", power: 5, recommended: true },
+  { id: "ssd-2tb-g4", category: "storage", brand: "—", name: "2 TB NVMe · PCIe 4.0", price: 119, capacityTb: 2, speed: "7000 MB/s", pcieGen: "Gen 4", type: "NVMe", power: 6, recommended: true },
+  { id: "ssd-4tb-g4", category: "storage", brand: "—", name: "4 TB NVMe · PCIe 4.0", price: 259, capacityTb: 4, speed: "7100 MB/s", pcieGen: "Gen 4", type: "NVMe", power: 7 },
+  { id: "ssd-8tb-g4", category: "storage", brand: "—", name: "8 TB NVMe · PCIe 4.0", price: 549, capacityTb: 8, speed: "7100 MB/s", pcieGen: "Gen 4", type: "NVMe", power: 8 },
+  { id: "ssd-1tb-g5", category: "storage", brand: "—", name: "1 TB NVMe · PCIe 5.0", price: 119, capacityTb: 1, speed: "12000 MB/s", pcieGen: "Gen 5", type: "NVMe", power: 7 },
+  { id: "ssd-2tb-g5", category: "storage", brand: "—", name: "2 TB NVMe · PCIe 5.0", price: 199, capacityTb: 2, speed: "12400 MB/s", pcieGen: "Gen 5", type: "NVMe", power: 8 },
+  { id: "ssd-4tb-g5", category: "storage", brand: "—", name: "4 TB NVMe · PCIe 5.0", price: 389, capacityTb: 4, speed: "14100 MB/s", pcieGen: "Gen 5", type: "NVMe", power: 9 },
 ];
 
+// Refrigeración genérica: sin marca, por tipo (aire/líquida) y variante.
+// Alturas de torre y tamaños de radiador son valores típicos reales del segmento.
 export const coolingParts: Part[] = [
-  { id: "cool-ax120", category: "cooling", brand: "Noctua", name: "NH-U12S redux", price: 54, power: 2, type: "air", height: 158, features: ["Silencioso", "Aire"] },
-  { id: "cool-pa120", category: "cooling", brand: "Thermalright", name: "Peerless Assassin 120 SE", price: 39, power: 2, type: "air", height: 155, features: ["Doble torre", "Aire"] },
-  { id: "cool-nhd15", category: "cooling", brand: "Noctua", name: "NH-D15", price: 109, power: 3, type: "air", height: 165, recommended: true, features: ["Doble torre", "Silencioso"] },
-  { id: "cool-drpro5", category: "cooling", brand: "be quiet!", name: "Dark Rock Pro 5", price: 95, power: 3, type: "air", height: 168, features: ["Doble torre", "Silencioso"] },
-  { id: "cool-aio240", category: "cooling", brand: "Corsair", name: "H100i RGB 240mm", price: 149, power: 8, type: "aio", radiatorSupport: 240, features: ["Liquid Cooling", "240mm"] },
-  { id: "cool-lf3-240", category: "cooling", brand: "Arctic", name: "Liquid Freezer III 240", price: 105, power: 8, type: "aio", radiatorSupport: 240, features: ["Liquid Cooling", "240mm"] },
-  { id: "cool-lf3-280", category: "cooling", brand: "Arctic", name: "Liquid Freezer III 280", price: 125, power: 9, type: "aio", radiatorSupport: 280, recommended: true, features: ["Liquid Cooling", "280mm"] },
-  { id: "cool-aio360", category: "cooling", brand: "NZXT", name: "Kraken 360 RGB", price: 289, power: 10, type: "aio", radiatorSupport: 360, features: ["Liquid Cooling", "360mm"] },
-  { id: "cool-h150i", category: "cooling", brand: "Corsair", name: "iCUE H150i Elite 360mm", price: 189, power: 10, type: "aio", radiatorSupport: 360, features: ["Liquid Cooling", "360mm"] },
-  { id: "cool-custom-loop", category: "cooling", brand: "Custom", name: "Loop a medida distro", price: 899, power: 25, type: "custom", radiatorSupport: 480, features: ["Custom Loop", "Max rendimiento"] },
+  { id: "cool-air-single", category: "cooling", brand: "—", name: "Aire · Torre simple", price: 39, power: 2, type: "air", height: 155, features: ["Aire", "Torre simple"] },
+  { id: "cool-air-dual", category: "cooling", brand: "—", name: "Aire · Doble torre", price: 59, power: 3, type: "air", height: 165, recommended: true, features: ["Aire", "Doble torre"] },
+  { id: "cool-aio-120", category: "cooling", brand: "—", name: "Líquida · 120 mm (simple)", price: 75, power: 6, type: "aio", radiatorSupport: 120, features: ["Líquida AIO", "120 mm"] },
+  { id: "cool-aio-240", category: "cooling", brand: "—", name: "Líquida · 240 mm (doble)", price: 109, power: 8, type: "aio", radiatorSupport: 240, recommended: true, features: ["Líquida AIO", "240 mm"] },
+  { id: "cool-aio-360", category: "cooling", brand: "—", name: "Líquida · 360 mm (triple)", price: 159, power: 10, type: "aio", radiatorSupport: 360, features: ["Líquida AIO", "360 mm"] },
 ];
 
+// Cajas genéricas por formato. maxGpuLength / maxCoolerHeight / radiatorMax /
+// formSupport son valores típicos del formato (no de un modelo concreto).
 export const caseParts: Part[] = [
-  { id: "case-popmini", category: "case", brand: "Fractal Design", name: "Pop Mini Air", price: 89, power: 0, maxGpuLength: 360, maxCoolerHeight: 170, size: "mATX", formSupport: ["mATX"], radiatorMax: 280, fans: "2x 120 mm incluidos", features: ["Compacta", "Flujo"] },
-  { id: "case-a3", category: "case", brand: "Lian Li", name: "A3-mATX (DAN Cases)", price: 85, power: 0, maxGpuLength: 415, maxCoolerHeight: 165, size: "mATX", formSupport: ["mATX"], radiatorMax: 360, fans: "Sin ventiladores incluidos", features: ["Compacta", "Mesh"] },
-  { id: "case-nxht", category: "case", brand: "NZXT", name: "H5 Flow RGB", price: 119, power: 0, maxGpuLength: 362, maxCoolerHeight: 165, size: "ATX", formSupport: ["ATX", "mATX"], radiatorMax: 240, features: ["Compacta", "Flujo"] },
-  { id: "case-4000d", category: "case", brand: "Corsair", name: "4000D Airflow", price: 105, power: 0, maxGpuLength: 360, maxCoolerHeight: 170, size: "ATX", formSupport: ["ATX", "mATX", "EATX"], radiatorMax: 360, fans: "2x 120 mm incluidos", features: ["Flujo"] },
-  { id: "case-pb500dx", category: "case", brand: "be quiet!", name: "Pure Base 500DX", price: 115, power: 0, maxGpuLength: 369, maxCoolerHeight: 190, size: "ATX", formSupport: ["ATX", "mATX"], radiatorMax: 360, fans: "3x 140 mm incluidos", features: ["Silenciosa", "ARGB"] },
-  { id: "case-north", category: "case", brand: "Fractal Design", name: "North", price: 139, power: 0, maxGpuLength: 355, maxCoolerHeight: 170, size: "ATX", formSupport: ["ATX", "mATX"], radiatorMax: 360, fans: "2x 140 mm incluidos", recommended: true, features: ["Madera", "Mesh"] },
-  { id: "case-lancool", category: "case", brand: "Lian Li", name: "Lancool 216", price: 149, power: 0, maxGpuLength: 392, maxCoolerHeight: 180, size: "ATX", formSupport: ["ATX", "mATX", "EATX"], radiatorMax: 360, features: ["Ventiladores incluidos"] },
-  { id: "case-xtpro", category: "case", brand: "Phanteks", name: "XT Pro Ultra", price: 119, power: 0, maxGpuLength: 415, maxCoolerHeight: 184, size: "E-ATX", formSupport: ["EATX", "ATX", "mATX"], radiatorMax: 360, fans: "4x 140 mm D-RGB incluidos", features: ["ARGB", "Showcase"] },
-  { id: "case-o11", category: "case", brand: "Lian Li", name: "O11 Dynamic", price: 169, power: 0, maxGpuLength: 422, maxCoolerHeight: 159, size: "E-ATX", formSupport: ["ATX", "mATX", "EATX"], radiatorMax: 360, fans: "Sin ventiladores incluidos", features: ["Showcase"] },
-  { id: "case-tower900", category: "case", brand: "Thermaltake", name: "Tower 900", price: 289, power: 0, maxGpuLength: 440, maxCoolerHeight: 230, size: "E-ATX", formSupport: ["EATX", "ATX"], radiatorMax: 480, features: ["Big Tower"] },
+  { id: "case-itx", category: "case", brand: "—", name: "Mini-ITX · Compacta (SFF)", price: 109, power: 0, maxGpuLength: 330, maxCoolerHeight: 155, size: "Mini-ITX", formSupport: ["ITX", "mATX"], radiatorMax: 240, fans: "2x 120 mm incluidos", features: ["SFF", "Compacta"] },
+  { id: "case-matx", category: "case", brand: "—", name: "Micro-ATX · Compacta", price: 85, power: 0, maxGpuLength: 350, maxCoolerHeight: 160, size: "Micro-ATX", formSupport: ["mATX", "ITX"], radiatorMax: 240, fans: "2x 120 mm incluidos", features: ["Compacta", "Mesh"] },
+  { id: "case-atx", category: "case", brand: "—", name: "ATX · Media torre", price: 99, power: 0, maxGpuLength: 370, maxCoolerHeight: 170, size: "ATX", formSupport: ["ATX", "mATX", "ITX"], radiatorMax: 360, fans: "3x 120 mm incluidos", recommended: true, features: ["Flujo de aire"] },
+  { id: "case-atx-tg", category: "case", brand: "—", name: "ATX · Media torre cristal templado", price: 139, power: 0, maxGpuLength: 400, maxCoolerHeight: 175, size: "ATX", formSupport: ["ATX", "mATX", "ITX"], radiatorMax: 360, fans: "4x 120 mm incluidos", recommended: true, features: ["Cristal templado", "Showcase"] },
+  { id: "case-eatx", category: "case", brand: "—", name: "E-ATX · Full tower", price: 219, power: 0, maxGpuLength: 450, maxCoolerHeight: 195, size: "E-ATX", formSupport: ["EATX", "ATX", "mATX", "ITX"], radiatorMax: 420, fans: "4x 140 mm incluidos", features: ["Full tower", "Doble cámara"] },
 ];
 
 export const psuParts: Part[] = [
-  { id: "psu-bronze-550", category: "psu", brand: "Corsair", name: "550 W · 80+ Bronze", price: 79, power: 0, watts: 550, rating: "Bronze", form: "ATX" },
-  { id: "psu-bronze-650", category: "psu", brand: "Corsair", name: "650 W · 80+ Bronze", price: 99, power: 0, watts: 650, rating: "Bronze", form: "ATX" },
-  { id: "psu-bronze-750", category: "psu", brand: "Corsair", name: "750 W · 80+ Bronze", price: 109, power: 0, watts: 750, rating: "Bronze", form: "ATX" },
-  { id: "psu-bronze-850", category: "psu", brand: "Corsair", name: "850 W · 80+ Bronze", price: 129, power: 0, watts: 850, rating: "Bronze", form: "ATX" },
-  { id: "psu-gold-550", category: "psu", brand: "Seasonic", name: "550 W · 80+ Gold", price: 109, power: 0, watts: 550, rating: "Gold", form: "ATX" },
-  { id: "psu-gold-650", category: "psu", brand: "Seasonic", name: "650 W · 80+ Gold", price: 139, power: 0, watts: 650, rating: "Gold", form: "ATX" },
-  { id: "psu-gold-750", category: "psu", brand: "Seasonic", name: "750 W · 80+ Gold", price: 149, power: 0, watts: 750, rating: "Gold", form: "ATX" },
-  { id: "psu-gold-850", category: "psu", brand: "Seasonic", name: "850 W · 80+ Gold", price: 179, power: 0, watts: 850, rating: "Gold", form: "ATX" },
-  { id: "psu-gold-1000", category: "psu", brand: "Seasonic", name: "1000 W · 80+ Gold", price: 229, power: 0, watts: 1000, rating: "Gold", form: "ATX" },
-  { id: "psu-platinum-750", category: "psu", brand: "be quiet!", name: "750 W · 80+ Platinum", price: 189, power: 0, watts: 750, rating: "Platinum", form: "ATX" },
-  { id: "psu-platinum-850", category: "psu", brand: "be quiet!", name: "850 W · 80+ Platinum", price: 209, power: 0, watts: 850, rating: "Platinum", form: "ATX" },
-  { id: "psu-platinum-1000", category: "psu", brand: "be quiet!", name: "1000 W · 80+ Platinum", price: 249, power: 0, watts: 1000, rating: "Platinum", form: "ATX" },
-  { id: "psu-platinum-1200", category: "psu", brand: "be quiet!", name: "1200 W · 80+ Platinum", price: 329, power: 0, watts: 1200, rating: "Platinum", form: "ATX" },
-  { id: "psu-titanium-1000", category: "psu", brand: "Corsair", name: "1000 W · 80+ Titanium", price: 319, power: 0, watts: 1000, rating: "Titanium", form: "ATX" },
-  { id: "psu-titanium-1200", category: "psu", brand: "Corsair", name: "1200 W · 80+ Titanium", price: 379, power: 0, watts: 1200, rating: "Titanium", form: "ATX" },
-  { id: "psu-titanium-1600", category: "psu", brand: "Corsair", name: "1600 W · 80+ Titanium", price: 519, power: 0, watts: 1600, rating: "Titanium", form: "ATX" },
+  { id: "psu-bronze-550", category: "psu", brand: "—", name: "550 W · 80+ Bronze", price: 79, power: 0, watts: 550, rating: "Bronze", form: "ATX" },
+  { id: "psu-bronze-650", category: "psu", brand: "—", name: "650 W · 80+ Bronze", price: 99, power: 0, watts: 650, rating: "Bronze", form: "ATX" },
+  { id: "psu-bronze-750", category: "psu", brand: "—", name: "750 W · 80+ Bronze", price: 109, power: 0, watts: 750, rating: "Bronze", form: "ATX" },
+  { id: "psu-bronze-850", category: "psu", brand: "—", name: "850 W · 80+ Bronze", price: 129, power: 0, watts: 850, rating: "Bronze", form: "ATX" },
+  { id: "psu-gold-550", category: "psu", brand: "—", name: "550 W · 80+ Gold", price: 109, power: 0, watts: 550, rating: "Gold", form: "ATX" },
+  { id: "psu-gold-650", category: "psu", brand: "—", name: "650 W · 80+ Gold", price: 139, power: 0, watts: 650, rating: "Gold", form: "ATX", recommended: true },
+  { id: "psu-gold-750", category: "psu", brand: "—", name: "750 W · 80+ Gold", price: 149, power: 0, watts: 750, rating: "Gold", form: "ATX", recommended: true },
+  { id: "psu-gold-850", category: "psu", brand: "—", name: "850 W · 80+ Gold", price: 179, power: 0, watts: 850, rating: "Gold", form: "ATX" },
+  { id: "psu-gold-1000", category: "psu", brand: "—", name: "1000 W · 80+ Gold", price: 229, power: 0, watts: 1000, rating: "Gold", form: "ATX" },
+  { id: "psu-platinum-750", category: "psu", brand: "—", name: "750 W · 80+ Platinum", price: 189, power: 0, watts: 750, rating: "Platinum", form: "ATX" },
+  { id: "psu-platinum-850", category: "psu", brand: "—", name: "850 W · 80+ Platinum", price: 209, power: 0, watts: 850, rating: "Platinum", form: "ATX" },
+  { id: "psu-platinum-1000", category: "psu", brand: "—", name: "1000 W · 80+ Platinum", price: 249, power: 0, watts: 1000, rating: "Platinum", form: "ATX" },
+  { id: "psu-platinum-1200", category: "psu", brand: "—", name: "1200 W · 80+ Platinum", price: 329, power: 0, watts: 1200, rating: "Platinum", form: "ATX" },
+  { id: "psu-titanium-1000", category: "psu", brand: "—", name: "1000 W · 80+ Titanium", price: 319, power: 0, watts: 1000, rating: "Titanium", form: "ATX" },
+  { id: "psu-titanium-1200", category: "psu", brand: "—", name: "1200 W · 80+ Titanium", price: 379, power: 0, watts: 1200, rating: "Titanium", form: "ATX" },
+  { id: "psu-titanium-1600", category: "psu", brand: "—", name: "1600 W · 80+ Titanium", price: 519, power: 0, watts: 1600, rating: "Titanium", form: "ATX" },
 ];
 
 export const osParts: Part[] = [
@@ -881,13 +880,22 @@ export const osParts: Part[] = [
   { id: "os-ubuntu", category: "os", brand: "Canonical", name: "Ubuntu 24.04 LTS", price: 0, power: 0 },
 ];
 
+// Monitores genéricos: sin marca, por pulgadas → tasa de refresco → panel.
+// Los ultrawide 34"/49" se mapean a displayRes "1440p" para las estimaciones de FPS.
 export const peripheralParts: Part[] = [
-  { id: "mon-aoc-24g2sp", category: "peripheral", brand: "AOC", name: "24G2SP 24\" 165 Hz", price: 139, power: 32, kind: "monitor", monitorSize: "24\"", displayRes: "1080p", refreshHz: 165, features: ["IPS", "1 ms", "FreeSync"] },
-  { id: "mon-lg-27gp850", category: "peripheral", brand: "LG", name: "UltraGear 27GP850-B 27\" 165 Hz", price: 329, power: 40, kind: "monitor", monitorSize: "27\"", displayRes: "1440p", refreshHz: 165, features: ["Nano IPS", "1 ms", "G-Sync Compatible"] },
-  { id: "mon-msi-271qrx", category: "peripheral", brand: "MSI", name: "MPG 271QRX QD-OLED 27\" 360 Hz", price: 749, power: 48, kind: "monitor", monitorSize: "27\"", displayRes: "1440p", refreshHz: 360, features: ["QD-OLED", "0,03 ms", "HDR"] },
-  { id: "mon-gigabyte-m28u", category: "peripheral", brand: "Gigabyte", name: "M28U 28\" 4K 144 Hz", price: 499, power: 45, kind: "monitor", monitorSize: "28\"", displayRes: "4k", refreshHz: 144, features: ["IPS", "HDMI 2.1", "1 ms"] },
-  { id: "mon-asus-pg32ucdm", category: "peripheral", brand: "ASUS", name: "ROG Swift PG32UCDM 32\" 4K 240 Hz", price: 1199, power: 65, kind: "monitor", monitorSize: "32\"", displayRes: "4k", refreshHz: 240, features: ["QD-OLED", "0,03 ms", "HDR"] },
-  { id: "peri-monitor", category: "peripheral", brand: "Samsung", name: "Odyssey G9 OLED 49\"", price: 999, power: 60, kind: "monitor", monitorSize: "49\"", displayRes: "1440p", refreshHz: 240, features: ["240 Hz", "5120x1440", "OLED"] },
+  { id: "mon-24-144-ips", category: "peripheral", brand: "—", name: "24\" · 144 Hz · IPS", price: 119, power: 26, kind: "monitor", monitorSize: "24\"", refreshHz: 144, panel: "IPS", displayRes: "1080p", features: ["1080p", "1 ms"] },
+  { id: "mon-24-165-ips", category: "peripheral", brand: "—", name: "24\" · 165 Hz · IPS", price: 139, power: 28, kind: "monitor", monitorSize: "24\"", refreshHz: 165, panel: "IPS", displayRes: "1080p", features: ["1080p", "1 ms"], recommended: true },
+  { id: "mon-27-144-ips", category: "peripheral", brand: "—", name: "27\" · 144 Hz · IPS", price: 219, power: 34, kind: "monitor", monitorSize: "27\"", refreshHz: 144, panel: "IPS", displayRes: "1440p", features: ["1440p", "1 ms"] },
+  { id: "mon-27-165-ips", category: "peripheral", brand: "—", name: "27\" · 165 Hz · IPS", price: 259, power: 36, kind: "monitor", monitorSize: "27\"", refreshHz: 165, panel: "IPS", displayRes: "1440p", features: ["1440p", "1 ms"], recommended: true },
+  { id: "mon-27-165-va", category: "peripheral", brand: "—", name: "27\" · 165 Hz · VA", price: 229, power: 36, kind: "monitor", monitorSize: "27\"", refreshHz: 165, panel: "VA", displayRes: "1440p", features: ["1440p", "Curvo"] },
+  { id: "mon-27-240-oled", category: "peripheral", brand: "—", name: "27\" · 240 Hz · OLED", price: 599, power: 44, kind: "monitor", monitorSize: "27\"", refreshHz: 240, panel: "OLED", displayRes: "1440p", features: ["1440p", "0,03 ms", "HDR"] },
+  { id: "mon-27-360-oled", category: "peripheral", brand: "—", name: "27\" · 360 Hz · OLED", price: 749, power: 48, kind: "monitor", monitorSize: "27\"", refreshHz: 360, panel: "OLED", displayRes: "1440p", features: ["1440p", "0,03 ms", "HDR"] },
+  { id: "mon-32-144-ips", category: "peripheral", brand: "—", name: "32\" · 144 Hz · IPS", price: 449, power: 42, kind: "monitor", monitorSize: "32\"", refreshHz: 144, panel: "IPS", displayRes: "4k", features: ["4K", "HDMI 2.1"] },
+  { id: "mon-32-165-va", category: "peripheral", brand: "—", name: "32\" · 165 Hz · VA", price: 399, power: 40, kind: "monitor", monitorSize: "32\"", refreshHz: 165, panel: "VA", displayRes: "4k", features: ["4K", "Curvo"] },
+  { id: "mon-32-240-oled", category: "peripheral", brand: "—", name: "32\" · 240 Hz · OLED", price: 999, power: 55, kind: "monitor", monitorSize: "32\"", refreshHz: 240, panel: "OLED", displayRes: "4k", features: ["4K", "0,03 ms", "HDR"] },
+  { id: "mon-34-165-va", category: "peripheral", brand: "—", name: "34\" · 165 Hz · VA · Ultrawide", price: 449, power: 46, kind: "monitor", monitorSize: "34\"", refreshHz: 165, panel: "VA", displayRes: "1440p", features: ["Ultrawide 21:9", "Curvo"] },
+  { id: "mon-34-175-oled", category: "peripheral", brand: "—", name: "34\" · 175 Hz · OLED · Ultrawide", price: 749, power: 50, kind: "monitor", monitorSize: "34\"", refreshHz: 175, panel: "OLED", displayRes: "1440p", features: ["Ultrawide 21:9", "0,03 ms", "HDR"] },
+  { id: "mon-49-240-oled", category: "peripheral", brand: "—", name: "49\" · 240 Hz · OLED · Superultrawide", price: 999, power: 60, kind: "monitor", monitorSize: "49\"", refreshHz: 240, panel: "OLED", displayRes: "1440p", features: ["Superultrawide 32:9", "0,03 ms", "HDR"] },
 ];
 
 export const extraParts: Part[] = [

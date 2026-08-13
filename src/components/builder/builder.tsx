@@ -36,11 +36,11 @@ const STEPS: StepMeta[] = [
   { key: "gpu", label: "Gráfica", short: "GPU", desc: "La pieza que más pesa en juegos, render e IA.", stages: ["Marca", "Familia", "Modelo"], icon: Gauge },
   { key: "ram", label: "Memoria RAM", short: "RAM", desc: "Capacidad y frecuencia adaptada a tu placa base.", stages: ["Capacidad", "Frecuencia"], icon: MemoryStick },
   { key: "storage", label: "Almacenamiento", short: "SSD", desc: "Tu biblioteca de juegos y proyectos, a toda velocidad.", stages: ["Capacidad", "Generación"], icon: HardDrive },
-  { key: "cooling", label: "Refrigeración", short: "Refri.", desc: "Aire silencioso o líquido, siempre que lo aguante la caja.", stages: ["Tipo", "Radiador"], icon: Wind },
-  { key: "psu", label: "Fuente", short: "Fuente", desc: "Energía limpia y holgada para tu consumo.", stages: ["Potencia"], icon: PlugZap },
+  { key: "cooling", label: "Refrigeración", short: "Refri.", desc: "Aire silencioso o líquido, siempre que lo aguante la caja.", stages: ["Tipo", "Variante"], icon: Wind },
+  { key: "psu", label: "Fuente", short: "Fuente", desc: "Energía limpia y holgada para tu consumo.", stages: ["Certificación", "Potencia"], icon: PlugZap },
   { key: "case", label: "Caja", short: "Caja", desc: "Formato y compatibilidad total con todo lo elegido.", stages: ["Tamaño", "Modelo"], icon: Box },
   { key: "os", label: "Sistema", short: "SO", desc: "El software que lo gobierna todo.", stages: ["Sistema"], icon: Disc },
-  { key: "monitor", label: "Monitor", short: "Monitor", desc: "Opcional: la pantalla define la resolución de los FPS estimados.", stages: ["Modelo"], icon: Monitor },
+  { key: "monitor", label: "Monitor", short: "Monitor", desc: "Opcional: la pantalla define la resolución de los FPS estimados.", stages: ["Pulgadas", "Tasa de refresco", "Panel"], icon: Monitor },
 ];
 const ORDER: StepKey[] = STEPS.map((s) => s.key);
 const stepMeta = (k: StepKey) => STEPS.find((s) => s.key === k)!;
@@ -54,10 +54,10 @@ const PICK_COUNT: Record<StepKey, number> = {
   ram: 3,
   storage: 3,
   cooling: 3,
-  psu: 1,
+  psu: 2,
   case: 2,
   os: 1,
-  monitor: 1,
+  monitor: 3,
 };
 
 interface ChoiceGroup {
@@ -107,7 +107,7 @@ function specLine(p: Part): string {
     case "storage":
       return `${p.speed ?? ""} · ${p.pcieGen ?? ""}`;
     case "cooling":
-      return p.type === "air" ? "Aire · torre" : p.type === "aio" ? `Liquid ${p.radiatorSupport} mm` : "Loop a medida";
+      return p.type === "air" ? `Aire · ${p.height} mm de alto` : `Líquida · radiador ${p.radiatorSupport} mm`;
     case "psu":
       return `${p.watts} W · 80+ ${p.rating}`;
     case "case":
@@ -115,14 +115,28 @@ function specLine(p: Part): string {
     case "os":
       return p.noOs ? "Instálalo tú mismo" : "Licencia + instalación";
     case "peripheral":
-      return [p.monitorSize, p.displayRes, p.refreshHz ? `${p.refreshHz} Hz` : ""].filter(Boolean).join(" · ");
+      return [p.monitorSize, p.refreshHz ? `${p.refreshHz} Hz` : "", p.panel ?? "", p.displayRes ?? ""].filter(Boolean).join(" · ");
     default:
       return "";
   }
 }
 
 function coolingTypeLabel(p: Part): string {
-  return p.type === "air" ? "Aire" : p.type === "aio" ? "Liquid Cooling (AIO)" : "Loop a medida";
+  return p.type === "air" ? "Aire" : "Líquida";
+}
+
+function coolingVariantLabel(p: Part): string {
+  return p.type === "air"
+    ? (p.height ?? 0) >= 160
+      ? "Doble torre"
+      : "Torre simple"
+    : `${p.radiatorSupport} mm`;
+}
+
+// Etiqueta de capacidad de SSD: 0.5 TB se muestra como "500 GB".
+function capacityLabel(p: Part): string {
+  const tb = p.capacityTb ?? 0;
+  return tb < 1 ? `${Math.round(tb * 1000)} GB` : `${tb} TB`;
 }
 
 // Reconstruye la cadena jerárquica de un paso a partir de la pieza elegida.
@@ -144,16 +158,16 @@ function chainFromSel(sel: BuildSelection): Partial<Record<StepKey, string[]>> {
         res.gpu = [p.brand, p.family!, p.id];
         break;
       case "ram":
-        res.ram = [`${p.memoryGb} GB`, `${p.speedMhz} MHz`, p.id];
+        res.ram = [`${p.memoryGb} GB`, `${p.speedMhz} MT/s`, p.id];
         break;
       case "storage":
-        res.storage = [`${p.capacityTb} TB`, p.pcieGen!, p.id];
+        res.storage = [capacityLabel(p), p.pcieGen!, p.id];
         break;
       case "cooling":
-        res.cooling = [coolingTypeLabel(p), p.type === "air" ? "Aire · torre" : `${p.radiatorSupport} mm`, p.id];
+        res.cooling = [coolingTypeLabel(p), coolingVariantLabel(p), p.id];
         break;
       case "psu":
-        res.psu = [p.id];
+        res.psu = [`80+ ${p.rating}`, p.id];
         break;
       case "case":
         res.case = [p.size!, p.id];
@@ -162,7 +176,7 @@ function chainFromSel(sel: BuildSelection): Partial<Record<StepKey, string[]>> {
         res.os = [p.id];
         break;
       case "monitor":
-        res.monitor = [p.id];
+        res.monitor = [p.monitorSize!, `${p.refreshHz} Hz`, p.panel ?? "", p.id];
         break;
       default:
         break;
@@ -224,7 +238,7 @@ function stepView(key: StepKey, chain: string[], sel: BuildSelection): StepView 
       if (chain.length === 0) {
         return {
           groups: groupBy(ramParts, (p) => `${p.memoryGb} GB`),
-          notes: mb ? [`Tu placa (${mb.name}) admite hasta ${mb.ramMaxMhz} MHz: la frecuencia se adaptará a ella.`] : [],
+          notes: mb ? [`Tu placa (${mb.name}) admite hasta ${mb.ramMaxMhz} MT/s: la frecuencia se adaptará a ella.`] : [],
         };
       }
       if (chain.length === 1) {
@@ -235,24 +249,23 @@ function stepView(key: StepKey, chain: string[], sel: BuildSelection): StepView 
           const before = list.length;
           list = list.filter((p) => (p.speedMhz ?? 0) <= (mb.ramMaxMhz ?? 0));
           if (list.length < before) {
-            notes.push(`Se ocultaron kits de más de ${mb.ramMaxMhz} MHz: tu placa no los soporta de forma estable.`);
+            notes.push(`Se ocultaron kits de más de ${mb.ramMaxMhz} MT/s: tu placa no los soporta de forma estable.`);
           }
         }
-        return { groups: groupBy(list, (p) => `${p.speedMhz} MHz`), notes };
+        return { groups: groupBy(list, (p) => `${p.speedMhz} MT/s`), notes };
       }
       return {
-        parts: ramParts.filter((p) => `${p.memoryGb} GB` === chain[0] && `${p.speedMhz} MHz` === chain[1]),
+        parts: ramParts.filter((p) => `${p.memoryGb} GB` === chain[0] && `${p.speedMhz} MT/s` === chain[1]),
         notes: [],
       };
     }
     case "storage": {
       const mb = sel.motherboard ? partById(sel.motherboard) : undefined;
       if (chain.length === 0) {
-        return { groups: groupBy(storageParts, (p) => `${p.capacityTb} TB`), notes: [] };
+        return { groups: groupBy(storageParts, capacityLabel), notes: [] };
       }
       if (chain.length === 1) {
-        const tb = Number(chain[0].split(" ")[0]);
-        const list = storageParts.filter((p) => p.capacityTb === tb);
+        const list = storageParts.filter((p) => capacityLabel(p) === chain[0]);
         const notes: string[] = [];
         if (mb && list.some((p) => p.pcieGen === "Gen 5")) {
           const max = mb.pcieGen ?? "Gen 4";
@@ -265,7 +278,7 @@ function stepView(key: StepKey, chain: string[], sel: BuildSelection): StepView 
         return { groups: groupBy(list, (p) => p.pcieGen!), notes };
       }
       return {
-        parts: storageParts.filter((p) => `${p.capacityTb} TB` === chain[0] && p.pcieGen === chain[1]),
+        parts: storageParts.filter((p) => capacityLabel(p) === chain[0] && p.pcieGen === chain[1]),
         notes: [],
       };
     }
@@ -291,31 +304,34 @@ function stepView(key: StepKey, chain: string[], sel: BuildSelection): StepView 
           }
         }
         return {
-          groups: groupBy(list, (p) => (p.type === "air" ? "Aire · torre" : `${p.radiatorSupport} mm`)),
+          groups: groupBy(list, coolingVariantLabel),
           notes,
         };
       }
       return {
-        parts: coolingParts.filter((p) => {
-          const kind = chain[0];
-          const rad = chain[1];
-          return coolingTypeLabel(p) === kind && (p.type === "air" ? rad === "Aire · torre" : `${p.radiatorSupport} mm` === rad);
-        }),
+        parts: coolingParts.filter(
+          (p) => coolingTypeLabel(p) === chain[0] && coolingVariantLabel(p) === chain[1]
+        ),
         notes: [],
       };
     }
     case "psu": {
       const calc = computeBuild(sel);
-      const all = [...psuParts];
-      if (calc.psuRecommended <= 0) {
-        return { parts: all, notes: [] };
-      }
-      const filtered = all.filter((p) => (p.watts ?? 0) >= calc.psuRecommended);
+      const min = calc.psuRecommended;
+      const eligible = min > 0 ? psuParts.filter((p) => (p.watts ?? 0) >= min) : [...psuParts];
       const notes =
-        filtered.length < all.length
-          ? [`Tu build consume ~${formatNumber(calc.wattage)} W en carga. Recomendamos ${calc.psuRecommended} W o más: se ocultaron fuentes por debajo.`]
-          : [`Tu build consume ~${formatNumber(calc.wattage)} W en carga; ${calc.psuRecommended} W es el mínimo recomendado.`];
-      return { parts: filtered, notes };
+        min > 0
+          ? eligible.length < psuParts.length
+            ? [`Tu build consume ~${formatNumber(calc.wattage)} W en carga. Recomendamos ${min} W o más: se ocultaron fuentes por debajo.`]
+            : [`Tu build consume ~${formatNumber(calc.wattage)} W en carga; ${min} W es el mínimo recomendado.`]
+          : [];
+      if (chain.length === 0) {
+        return { groups: groupBy(eligible, (p) => `80+ ${p.rating}`), notes };
+      }
+      return {
+        parts: eligible.filter((p) => `80+ ${p.rating}` === chain[0]),
+        notes,
+      };
     }
     case "case": {
       const mb = sel.motherboard ? partById(sel.motherboard) : undefined;
@@ -355,7 +371,25 @@ function stepView(key: StepKey, chain: string[], sel: BuildSelection): StepView 
       return { parts: osParts, notes: [] };
     }
     case "monitor": {
-      return { parts: peripheralParts.filter((p) => p.kind === "monitor"), notes: [] };
+      const mons = peripheralParts.filter((p) => p.kind === "monitor");
+      // Tras "Sin monitor" la cadena queda en ["none"]: mostramos el inicio.
+      if (chain.length === 0 || chain[0] === "none") {
+        return { groups: groupBy(mons, (p) => p.monitorSize!), notes: [] };
+      }
+      if (chain.length === 1) {
+        const list = mons.filter((p) => p.monitorSize === chain[0]);
+        return { groups: groupBy(list, (p) => `${p.refreshHz} Hz`), notes: [] };
+      }
+      if (chain.length === 2) {
+        const list = mons.filter((p) => p.monitorSize === chain[0] && `${p.refreshHz} Hz` === chain[1]);
+        return { groups: groupBy(list, (p) => p.panel ?? ""), notes: [] };
+      }
+      return {
+        parts: mons.filter(
+          (p) => p.monitorSize === chain[0] && `${p.refreshHz} Hz` === chain[1] && (p.panel ?? "") === chain[2]
+        ),
+        notes: [],
+      };
     }
     default:
       return { groups: [], notes: [] };
@@ -374,6 +408,7 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
   const [sel, setSel] = React.useState<BuildSelection>(() => ({ ...(initial ?? {}) }));
   const [chain, setChain] = React.useState<Partial<Record<StepKey, string[]>>>(() => chainFromSel(initial ?? {}));
   const [active, setActive] = React.useState<StepKey>("cpu");
+  const [notes, setNotes] = React.useState("");
   const calc = computeBuild(sel);
   const monitorRes: Resolution =
     (sel.monitor ? partById(sel.monitor)?.displayRes : undefined) ?? "1440p";
@@ -391,7 +426,9 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
     const cur = chain[key] ?? [];
     const nextChain = cur.concat(pick);
     const nextSel = { ...sel };
-    if (nextChain.length === PICK_COUNT[key]) {
+    // "Sin monitor" completa el paso en una sola elección.
+    const completes = nextChain.length === PICK_COUNT[key] || (key === "monitor" && pick === "none");
+    if (completes) {
       (nextSel as unknown as Record<string, string>)[key] = pick;
     }
     if (key === "cpu") {
@@ -406,7 +443,7 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
     setSel(nextSel);
     setChain((prev) => ({ ...prev, [key]: nextChain }));
     const idx = ORDER.indexOf(key);
-    if (nextChain.length === PICK_COUNT[key] && idx < ORDER.length - 1) {
+    if (completes && idx < ORDER.length - 1) {
       setActive(ORDER[idx + 1]);
     }
   };
@@ -429,6 +466,7 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
   const reset = () => {
     setSel({});
     setChain({});
+    setNotes("");
     setActive("cpu");
   };
 
@@ -522,7 +560,7 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
             <nav aria-label={`Selección de ${meta.label}`} className="mb-4 flex flex-wrap items-center gap-1.5 text-xs">
               {cur.map((pick, i) => {
                 const isLeaf = i === cur.length - 1;
-                const label = isLeaf ? (partById(pick)?.name ?? pick) : pick;
+                const label = isLeaf ? (pick === "none" ? "Sin monitor" : (partById(pick)?.name ?? pick)) : pick;
                 return (
                   <React.Fragment key={i}>
                     {i > 0 && <ChevronRight className="size-3 text-muted/50" aria-hidden />}
@@ -545,6 +583,44 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-wider text-muted">
             {stageName}
           </p>
+
+          {active === "monitor" && cur.length === 0 && (
+            <div className="mb-3 grid gap-3 sm:grid-cols-2">
+              <motion.button
+                key="monitor-none"
+                initial={reduced ? false : { opacity: 0, scale: 0.97 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.25 }}
+                onClick={() => handlePick(active, "none")}
+                aria-pressed={sel.monitor === "none"}
+                className={cn(
+                  "group flex flex-col rounded-2xl border p-4 text-left transition-all duration-300",
+                  sel.monitor === "none"
+                    ? "border-brand/60 bg-brand/5 shadow-glow-sm"
+                    : "border-border bg-surface-2/40 hover:border-border-strong hover:bg-surface-2/70"
+                )}
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <span className="rounded-md border border-border bg-surface-2/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted">
+                    Opcional
+                  </span>
+                  <span
+                    className={cn(
+                      "flex size-5 shrink-0 items-center justify-center rounded-full border transition-all",
+                      sel.monitor === "none" ? "border-brand bg-brand text-white" : "border-border text-transparent"
+                    )}
+                  >
+                    <Check className="size-3" strokeWidth={3} aria-hidden />
+                  </span>
+                </div>
+                <p className="mt-2.5 font-display text-[15px] font-semibold leading-snug">Sin monitor</p>
+                <p className="mt-1 text-[11px] text-muted">Solo el equipo: los FPS se estiman a 1440p.</p>
+                <span className="mt-2 text-[10px] uppercase tracking-wide text-muted/60">
+                  Seleccionar
+                </span>
+              </motion.button>
+            </div>
+          )}
 
           {view.groups && view.groups.length > 0 && (
             <div className="grid gap-3 sm:grid-cols-2">
@@ -581,41 +657,6 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
           {view.parts && (
             <div className="grid gap-3 sm:grid-cols-2">
               <AnimatePresence initial={false}>
-                {active === "monitor" && (
-                  <motion.button
-                    key="monitor-none"
-                    initial={reduced ? false : { opacity: 0, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.25 }}
-                    onClick={() => handlePick(active, "none")}
-                    aria-pressed={sel.monitor === "none"}
-                    className={cn(
-                      "group flex flex-col rounded-2xl border p-4 text-left transition-all duration-300",
-                      sel.monitor === "none"
-                        ? "border-brand/60 bg-brand/5 shadow-glow-sm"
-                        : "border-border bg-surface-2/40 hover:border-border-strong hover:bg-surface-2/70"
-                    )}
-                  >
-                    <div className="flex items-start justify-between gap-2">
-                      <span className="rounded-md border border-border bg-surface-2/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted">
-                        Opcional
-                      </span>
-                      <span
-                        className={cn(
-                          "flex size-5 shrink-0 items-center justify-center rounded-full border transition-all",
-                          sel.monitor === "none" ? "border-brand bg-brand text-white" : "border-border text-transparent"
-                        )}
-                      >
-                        <Check className="size-3" strokeWidth={3} aria-hidden />
-                      </span>
-                    </div>
-                    <p className="mt-2.5 font-display text-[15px] font-semibold leading-snug">Sin monitor</p>
-                    <p className="mt-1 text-[11px] text-muted">Solo el equipo: los FPS se estiman a 1440p.</p>
-                    <span className="mt-2 text-[10px] uppercase tracking-wide text-muted/60">
-                      Seleccionar
-                    </span>
-                  </motion.button>
-                )}
                 {view.parts.map((p) => {
                   const selected = sel[active as keyof BuildSelection] === p.id;
                   const badgeText =
@@ -741,6 +782,29 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
                   );
                 })}
               </div>
+
+              <div className="mt-6 border-t border-border pt-5">
+                <div className="mb-3 flex items-center gap-3">
+                  <span className="flex size-9 items-center justify-center rounded-lg border border-border bg-surface-2/50 text-muted">
+                    <Sparkles className="size-4" aria-hidden />
+                  </span>
+                  <div>
+                    <h3 className="font-display text-sm font-semibold">Otros / petición especial</h3>
+                    <p className="text-[11px] text-muted">
+                      Solo informativo: lo tenemos en cuenta al preparar tu cotización, no cambia el rendimiento estimado.
+                    </p>
+                  </div>
+                </div>
+                <textarea
+                  value={notes}
+                  onChange={(e) => setNotes(e.target.value)}
+                  rows={3}
+                  maxLength={500}
+                  placeholder="PC full white, sin RGB, presupuesto de extras…"
+                  aria-label="Otros / petición especial"
+                  className="w-full resize-y rounded-xl border border-border bg-surface-2/40 px-3 py-2.5 text-sm placeholder:text-muted/50 focus:border-brand/60 focus:outline-none"
+                />
+              </div>
             </div>
           )}
         </motion.div>
@@ -757,14 +821,25 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
             <dl className="mt-4 max-h-64 space-y-1.5 overflow-y-auto pr-1 text-sm no-scrollbar">
               {[...ORDER, "peripheral", "extra"].map((c) => {
                 const part = sel[c as keyof BuildSelection] ? allParts.find((p) => p.id === sel[c as keyof BuildSelection]) : undefined;
+                const label =
+                  c === "monitor" && sel.monitor === "none"
+                    ? "Sin monitor"
+                    : (part?.name ?? <span className="text-muted/50">—</span>);
                 return (
                   <div key={c} className="flex items-center justify-between gap-2">
                     <dt className="text-muted">{categories[c as Category].label}</dt>
-                    <dd className="truncate text-right font-medium">{part?.name ?? <span className="text-muted/50">—</span>}</dd>
+                    <dd className="truncate text-right font-medium">{label}</dd>
                   </div>
                 );
               })}
             </dl>
+
+            {notes.trim() && (
+              <div className="mt-3 rounded-xl bg-surface-2/50 px-3 py-2.5">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted">Notas</p>
+                <p className="mt-1 whitespace-pre-line text-xs leading-relaxed text-foreground/90">{notes}</p>
+              </div>
+            )}
 
             <div className="mt-4 grid gap-2 text-center">
               <div className="rounded-xl bg-surface-2/60 p-2.5">
