@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="600" y2="600">
+      <stop stop-color="#0a0a12"/>
+      <stop offset="1" stop-color="#0e0e18"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4fd1ff"/>
+      <stop offset="1" stop-color="#bfeaff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <circle cx="300" cy="300" r="200" stroke="#4fd1ff" stroke-opacity="0.12"/>
+  <rect x="130" y="255" width="340" height="90" rx="8" fill="#15161f" stroke="url(#acc)" stroke-width="3"/>
+  <circle cx="152" cy="300" r="9" fill="#0a0a12" stroke="#3a3d4d" stroke-width="3"/>
+  <g fill="#2b2e3c">
+    <rect x="200" y="270" width="72" height="60" rx="4"/>
+    <rect x="288" y="270" width="72" height="60" rx="4"/>
+  </g>
+  <rect x="376" y="278" width="56" height="44" rx="4" fill="#1d1f2a" stroke="#3a3d4d" stroke-width="2"/>
+  <path d="M452 264 v72" stroke="#bfeaff" stroke-opacity="0.6" stroke-width="10" stroke-dasharray="6 7"/>
+  <text x="300" y="560" text-anchor="middle" fill="#e8eaf2" font-family="Arial" font-size="18" font-weight="700" letter-spacing="8">SSD NVMe M.2</text>
+</svg>

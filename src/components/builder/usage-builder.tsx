@@ -12,6 +12,7 @@ import { categories, Category, partById } from "@/lib/parts";
 import { computeBuild, BuildSelection } from "@/lib/build-engine";
 import type { Resolution } from "@/lib/benchmarks";
 import { FpsPanel } from "@/components/builder/fps-panel";
+import { BuildRender } from "@/components/builder/build-render";
 import { cn, formatNumber } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -327,6 +328,18 @@ export function UsageBuilder({ onUseHardware }: { onUseHardware: (sel: BuildSele
               <p className="mt-0.5 text-center font-display font-semibold">{calc.psuRecommended} W</p>
             </div>
           </div>
+
+          <motion.div
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-6"
+          >
+            <BuildRender selection={profile} className="h-auto w-full rounded-2xl border border-border" />
+            <p className="mt-2 text-center text-[11px] text-muted">
+              Visualización orientativa generada a partir de tu configuración.
+            </p>
+          </motion.div>
 
           {issues.length > 0 && (
             <ul className="mt-4 space-y-2">

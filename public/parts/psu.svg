@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="600" y2="600">
+      <stop stop-color="#0a0a12"/>
+      <stop offset="1" stop-color="#0e0e18"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4fd1ff"/>
+      <stop offset="1" stop-color="#bfeaff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <circle cx="300" cy="300" r="200" stroke="#4fd1ff" stroke-opacity="0.12"/>
+  <rect x="150" y="200" width="300" height="190" rx="12" fill="#15161f" stroke="#3a3d4d" stroke-width="3"/>
+  <circle cx="270" cy="295" r="62" fill="#0e0f16" stroke="url(#acc)" stroke-width="3"/>
+  <g stroke="#4fd1ff" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round">
+    <path d="M270 295 l0 -44"/>
+    <path d="M270 295 l38 22"/>
+    <path d="M270 295 l-38 22"/>
+  </g>
+  <circle cx="270" cy="295" r="10" fill="#1d1f2a"/>
+  <g stroke="#3a3d4d" stroke-width="4" stroke-linecap="round">
+    <path d="M372 240 h52"/>
+    <path d="M372 262 h52"/>
+    <path d="M372 284 h52"/>
+    <path d="M372 306 h52"/>
+    <path d="M372 328 h52"/>
+    <path d="M372 350 h52"/>
+  </g>
+  <path d="M450 330 c 44 8 66 40 34 74" stroke="#2b2e3c" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <text x="300" y="560" text-anchor="middle" fill="#e8eaf2" font-family="Arial" font-size="18" font-weight="700" letter-spacing="8">FUENTE</text>
+</svg>

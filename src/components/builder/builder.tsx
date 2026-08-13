@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Cpu, CircuitBoard, Gauge, MemoryStick, HardDrive, Wind, PlugZap, Box, Disc,
@@ -14,6 +15,8 @@ import {
 import { computeBuild, BuildSelection, BuildIssue } from "@/lib/build-engine";
 import type { Resolution } from "@/lib/benchmarks";
 import { FpsPanel } from "@/components/builder/fps-panel";
+import { BuildRender } from "@/components/builder/build-render";
+import { partImage } from "@/lib/part-images";
 import { cn, formatNumber } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -854,7 +857,18 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
                 return (
                   <div key={c} className="flex items-center justify-between gap-2">
                     <dt className="text-muted">{categories[c as Category].label}</dt>
-                    <dd className="truncate text-right font-medium">{label}</dd>
+                    <dd className="flex min-w-0 items-center justify-end gap-2 text-right font-medium">
+                      {part && (
+                        <Image
+                          src={partImage(part)}
+                          alt=""
+                          width={40}
+                          height={40}
+                          className="size-10 shrink-0 rounded-lg border border-border bg-surface-2/60 object-cover"
+                        />
+                      )}
+                      <span className="truncate">{label}</span>
+                    </dd>
                   </div>
                 );
               })}
@@ -921,6 +935,22 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
             ))}
           </ul>
         </div>
+      )}
+
+      {calc.complete && (
+        <motion.section
+          initial={reduced ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-14 rounded-3xl border border-border bg-surface/50 p-6 backdrop-blur"
+        >
+          <h3 className="font-display text-xl font-semibold">Tu PC, montado</h3>
+          <p className="mt-1 max-w-2xl text-sm text-muted">
+            Visualización orientativa generada a partir de tu configuración.
+          </p>
+          <BuildRender selection={sel} className="mt-5 h-auto w-full rounded-2xl border border-border" />
+        </motion.section>
       )}
 
       <PerformancePanel ref={perfRef} calc={calc} monitorRes={monitorRes} />

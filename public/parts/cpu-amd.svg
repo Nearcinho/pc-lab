@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="600" y2="600">
+      <stop stop-color="#0a0a12"/>
+      <stop offset="1" stop-color="#0e0e18"/>
+    </linearGradient>
+    <linearGradient id="acc" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4fd1ff"/>
+      <stop offset="1" stop-color="#bfeaff"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="600" fill="url(#bg)"/>
+  <circle cx="300" cy="300" r="200" stroke="#4fd1ff" stroke-opacity="0.12"/>
+  <g stroke="#3a3d4d" stroke-width="6" stroke-dasharray="8 10">
+    <path d="M222 198 h156"/>
+    <path d="M222 402 h156"/>
+    <path d="M198 222 v156"/>
+    <path d="M402 222 v156"/>
+  </g>
+  <rect x="210" y="210" width="180" height="180" rx="10" fill="#15161f" stroke="url(#acc)" stroke-width="3"/>
+  <rect x="246" y="246" width="108" height="108" rx="6" fill="#1d1f2a" stroke="#3a3d4d" stroke-width="2"/>
+  <text x="300" y="310" text-anchor="middle" fill="#4fd1ff" font-family="Arial" font-size="26" font-weight="700" letter-spacing="4">AM5</text>
+  <circle cx="228" cy="228" r="5" fill="#4fd1ff" fill-opacity="0.7"/>
+  <text x="300" y="560" text-anchor="middle" fill="#e8eaf2" font-family="Arial" font-size="18" font-weight="700" letter-spacing="8">PROCESADOR</text>
+</svg>
