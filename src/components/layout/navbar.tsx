@@ -13,7 +13,7 @@ import { mainNav } from "@/lib/site";
 function NavItem({ label, href, items }: { label: string; href: string; items?: { label: string; href: string; description: string }[] }) {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
-  const hrefFor = href === "/servicios" ? (pathname === "/" ? "/#servicios" : "/servicios") : href;
+  const hrefFor = href === "/servicios" ? "/#servicios" : href;
   const isActive = pathname === href || (items?.some((c) => pathname === c.href) ?? false);
   const isDropdown = Boolean(items?.length);
 
@@ -112,7 +112,7 @@ export function Navbar() {
               ) : (
                 <Link
                   key={item.href}
-                  href={item.href === "/servicios" ? (pathname === "/" ? "/#servicios" : "/servicios") : item.href}
+                  href={item.href === "/servicios" ? "/#servicios" : item.href}
                   className={cn(
                     "rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
                     pathname === item.href ? "text-brand" : "text-muted-2 hover:text-foreground"
@@ -156,7 +156,7 @@ export function Navbar() {
               {mainNav.map((item) => (
                 <div key={item.href}>
                   <Link
-                    href={item.href === "/servicios" ? (pathname === "/" ? "/#servicios" : "/servicios") : item.href}
+                    href={item.href === "/servicios" ? "/#servicios" : item.href}
                     className={cn(
                       "block rounded-xl px-4 py-3 text-sm font-medium",
                       pathname === item.href ? "bg-brand/10 text-brand" : "text-foreground hover:bg-surface-2/60"
