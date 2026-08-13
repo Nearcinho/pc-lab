@@ -24,7 +24,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-05-18",
     readTime: "7 min",
     author: "Equipo PC LAB",
-    cover: asset("/blog/ram.svg"),
+    cover: asset("/blog/ram.jpg"),
     gradient: "from-brand/25 to-brand-2/25",
     tags: ["RAM", "DDR5", "Guía"],
     content: [
@@ -59,7 +59,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-06-02",
     readTime: "9 min",
     author: "PC LAB",
-    cover: asset("/blog/cpu.svg"),
+    cover: asset("/blog/cpu.jpg"),
     gradient: "from-violet-500/20 to-cyan-500/20",
     tags: ["CPU", "AMD", "Intel", "Comparativa"],
     content: [
@@ -89,7 +89,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-03-10",
     readTime: "6 min",
     author: "PC LAB",
-    cover: asset("/blog/stream.svg"),
+    cover: asset("/blog/stream.jpg"),
     gradient: "from-rose-500/20 to-violet-600/20",
     tags: ["Streaming", "Gaming", "NVENC"],
     content: [
@@ -119,7 +119,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-02-12",
     readTime: "9 min",
     author: "PC LAB",
-    cover: asset("/blog/workstation.svg"),
+    cover: asset("/blog/workstation.jpg"),
     gradient: "from-amber-500/20 to-orange-600/20",
     tags: ["Workstation", "Comparativa"],
     content: [
