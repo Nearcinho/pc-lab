@@ -81,36 +81,6 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "que-es-un-custom-loop",
-    title: "Custom loop: ¿merece la pena en 2026?",
-    excerpt:
-      "Temperaturas, ruido, estética y mantenimiento: qué aporta de verdad una refrigeración líquida a medida frente a un buen AIO.",
-    category: "Guías",
-    date: "2026-04-20",
-    readTime: "8 min",
-    author: "PC LAB",
-    cover: asset("/blog/loop.svg"),
-    gradient: "from-cyan-500/20 to-blue-600/25",
-    tags: ["Custom Loop", "Refrigeración"],
-    content: [
-      {
-        heading: "Qué ganas de verdad",
-        text:
-          "Un loop a medida refrigera CPU y GPU con un circuito único y radiadores generosos. Frente a un AIO de calidad, la mejora típica es de varios grados bajo carga sostenida y, sobre todo, mucho menos ruido: los ventiladores pueden girar más despacio al haber más superficie de disipación. El mayor salto se nota en la GPU, que en la mayoría de equipos es quien más calor genera.",
-      },
-      {
-        heading: "Lo que nadie te cuenta",
-        text:
-          "Un custom loop no es «montar y olvidar»: exige mantenimiento (cambio de líquido cada 12-18 meses) y un montaje impecable. Hecho por profesionales, con tubo bien insertado y prueba de fugas previa, el riesgo es mínimo; hecho a las carreras, es la pieza más delicada del equipo. No compra FPS por sí solo: compra temperaturas, silencio y margen para overclock.",
-      },
-      {
-        heading: "¿Para quién es?",
-        text:
-          "Para quien busca el silencio absoluto, una estética única o exprimir un equipo de gama muy alta. Para el resto, un AIO de 240-360 mm o un buen disipador de aire ofrecen el 90 % del resultado con una fracción del esfuerzo. En PC LAB montamos ambos: te diremos con honestidad cuál encaja en tu caso.",
-      },
-    ],
-  },
-  {
     slug: "pc-streaming-2026",
     title: "¿Necesitas un PC especial para hacer streaming?",
     excerpt:

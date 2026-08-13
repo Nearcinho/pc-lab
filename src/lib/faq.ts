@@ -10,17 +10,12 @@ export const faqGroups: FaqEntry[] = [
       {
         question: "¿Cuánto tarda el montaje de mi PC?",
         answer:
-          "Un equipo estándar se ensambla, testea y calibra en 7 a 10 días laborables. Los builds con configuraciones muy especiales (loops personalizados, mods) pueden tardar hasta 3 semanas. Al hacer el pedido te damos una fecha estimada y te avisamos de cada fase.",
+          "Un equipo estándar se ensambla, testea y calibra en 7 a 10 días laborables. Las configuraciones muy especiales pueden tardar hasta 3 semanas. Al hacer el pedido te damos una fecha estimada y te avisamos de cada fase.",
       },
       {
         question: "¿Hacéis envíos a toda España?",
         answer:
           "Sí. Enviamos a toda España y Portugal con seguros incluidos y embalaje antiestático de transporte. Los envíos a Península son gratis en configuraciones superiores a 899€; a Islas aplicamos un suplemento sin sorpresas.",
-      },
-      {
-        question: "¿Puedo fraccionar el pago?",
-        answer:
-          "Por supuesto. Ofrecemos pago fraccionado sin intereses a 3, 6 y 12 meses a través de financiación verificada, además de pago con tarjeta, transferencia y Bizum.",
       },
     ],
   },
@@ -33,9 +28,9 @@ export const faqGroups: FaqEntry[] = [
           "Cada equipo pasa un test de estrés de 24 horas (CPU + GPU + RAM + SSD) registrando temperaturas, estabilidad de potencias y ruido. Te entregamos el informe completo con los resultados para que veas exactamente cómo se comporta tu máquina.",
       },
       {
-        question: "¿Qué garantía ofrezco?",
+        question: "¿Qué garantía tiene mi PC?",
         answer:
-          "2 años de garantía en toda la configuración, ampliable a 5 años. La cobertura incluye los componentes y la mano de obra, con recogida gratuita en domicilio si algo falla en el primer año.",
+          "1 año de garantía en el ensamblado: si algo falla por el montaje, lo resolvemos sin coste. Los componentes, además, mantienen la garantía oficial de cada fabricante, y nosotros gestionamos el trámite contigo.",
       },
       {
         question: "¿Podéis mejorar mi PC actual?",
@@ -47,16 +42,6 @@ export const faqGroups: FaqEntry[] = [
   {
     category: "Personalización",
     items: [
-      {
-        question: "¿Podéis hacer un custom loop?",
-        answer:
-          "Es una de nuestras especialidades: loops a medida con bloques para CPU y GPU, tanques, tubos rígidos o flexibles y refrigerante estético. Diseñamos el recorrido, montamos y dejamos el circuito purgado y sin burbujas.",
-      },
-      {
-        question: "¿Ofrecéis modding estético?",
-        answer:
-          "Sí. Pintura personalizada, grabados láser, IPS screens internas, iluminación RGB síncrona y distribución de cableado a medida. Cuéntanos tu idea y la hacemos real.",
-      },
       {
         question: "¿Podéis preinstalar juegos y software?",
         answer:
@@ -70,17 +55,12 @@ export const faqGroups: FaqEntry[] = [
       {
         question: "¿Qué soporte hay después de la compra?",
         answer:
-          "Soporte técnico ilimitado y gratuito de por vida en configuración, optimización y resolución de dudas. Además incluimos 90 días de soporte prioritario para primeras puestas en marcha.",
+          "Soporte técnico gratuito durante el primer año: configuración, optimización y resolución de dudas. Estamos contigo mientras le sacas partido a tu equipo.",
       },
       {
         question: "¿Hacéis asistencia remota?",
         answer:
-          "Sí, mediante película segura podemos conectarnos a tu equipo para configurar BIOS, ajustar perfiles de ventiladores o resolver incidencias sin que tengas que movernos nada.",
-      },
-      {
-        question: "¿Ofrecéis seguros contra sustos?",
-        answer:
-          "Todos los equipos salen con protección de voltaje incorporada (AVR) y test de picos. Además puedes contratar nuestro seguro anti-fenómenos para sobretensiones durante los primeros 24 meses.",
+          "Sí, mediante conexión remota segura podemos conectarnos a tu equipo para configurar la BIOS, ajustar perfiles de ventiladores o resolver incidencias sin que tengas que traernos nada.",
       },
     ],
   },
