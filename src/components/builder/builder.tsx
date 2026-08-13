@@ -423,25 +423,51 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
   const doneCount = ORDER.filter((k) => Boolean(sel[k])).length;
 
   const handlePick = (key: StepKey, pick: string) => {
-    const cur = chain[key] ?? [];
-    const nextChain = cur.concat(pick);
-    const nextSel = { ...sel };
-    // "Sin monitor" completa el paso en una sola elección.
-    const completes = nextChain.length === PICK_COUNT[key] || (key === "monitor" && pick === "none");
-    if (completes) {
-      (nextSel as unknown as Record<string, string>)[key] = pick;
-    }
-    if (key === "cpu") {
-      const cpu = partById(pick);
-      const mbId = nextSel.motherboard;
-      const mb = mbId ? partById(mbId) : undefined;
-      if (cpu && mb && cpu.socket !== mb.socket) {
-        delete (nextSel as unknown as Record<string, string>).motherboard;
-        setChain((prev) => ({ ...prev, motherboard: [] }));
+    const max = PICK_COUNT[key];
+    let cur = chain[key] ?? [];
+    // Elegir un monitor tras "Sin monitor" reinicia la cadena del paso.
+    if (key === "monitor" && pick !== "none" && cur[0] === "none") cur = [];
+    // Si el paso ya estaba completo, la nueva elección SUSTITUYE a la
+    // anterior: nunca se acumulan dos componentes en la misma categoría.
+    const nextChain = (cur.length >= max ? cur.slice(0, max - 1) : cur).concat(pick);
+    const completes = nextChain.length === max || (key === "monitor" && pick === "none");
+    const nextSel = { ...sel } as Record<string, string>;
+    if (completes) nextSel[key] = pick;
+
+    // Cascada: la pieza recién elegida manda; se descartan las selecciones
+    // de otras categorías que hayan quedado incompatibles.
+    const cleared: StepKey[] = [];
+    const drop = (k: StepKey) => {
+      if (nextSel[k]) {
+        delete nextSel[k];
+        cleared.push(k);
       }
+    };
+    const cpu = partById(nextSel.cpu);
+    const mb = partById(nextSel.motherboard);
+    const ram = partById(nextSel.ram);
+    const gpu = partById(nextSel.gpu);
+    const cooling = partById(nextSel.cooling);
+    const box = partById(nextSel.case);
+    if (cpu && mb && cpu.socket !== mb.socket) drop(key === "motherboard" ? "cpu" : "motherboard");
+    if (mb?.ramMaxMhz && ram?.speedMhz && ram.speedMhz > mb.ramMaxMhz) drop(key === "ram" ? "motherboard" : "ram");
+    if (gpu?.lengthMm && box?.maxGpuLength && gpu.lengthMm > box.maxGpuLength) drop(key === "case" ? "gpu" : "case");
+    if (mb?.form && box?.formSupport && !box.formSupport.includes(mb.form)) drop(key === "case" ? "motherboard" : "case");
+    if (
+      cooling &&
+      box &&
+      ((cooling.radiatorSupport && box.radiatorMax && cooling.radiatorSupport > box.radiatorMax) ||
+        (cooling.height && box.maxCoolerHeight && cooling.height > box.maxCoolerHeight))
+    ) {
+      drop(key === "cooling" ? "case" : "cooling");
     }
-    setSel(nextSel);
-    setChain((prev) => ({ ...prev, [key]: nextChain }));
+
+    setSel(nextSel as BuildSelection);
+    setChain((prev) => {
+      const next = { ...prev, [key]: nextChain };
+      for (const k of cleared) next[k] = [];
+      return next;
+    });
     const idx = ORDER.indexOf(key);
     if (completes && idx < ORDER.length - 1) {
       setActive(ORDER[idx + 1]);
