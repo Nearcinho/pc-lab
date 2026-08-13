@@ -17,9 +17,9 @@ export interface BlogPost {
 export const blogPosts: BlogPost[] = [
   {
     slug: "cuanta-ram-necesitas-2026",
-    title: "¿Cuánta RAM necesito en 2026? Guía definitiva",
+    title: "¿Cuánta RAM necesitas en 2026? Guía definitiva",
     excerpt:
-      "16, 32 o 64 GB: te explicamos cuánta memoria DDR5 merece la pena para gaming, streaming, video y programación en la nueva generación.",
+      "16, 32 o 64 GB: cuánta memoria DDR5 merece la pena para gaming, streaming, edición y programación, y por qué la latencia importa tanto como los MHz.",
     category: "Guías",
     date: "2026-05-18",
     readTime: "7 min",
@@ -29,25 +29,32 @@ export const blogPosts: BlogPost[] = [
     tags: ["RAM", "DDR5", "Guía"],
     content: [
       {
-        heading: "La regla del 1% low que casi nadie mira",
+        heading: "La capacidad: el punto dulce ha subido",
         text:
-          "La mayoría compara solo la media de FPS, pero el rendimiento real de un PC se mide en el 1% low: esa caída que notas en los momentos más intensos de la partida. La RAM tiene un papel clave en su estabilidad, sobre todo si el perfil EXPO deja de aplicarse.",
+          "Durante años 16 GB fueron la recomendación estándar para jugar. En 2026 siguen siendo el mínimo razonable, pero los títulos más exigentes, combinados con Discord, navegador y apps en segundo plano, ya los ponen contra las cuerdas. Los 32 GB se han convertido en el punto dulce: margen de sobra para jugar, emitir y trabajar sin pensar en qué tienes abierto.",
+        list: [
+          "16 GB: gaming casual y ofimática",
+          "32 GB: gaming exigente, streaming y trabajo diario",
+          "64 GB o más: render, edición 4K/8K, IA local y virtualización",
+        ],
       },
       {
-        text: "16 GB siguen siendo el mínimo saludable para jugar en 2026, pero empieza a quedarse corto en los títulos más exigentes y con apps de fondo abiertas. 32 GB es el punto dulce: juega con Discord, navegador y OBS grabando sin pestañear.",
-        list: ["16 GB: gaming casual y ofimática", "32 GB: gaming serio, streaming y trabajo", "64 GB: render 4K/8K, IA y multitarea extrema"],
+        heading: "El 1% low: el dato que casi nadie mira",
+        text:
+          "La media de FPS solo cuenta la mitad de la historia. La fluidez real se mide en el 1% low: esos tirones puntuales en los momentos más cargados de la partida. La RAM influye directamente en su estabilidad, y por eso conviene activar siempre el perfil EXPO (AMD) o XMP (Intel) en la BIOS: sin él, el kit funciona a velocidades de fábrica muy por debajo de lo que pagaste.",
       },
       {
-        heading: "Latencia > frecuencia",
-        text: "Un kit de 6000 MHz CL30 suele rendir más que uno de 6400 CL36 en AMD. Mira la latencia efectiva (CL÷frecuencia) antes de fijarte solo en los MHz nominales.",
+        heading: "Latencia frente a frecuencia",
+        text:
+          "Un kit de 6000 MT/s CL30 suele rendir igual o mejor que uno de 6400 MT/s CL36, porque lo que manda es la latencia real en nanosegundos: se calcula dividiendo el CL entre la velocidad y multiplicando por 2000. Así, 6000 CL30 equivale a 10 ns. En plataformas AM5, además, los 6000 MT/s son el punto óptimo reconocido por los análisis técnicos: más velocidad obliga a desincronizar el controlador de memoria y puede restar rendimiento.",
       },
     ],
   },
   {
     slug: "mejor-procesador-2026",
-    title: "Los mejores procesadores de 2026 para cada presupuesto",
+    title: "Los mejores procesadores de 2026 para cada tipo de usuario",
     excerpt:
-      "Del Ryzen 5 al 9800X3D del mercado: comparativa real de CPUs para gaming, esports, render e IA.",
+      "Del Ryzen 5 al 9800X3D: qué CPU elegir para gaming, esports, render o IA, según cómo uses el equipo de verdad.",
     category: "Comparativas",
     date: "2026-06-02",
     readTime: "9 min",
@@ -57,24 +64,27 @@ export const blogPosts: BlogPost[] = [
     tags: ["CPU", "AMD", "Intel", "Comparativa"],
     content: [
       {
-        heading: "Gaming puro: los X3D dominan",
-        text: "Si solo te importa jugar, la serie de procesadores con caché 3D de AMD sigue siendo la reina. El salto de 1% low frente a opciones sin la caché extra es enorme en títulos como CS 2 o Warzone.",
+        heading: "Gaming puro: los X3D marcan la diferencia",
+        text:
+          "Los procesadores AMD con caché 3D V-Cache dominan los rankings independientes de rendimiento en juegos, como la jerarquía de CPUs de Tom's Hardware medida con una RTX 5090. La ventaja no está solo en la media de FPS, sino en la estabilidad: el 1% low mejora de forma notable en títulos sensibles a la CPU como Counter-Strike 2 o los mundos abiertos cargados de física.",
       },
       {
-        heading: "Mixto: esto vale tu dinero",
-        text: "Si juegas pero también editas, renderas o compilas, un Ryzen 7 o Intel i7 clásico es el equilibrio perfecto. Los núcleos de rendimiento y eficiencia de Intel se lucen en multitarea; los X3D de AMD son imbatibles en juegos.",
+        heading: "Uso mixto: el equilibrio manda",
+        text:
+          "Si juegas pero también editas vídeo, renderizas o compilas, un Ryzen 7 o un Core i7/Ultra 7 es el punto de equilibrio: muchos núcleos para trabajar y rendimiento sobrado en juegos. En multitarea pesada brillan los recuentos altos de núcleos; en juegos puros, la caché 3D de AMD. Saber qué harás el 80 % del tiempo es la pregunta que decide la compra.",
       },
       {
-        heading: "¿Cuántos núcleos necesito?",
-        text: "6 son el mínimo para juego+stream, 8 el estándar cómodo y 12-16 para trabajar con blender, code o IA local, donde la escalado de rendimiento es lineal.",
+        heading: "¿Cuántos núcleos necesitas?",
+        text:
+          "Para jugar y emitir a la vez, 6-8 núcleos modernos van sobrados. Para render, código o IA local, el rendimiento escala casi de forma lineal con los núcleos: ahí los 12-16 núcleos de un Ryzen 9 o un Core i9/Ultra 9 se justifican solos. Más núcleos de los que tu software usa no aportan nada; menos, se notan cada día.",
       },
     ],
   },
   {
     slug: "que-es-un-custom-loop",
-    title: "Custom loop: vale la pena en 2026",
+    title: "Custom loop: ¿merece la pena en 2026?",
     excerpt:
-      "Rendimiento, estética y riesgo: analizamos si la refrigeración líquida a medida merece la pena frente a un AIO de calidad.",
+      "Temperaturas, ruido, estética y mantenimiento: qué aporta de verdad una refrigeración líquida a medida frente a un buen AIO.",
     category: "Guías",
     date: "2026-04-20",
     readTime: "8 min",
@@ -84,23 +94,27 @@ export const blogPosts: BlogPost[] = [
     tags: ["Custom Loop", "Refrigeración"],
     content: [
       {
-        heading: "Temperaturas de otro mundo",
-        text: "Un loop a medida puede dejar a tu GPU y CPU hasta 15 grados por debajo de un AIO de gama alta bajo carga sostenida. Es la vía más efectiva para un overclocko agresivo y para silencio absoluto.",
+        heading: "Qué ganas de verdad",
+        text:
+          "Un loop a medida refrigera CPU y GPU con un circuito único y radiadores generosos. Frente a un AIO de calidad, la mejora típica es de varios grados bajo carga sostenida y, sobre todo, mucho menos ruido: los ventiladores pueden girar más despacio al haber más superficie de disipación. El mayor salto se nota en la GPU, que en la mayoría de equipos es quien más calor genera.",
       },
       {
-        heading: "¿Y el riesgo?",
-        text: "Hoy los componentes son a prueba de fugas si el montaje se hace bien: tubos insertados a fondo, tapones correctos y prueba de fugas con aire. Un profesional reduce ese riesgo a casi cero y te da un mantenimiento sencillo (cambio de refrigerante cada 12-18 meses).",
+        heading: "Lo que nadie te cuenta",
+        text:
+          "Un custom loop no es «montar y olvidar»: exige mantenimiento (cambio de líquido cada 12-18 meses) y un montaje impecable. Hecho por profesionales, con tubo bien insertado y prueba de fugas previa, el riesgo es mínimo; hecho a las carreras, es la pieza más delicada del equipo. No compra FPS por sí solo: compra temperaturas, silencio y margen para overclock.",
       },
       {
-        text: "En PC LAB montamos loops a medida desde 899 € con test de 24 h y garantía. No es para todos, pero si quieres la máxima expresión de rendimiento y estética, es la única opción.",
+        heading: "¿Para quién es?",
+        text:
+          "Para quien busca el silencio absoluto, una estética única o exprimir un equipo de gama muy alta. Para el resto, un AIO de 240-360 mm o un buen disipador de aire ofrecen el 90 % del resultado con una fracción del esfuerzo. En PC LAB montamos ambos: te diremos con honestidad cuál encaja en tu caso.",
       },
     ],
   },
   {
     slug: "pc-streaming-2026",
-    title: "¿Necesito un PC especial para hacer streaming?",
+    title: "¿Necesitas un PC especial para hacer streaming?",
     excerpt:
-      "Combo de CPU + GPU + NVENC explicado para que emitas a 4K60 sin perder FPS, y qué configuraciones recomendamos.",
+      "Cómo emitir a 1080p60 o 4K60 sin apenas perder FPS: el papel real de NVENC, la CPU y la RAM en un equipo para crear contenido.",
     category: "Gaming",
     date: "2026-03-10",
     readTime: "6 min",
@@ -110,20 +124,27 @@ export const blogPosts: BlogPost[] = [
     tags: ["Streaming", "Gaming", "NVENC"],
     content: [
       {
-        heading: "La regla de oro del streaming",
-        text: "El trabajo que hoy no roba FPS a tu juego: la codificación con el codificador NVENC de NVIDIA dedicado en la GPU. Verás que el impacto en la tasa de fotogramas es mínimo incluso a 4K60.",
+        heading: "La regla de oro: el encoder dedicado",
+        text:
+          "Emitir ya no cuesta FPS como antes. Las GPU NVIDIA actuales (RTX 40 y 50) integran NVENC, un chip dedicado a codificar vídeo que trabaja al margen del juego: el impacto en la tasa de fotogramas es mínimo incluso emitiendo a 4K60. Desde la generación RTX 40, además, NVENC soporta AV1, que da más calidad con menos bitrate en plataformas compatibles. AMD e Intel tienen alternativas equivalentes (AMF y Quick Sync), aunque NVENC sigue siendo la referencia en OBS.",
       },
       {
-        heading: "Combo CPU + GPU + RAM",
-        text: "Un streamer de hoy juega y codifica a la vez. Aun con NVENC, es el CPU el que sostiene la escena del juego más exigente, y con 8 núcleos irás sobrado. 32 GB de RAM son el estándar sensato: OBS, el juego y las fuentes se llevan bien con memoria de sobra.",
+        heading: "La CPU sigue mandando",
+        text:
+          "Aunque el encoder viva en la GPU, es la CPU la que sostiene la escena: el juego, OBS, las fuentes del navegador y las alertas. Para jugar y emitir a la vez, 8 núcleos modernos son el estándar cómodo; con 6 se puede, pero irás más justo en los títulos más exigentes.",
+      },
+      {
+        heading: "RAM y pequeños detalles",
+        text:
+          "32 GB de RAM son el estándar sensato para crear contenido: juego, OBS y fuentes abiertas conviven sin despeinarse. Y no descuides lo aburrido: una buena conexión por cable y una escena de OBS bien configurada mejoran tu directo más que cualquier componente extra.",
       },
     ],
   },
   {
     slug: "workstation-vs-gaming-pc",
-    title: "Workstation vs gaming: cuál compra de verdad",
+    title: "Workstation vs PC de gaming: qué comprar de verdad",
     excerpt:
-      "¿Te compras una máquina de juego para renderizar? Te contamos las diferencias reales y qué especificaciones mandan en cada escenario.",
+      "¿Sirve un PC de gaming para renderizar? Diferencias reales entre tarjetas de consumo y profesionales, y qué specs mandan en cada caso.",
     category: "Guías",
     date: "2026-02-12",
     readTime: "9 min",
@@ -133,20 +154,27 @@ export const blogPosts: BlogPost[] = [
     tags: ["Workstation", "Comparativa"],
     content: [
       {
-        heading: "El mito de la tarjeta de trabajo",
-        text: "Las RTX de gaming y las llamadas tarjetas pro rinden parecido en la mayoría del software 3D (Blender, C4D, Redshift). Las tarjetas ISV aportan extras de negocio y certificaciones, pero para el 90% de los usuarios la diferencia es mínima. Lo que sí cambia es la VRAM y la estabilidad de los drivers para aplicaciones profesionales.",
+        heading: "El mito de la tarjeta «profesional»",
+        text:
+          "En la mayoría del software 3D y de edición (Blender, DaVinci Resolve, motores de render por GPU), una GeForce RTX de consumo rinde a la par que una tarjeta profesional de precio muy superior. Las gamas profesionales aportan certificaciones ISV, drivers validados para software crítico y opciones con más VRAM o ECC: tienen sentido en entornos empresariales, pero para la mayoría de creadores la diferencia práctica es mínima.",
       },
       {
-        heading: "Lo importante: VRAM y memoria",
-        text: "Para render y edición, la VRAM de la GPU es la reina: 16 GB cubren la mayoría de proyectos; 24 GB para escenas épicas. La RAM tampoco se queda atrás: las piezas de juego y las comprobaciones vuelan con 64 GB.",
+        heading: "Lo que sí manda: VRAM y RAM",
+        text:
+          "En render y edición, la VRAM es la primera frontera: si la escena no cabe en la memoria de la GPU, el rendimiento se desploma. 16 GB cubren la mayoría de proyectos; las escenas muy pesadas y la IA local agradecen 24 GB. En RAM, 64 GB son el punto cómodo para proyectos serios de vídeo, 3D o datos.",
+      },
+      {
+        heading: "Entonces, ¿qué compro?",
+        text:
+          "Si tu trabajo es diseño, vídeo, 3D o desarrollo, un buen PC de gaming bien configurado es casi siempre la respuesta correcta: misma potencia, mejor relación prestaciones/inversión. Solo cuando tu empresa exige certificación oficial del software o memoria ECC tiene sentido dar el salto a una workstation certificada.",
       },
     ],
   },
   {
     slug: "envio-pc-gaming-espana",
-    title: "Cómo se envía un PC sin romperlo",
+    title: "Cómo enviamos un PC para que llegue perfecto",
     excerpt:
-      "¿Es seguro enviar un ordenador por transporte? En PC LAB te contamos la caja, los seguros y el embalaje antiestático detrás de cada envío.",
+      "Espuma interior, protección de la GPU, doble caja y seguro: así preparamos cada equipo antes de ponerlo en la carretera.",
     category: "Servicio",
     date: "2026-02-01",
     readTime: "4 min",
@@ -156,12 +184,19 @@ export const blogPosts: BlogPost[] = [
     tags: ["Envíos", "Servicio"],
     content: [
       {
-        heading: "Embalaje profesional, no pegote",
-        text: "El interior se fija con espuma premium dentro de la caja, se insertan protectores para GPU y torres, y la torre viaja en un esqueleto de poliuretano que absorbe golpes. Todo con etiquetado «frágil» y transporte asegurado hasta 5.000 €.",
+        heading: "Embalaje profesional, nada de «pegotes»",
+        text:
+          "Un PC montado es un objeto delicado: la gráfica y el disipador pesan y van sujetos a la placa solo por sus anclajes. Por eso rellenamos el interior con espuma de expansión que inmoviliza cada componente, protegemos la GPU y la refrigeración, y la torre viaja en doble caja con material absorbente de impactos, etiquetada como frágil.",
       },
       {
-        heading: "Seguros y seguimiento",
-        text: "Ofrecemos seguro de retorno sin complejos. Si el PC llegara dañado (muy raro), recoges, enviamos otro y te regeneran. El packaging es reutilizable y certificado ISTA 3A para transporte.",
+        heading: "Seguro y seguimiento",
+        text:
+          "Cada envío va asegurado por el valor completo del equipo y con seguimiento en tiempo real. Si algo llegara dañado —es muy raro—, lo recogemos, lo reparamos o reponemos, y tú no pones un euro ni un gesto de más. El embalaje, además, es reutilizable: guárdalo por si algún día tienes que mover el equipo.",
+      },
+      {
+        heading: "Al recibirlo",
+        text:
+          "Retira la espuma interior antes de encenderlo (te lo recordamos con una guía en la caja), conecta el monitor a la tarjeta gráfica —no a la placa base— y listo: el equipo llega probado tras un test de estrés completo en nuestro laboratorio.",
       },
     ],
   },
