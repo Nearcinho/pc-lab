@@ -54,23 +54,38 @@ export const GPU_REL: Record<string, number> = {
 export const CPU_GAMING_INDEX: Record<string, number> = {
   "cpu-r7-9800x3d": 100, // TH 97.0% (base 9850X3D) → referencia
   "cpu-r9-9950x3d": 98.7, // TH 95.7%
+  "cpu-r9-9900x3d": 89.6, // TH 86.9%
   "cpu-r7-7800x3d": 88.2, // TH 85.6%
   "cpu-r9-7950x3d": 86.5, // TH 83.9%
   "cpu-i9-14900k": 80.6, // TH 78.2%
+  "cpu-i9-14900kf": 80.6, // TH 78.2% (testado como 14900K, mismo silicio)
+  "cpu-r9-7900x3d": 79.5, // TH 77.1%
   "cpu-r9-9950x": 79.3, // TH 76.9%
+  "cpu-i9-13900k": 79.2, // TH 76.8%
   "cpu-i7-14700k": 78.8, // TH 76.4%
+  "cpu-i7-14700kf": 78.8, // TH 76.4% (testado como 14700K, mismo silicio)
+  "cpu-i7-13700k": 78.1, // TH 75.8%
   "cpu-r9-9900x": 76.2, // TH 73.9%
+  "cpu-i5-14600kf": 75.1, // TH 72.8% (testado como 14600K, mismo silicio)
   "cpu-i5-14600k": 75.0, // TH 72.8%
   "cpu-r5-9600x": 74.8, // TH 72.6%
   "cpu-i9-285k": 74.0, // TH 71.8%
   "cpu-r7-9700x": 73.6, // ComputerBase CPU-Rangliste (720p, RTX 5090): 134 vs 182 FPS del 9800X3D — https://www.computerbase.de/thema/cpu/rangliste/
+  "cpu-r9-7950x": 73.2, // TH 71.0%
   "cpu-i5-13600k": 73.1, // TH 70.9%
   "cpu-r7-7700x": 72.8, // TH 70.6%
   "cpu-i7-265k": 72.5, // TH 70.3%
   "cpu-r5-7600": 70, // estimado: ~3% bajo el 7700X (mismo chiplet, -200 MHz) según datos TH
   "cpu-r5-7600x": 69.4, // TH 67.3%
   "cpu-i5-245k": 69.2, // TH 67.1%
+  "cpu-i5-225f": 68.9, // CB test 05/2025, RTX 5090
+  "cpu-r5-7500f": 68.1, // CB test 05/2025, RTX 5090
+  "cpu-i7-12700k": 67.8, // TH 65.8%
+  "cpu-i5-225": 64.4, // TH 62.5%
+  "cpu-i5-12600k": 62.7, // TH 60.8%
+  "cpu-r5-8400f": 60.8, // CB test 05/2025, RTX 5090
   "cpu-i5-14400": 59.8, // TH 58.0%
+  "cpu-i3-12100f": 50.5, // CB test 05/2025, RTX 5090
 };
 
 export type GameKey = "cyberpunk" | "cs2" | "fortnite" | "aaa-avg";
@@ -144,7 +159,9 @@ function interpolateGpuFps(table: Record<string, number>, gpuId: string): number
     const lo = points[i];
     const hi = points[i + 1];
     if (rel >= lo.rel && rel <= hi.rel) {
-      const t = (rel - lo.rel) / (hi.rel - lo.rel);
+      // Dos GPUs medidas pueden compartir el mismo índice rel (p.ej. RTX 4060 y
+      // RX 7600 XT, ambas = 32): se promedian para evitar división por cero.
+      const t = hi.rel === lo.rel ? 0.5 : (rel - lo.rel) / (hi.rel - lo.rel);
       return lo.fps + t * (hi.fps - lo.fps);
     }
   }
@@ -180,6 +197,7 @@ export const BENCHMARK_SOURCES = [
   { label: "Tom's Hardware — GPU Benchmarks Hierarchy (FPS por juego)", url: "https://www.tomshardware.com/reviews/gpu-hierarchy,4388.html" },
   { label: "Tom's Hardware — CPU Hierarchy (índice gaming CPU)", url: "https://www.tomshardware.com/reviews/cpu-hierarchy,4312.html" },
   { label: "ComputerBase — CPU-Rangliste (Ryzen 7 9700X)", url: "https://www.computerbase.de/thema/cpu/rangliste/" },
+  { label: "ComputerBase — Test CPUs 50–200 € (05/2025, RTX 5090)", url: "https://www.computerbase.de/artikel/prozessoren/cpu-test-amd-intel-50-200-euro.92391/seite-2" },
 ];
 
 export const BENCHMARK_DATA_DATE = "agosto 2026";
