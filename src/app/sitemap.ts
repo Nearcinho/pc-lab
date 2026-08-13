@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     "", "/configurador", "/calculadora-rendimiento",
     "/nosotros", "/servicios", "/blog", "/faq", "/contacto",
-    "/garantia", "/terminos", "/privacidad", "/cookies",
+    "/garantia", "/terminos", "/privacidad",
   ].map((p) => ({
     url: `${siteConfig.domain}${p}`,
     lastModified: now,
