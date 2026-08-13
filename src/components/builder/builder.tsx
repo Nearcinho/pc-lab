@@ -35,7 +35,7 @@ interface StepMeta {
 
 const STEPS: StepMeta[] = [
   { key: "cpu", label: "Procesador", short: "CPU", desc: "Elige la plataforma y el modelo según tu presupuesto y uso.", stages: ["Marca", "Familia", "Modelo"], icon: Cpu },
-  { key: "motherboard", label: "Placa base", short: "Placa", desc: "Solo mostramos placas compatibles con el socket de tu procesador.", stages: ["Socket", "Chipset", "Modelo"], icon: CircuitBoard },
+  { key: "motherboard", label: "Placa base", short: "Placa", desc: "Solo mostramos chipsets compatibles con el socket de tu procesador.", stages: ["Socket", "Chipset", "Variante"], icon: CircuitBoard },
   { key: "gpu", label: "Gráfica", short: "GPU", desc: "La pieza que más pesa en juegos, render e IA.", stages: ["Marca", "Familia", "Modelo"], icon: Gauge },
   { key: "ram", label: "Memoria RAM", short: "RAM", desc: "Capacidad y frecuencia adaptada a tu placa base.", stages: ["Capacidad", "Frecuencia"], icon: MemoryStick },
   { key: "storage", label: "Almacenamiento", short: "SSD", desc: "Tu biblioteca de juegos y proyectos, a toda velocidad.", stages: ["Capacidad", "Generación"], icon: HardDrive },
