@@ -61,7 +61,7 @@ export function computeBuild(sel: BuildSelection): BuildComputation {
   const issues: BuildIssue[] = [];
   const missing: Category[] = [];
 
-  const required: Category[] = ["cpu", "gpu", "ram", "storage", "cooling", "psu", "case", "os"];
+  const required: Category[] = ["cpu", "motherboard", "gpu", "ram", "storage", "cooling", "psu", "case", "os"];
   for (const key of required) {
     const id = sel[key as keyof BuildSelection];
     if (!id) {
