@@ -15,7 +15,6 @@ import {
 import { computeBuild, BuildSelection, BuildIssue } from "@/lib/build-engine";
 import type { Resolution } from "@/lib/benchmarks";
 import { FpsPanel } from "@/components/builder/fps-panel";
-import { BuildRender } from "@/components/builder/build-render";
 import { partImage } from "@/lib/part-images";
 import { cn, formatNumber } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -935,22 +934,6 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
             ))}
           </ul>
         </div>
-      )}
-
-      {calc.complete && (
-        <motion.section
-          initial={reduced ? false : { opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-14 rounded-3xl border border-border bg-surface/50 p-6 backdrop-blur"
-        >
-          <h3 className="font-display text-xl font-semibold">Tu PC, montado</h3>
-          <p className="mt-1 max-w-2xl text-sm text-muted">
-            Visualización orientativa generada a partir de tu configuración.
-          </p>
-          <BuildRender selection={sel} className="mt-5 h-auto w-full rounded-2xl border border-border" />
-        </motion.section>
       )}
 
       <PerformancePanel ref={perfRef} calc={calc} monitorRes={monitorRes} />
