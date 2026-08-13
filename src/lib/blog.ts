@@ -140,36 +140,6 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
-  {
-    slug: "envio-pc-gaming-espana",
-    title: "Cómo enviamos un PC para que llegue perfecto",
-    excerpt:
-      "Espuma interior, protección de la GPU, doble caja y seguro: así preparamos cada equipo antes de ponerlo en la carretera.",
-    category: "Servicio",
-    date: "2026-02-01",
-    readTime: "4 min",
-    author: "PC LAB",
-    cover: asset("/blog/ship.svg"),
-    gradient: "from-emerald-500/20 to-teal-600/20",
-    tags: ["Envíos", "Servicio"],
-    content: [
-      {
-        heading: "Embalaje profesional, nada de «pegotes»",
-        text:
-          "Un PC montado es un objeto delicado: la gráfica y el disipador pesan y van sujetos a la placa solo por sus anclajes. Por eso rellenamos el interior con espuma de expansión que inmoviliza cada componente, protegemos la GPU y la refrigeración, y la torre viaja en doble caja con material absorbente de impactos, etiquetada como frágil.",
-      },
-      {
-        heading: "Seguro y seguimiento",
-        text:
-          "Cada envío va asegurado por el valor completo del equipo y con seguimiento en tiempo real. Si algo llegara dañado —es muy raro—, lo recogemos, lo reparamos o reponemos, y tú no pones un euro ni un gesto de más. El embalaje, además, es reutilizable: guárdalo por si algún día tienes que mover el equipo.",
-      },
-      {
-        heading: "Al recibirlo",
-        text:
-          "Retira la espuma interior antes de encenderlo (te lo recordamos con una guía en la caja), conecta el monitor a la tarjeta gráfica —no a la placa base— y listo: el equipo llega probado tras un test de estrés completo en nuestro laboratorio.",
-      },
-    ],
-  },
 ];
 
 export function getPost(slug: string) {
