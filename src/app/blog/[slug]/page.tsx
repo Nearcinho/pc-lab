@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ChevronLeft, CalendarDays, Clock, Tags } from "lucide-react";
 import { blogPosts, getPost } from "@/lib/blog";
@@ -83,7 +84,14 @@ export default async function BlogPostPage({ params }: Props) {
 
         <Reveal delay={0.1} className="mt-10">
           <div className="overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-brand/20 to-brand-2/20 p-2">
-            <div className="aspect-[2/1] rounded-xl" />
+            <Image
+              src={post.cover}
+              alt={post.title}
+              width={1408}
+              height={768}
+              className="aspect-[2/1] w-full rounded-xl object-cover"
+              priority
+            />
           </div>
         </Reveal>
 
