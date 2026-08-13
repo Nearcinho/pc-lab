@@ -20,16 +20,23 @@ export const RESOLUTIONS: { key: Resolution; label: string }[] = [
 export const GPU_REL: Record<string, number> = {
   "gpu-rtx4060": 32, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4060.c4107
   "gpu-rx7600xt": 32, // https://www.techpowerup.com/gpu-specs/radeon-rx-7600-xt.c4190
+  "gpu-arc-b580": 32, // https://www.techpowerup.com/gpu-specs/arc-b580.c4244
   "gpu-rtx5060": 39, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5060.c4219
-  "gpu-rx9060xt": 44, // https://www.techpowerup.com/gpu-specs/radeon-rx-9060-xt-16-gb.c4293
+  "gpu-rtx4060ti": 40, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4060-ti-16-gb.c4155
+  "gpu-rx9060xt": 43, // 16 GB — https://www.techpowerup.com/gpu-specs/radeon-rx-9060-xt-16-gb.c4293
+  "gpu-rx7700xt": 45, // https://www.techpowerup.com/gpu-specs/radeon-rx-7700-xt.c3911
   "gpu-rtx5060ti": 46, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5060-ti-16-gb.c4292
   "gpu-rx7800xt": 51, // https://www.techpowerup.com/gpu-specs/radeon-rx-7800-xt.c3839
   "gpu-rtx4070": 53, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070.c3924
   "gpu-rtx4070super": 55, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070-super.c4186
   "gpu-rtx5070": 58, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5070.c4218
+  "gpu-rtx4070ti": 59, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070-ti.c3950
+  "gpu-rx9070": 64, // https://www.techpowerup.com/gpu-specs/radeon-rx-9070.c4250
   "gpu-rtx4070ti-super": 65, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070-ti-super.c4187
+  "gpu-rx7900xt": 66, // https://www.techpowerup.com/gpu-specs/radeon-rx-7900-xt.c3912
   "gpu-rx9070xt": 72, // https://www.techpowerup.com/gpu-specs/radeon-rx-9070-xt.c4229
   "gpu-rtx5070ti": 75, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5070-ti.c4243
+  "gpu-rtx4080": 76, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4080.c3888
   "gpu-rx7900xtx": 76, // https://www.techpowerup.com/gpu-specs/radeon-rx-7900-xtx.c3941
   "gpu-rtx4080super": 77, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4080-super.c4182
   "gpu-rtx5080": 86, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5080.c4217
@@ -46,16 +53,24 @@ export const GPU_REL: Record<string, number> = {
 // ---------------------------------------------------------------------------
 export const CPU_GAMING_INDEX: Record<string, number> = {
   "cpu-r7-9800x3d": 100, // TH 97.0% (base 9850X3D) → referencia
+  "cpu-r9-9950x3d": 98.7, // TH 95.7%
   "cpu-r7-7800x3d": 88.2, // TH 85.6%
   "cpu-r9-7950x3d": 86.5, // TH 83.9%
   "cpu-i9-14900k": 80.6, // TH 78.2%
   "cpu-r9-9950x": 79.3, // TH 76.9%
   "cpu-i7-14700k": 78.8, // TH 76.4%
+  "cpu-r9-9900x": 76.2, // TH 73.9%
   "cpu-i5-14600k": 75.0, // TH 72.8%
   "cpu-r5-9600x": 74.8, // TH 72.6%
+  "cpu-i9-285k": 74.0, // TH 71.8%
   "cpu-r7-9700x": 73.6, // ComputerBase CPU-Rangliste (720p, RTX 5090): 134 vs 182 FPS del 9800X3D — https://www.computerbase.de/thema/cpu/rangliste/
+  "cpu-i5-13600k": 73.1, // TH 70.9%
   "cpu-r7-7700x": 72.8, // TH 70.6%
+  "cpu-i7-265k": 72.5, // TH 70.3%
   "cpu-r5-7600": 70, // estimado: ~3% bajo el 7700X (mismo chiplet, -200 MHz) según datos TH
+  "cpu-r5-7600x": 69.4, // TH 67.3%
+  "cpu-i5-245k": 69.2, // TH 67.1%
+  "cpu-i5-14400": 59.8, // TH 58.0%
 };
 
 export type GameKey = "cyberpunk" | "cs2" | "fortnite" | "aaa-avg";
