@@ -1,11 +1,10 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Cpu, CircuitBoard, Gauge, MemoryStick, HardDrive, Wind, PlugZap, Box, Disc,
-  Headphones, Sparkles, Check, AlertTriangle, Info, Rocket, ChevronRight, RotateCcw, Monitor,
+  Headphones, Sparkles, Check, AlertTriangle, Info, Rocket, ChevronRight, RotateCcw, Monitor, ArrowLeft,
 } from "lucide-react";
 import {
   categories, Category, Part, partById,
@@ -15,7 +14,6 @@ import {
 import { computeBuild, BuildSelection, BuildIssue } from "@/lib/build-engine";
 import type { Resolution } from "@/lib/benchmarks";
 import { FpsPanel } from "@/components/builder/fps-panel";
-import { partImage } from "@/lib/part-images";
 import { cn, formatNumber } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -498,6 +496,18 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
     setActive("cpu");
   };
 
+  // Volver atrás: primero retrocede una etapa dentro del paso actual;
+  // si no hay etapas, salta al paso anterior.
+  const goBack = () => {
+    const c = chain[active] ?? [];
+    if (c.length > 0) {
+      jump(active, c.length - 1);
+      return;
+    }
+    const idx = ORDER.indexOf(active);
+    if (idx > 0) setActive(ORDER[idx - 1]);
+  };
+
   const toggleAddon = (slot: "peripheral" | "extra", id: string) =>
     setSel((prev) => {
       if (prev[slot] === id) {
@@ -513,6 +523,7 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
   const view = stepView(active, cur, sel);
   const stageName = meta.stages[Math.min(cur.length, meta.stages.length - 1)];
   const stepIndex = ORDER.indexOf(active);
+  const canGoBack = cur.length > 0 || stepIndex > 0;
   const isDone = Boolean(sel[active]);
   const psuRecommendedId =
     active === "psu" && view.parts && view.parts.length > 0
@@ -583,6 +594,14 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
               </Button>
             )}
           </div>
+
+          {canGoBack && (
+            <div className="mb-3">
+              <Button variant="ghost" size="sm" onClick={goBack} className="-ml-2">
+                <ArrowLeft className="size-3.5" aria-hidden /> Atrás
+              </Button>
+            </div>
+          )}
 
           {cur.length > 0 && (
             <nav aria-label={`Selección de ${meta.label}`} className="mb-4 flex flex-wrap items-center gap-1.5 text-xs">
@@ -857,15 +876,6 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
                   <div key={c} className="flex items-center justify-between gap-2">
                     <dt className="text-muted">{categories[c as Category].label}</dt>
                     <dd className="flex min-w-0 items-center justify-end gap-2 text-right font-medium">
-                      {part && (
-                        <Image
-                          src={partImage(part)}
-                          alt=""
-                          width={40}
-                          height={40}
-                          className="size-10 shrink-0 rounded-lg border border-border bg-surface-2/60 object-cover"
-                        />
-                      )}
                       <span className="truncate">{label}</span>
                     </dd>
                   </div>
