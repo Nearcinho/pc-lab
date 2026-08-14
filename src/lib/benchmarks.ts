@@ -16,32 +16,36 @@ export const RESOLUTIONS: { key: Resolution; label: string }[] = [
 // Fuente: gráfico "Relative Performance" de TechPowerUp, escala común
 // RTX 4090 = 100, extraído de https://www.techpowerup.com/gpu-specs/geforce-rtx-4090.c3889
 // (consultado 2026-08-12). Páginas individuales citadas por GPU.
+// Solo GPUs del catálogo actual (a la venta, agosto 2026): serie RTX 50,
+// RX 9000 y Arc B580. Las RTX 40 / RX 7000 están descatalogadas (EOL).
 // ---------------------------------------------------------------------------
 export const GPU_REL: Record<string, number> = {
-  "gpu-rtx4060": 32, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4060.c4107
-  "gpu-rx7600xt": 32, // https://www.techpowerup.com/gpu-specs/radeon-rx-7600-xt.c4190
   "gpu-arc-b580": 32, // https://www.techpowerup.com/gpu-specs/arc-b580.c4244
   "gpu-rtx5060": 39, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5060.c4219
-  "gpu-rtx4060ti": 40, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4060-ti-16-gb.c4155
   "gpu-rx9060xt": 43, // 16 GB — https://www.techpowerup.com/gpu-specs/radeon-rx-9060-xt-16-gb.c4293
-  "gpu-rx7700xt": 45, // https://www.techpowerup.com/gpu-specs/radeon-rx-7700-xt.c3911
   "gpu-rtx5060ti": 46, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5060-ti-16-gb.c4292
-  "gpu-rx7800xt": 51, // https://www.techpowerup.com/gpu-specs/radeon-rx-7800-xt.c3839
-  "gpu-rtx4070": 53, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070.c3924
-  "gpu-rtx4070super": 55, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070-super.c4186
   "gpu-rtx5070": 58, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5070.c4218
-  "gpu-rtx4070ti": 59, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070-ti.c3950
   "gpu-rx9070": 64, // https://www.techpowerup.com/gpu-specs/radeon-rx-9070.c4250
-  "gpu-rtx4070ti-super": 65, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4070-ti-super.c4187
-  "gpu-rx7900xt": 66, // https://www.techpowerup.com/gpu-specs/radeon-rx-7900-xt.c3912
   "gpu-rx9070xt": 72, // https://www.techpowerup.com/gpu-specs/radeon-rx-9070-xt.c4229
   "gpu-rtx5070ti": 75, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5070-ti.c4243
-  "gpu-rtx4080": 76, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4080.c3888
-  "gpu-rx7900xtx": 76, // https://www.techpowerup.com/gpu-specs/radeon-rx-7900-xtx.c3941
-  "gpu-rtx4080super": 77, // https://www.techpowerup.com/gpu-specs/geforce-rtx-4080-super.c4182
   "gpu-rtx5080": 86, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5080.c4217
-  "gpu-rtx4090": 100, // referencia https://www.techpowerup.com/gpu-specs/geforce-rtx-4090.c3889
   "gpu-rtx5090": 131, // https://www.techpowerup.com/gpu-specs/geforce-rtx-5090.c4216
+};
+
+// Índices TPU de GPUs descatalogadas que siguen apareciendo en GAME_FPS.
+// NO forman parte del catálogo: solo anclan la interpolación de los FPS
+// medidos por Tom's Hardware (sin ellos, tablas como aaa-avg — medida íntegramente
+// con GPUs RTX 40 / RX 7000 — no tendrían puntos de referencia).
+const GPU_FPS_ANCHORS: Record<string, number> = {
+  "gpu-rtx4060": 32,
+  "gpu-rx7600xt": 32,
+  "gpu-rx7800xt": 51,
+  "gpu-rtx4070": 53,
+  "gpu-rtx4070super": 55,
+  "gpu-rtx4070ti-super": 65,
+  "gpu-rx7900xtx": 76,
+  "gpu-rtx4080super": 77,
+  "gpu-rtx4090": 100, // referencia de la escala TPU
 };
 
 // ---------------------------------------------------------------------------
@@ -61,10 +65,8 @@ export const CPU_GAMING_INDEX: Record<string, number> = {
   "cpu-i9-14900kf": 80.6, // TH 78.2% (testado como 14900K, mismo silicio)
   "cpu-r9-7900x3d": 79.5, // TH 77.1%
   "cpu-r9-9950x": 79.3, // TH 76.9%
-  "cpu-i9-13900k": 79.2, // TH 76.8%
   "cpu-i7-14700k": 78.8, // TH 76.4%
   "cpu-i7-14700kf": 78.8, // TH 76.4% (testado como 14700K, mismo silicio)
-  "cpu-i7-13700k": 78.1, // TH 75.8%
   "cpu-r9-9900x": 76.2, // TH 73.9%
   "cpu-i5-14600kf": 75.1, // TH 72.8% (testado como 14600K, mismo silicio)
   "cpu-i5-14600k": 75.0, // TH 72.8%
@@ -72,7 +74,6 @@ export const CPU_GAMING_INDEX: Record<string, number> = {
   "cpu-i9-285k": 74.0, // TH 71.8%
   "cpu-r7-9700x": 73.6, // ComputerBase CPU-Rangliste (720p, RTX 5090): 134 vs 182 FPS del 9800X3D — https://www.computerbase.de/thema/cpu/rangliste/
   "cpu-r9-7950x": 73.2, // TH 71.0%
-  "cpu-i5-13600k": 73.1, // TH 70.9%
   "cpu-r7-7700x": 72.8, // TH 70.6%
   "cpu-i7-265k": 72.5, // TH 70.3%
   "cpu-r5-7600": 70, // estimado: ~3% bajo el 7700X (mismo chiplet, -200 MHz) según datos TH
@@ -80,12 +81,9 @@ export const CPU_GAMING_INDEX: Record<string, number> = {
   "cpu-i5-245k": 69.2, // TH 67.1%
   "cpu-i5-225f": 68.9, // CB test 05/2025, RTX 5090
   "cpu-r5-7500f": 68.1, // CB test 05/2025, RTX 5090
-  "cpu-i7-12700k": 67.8, // TH 65.8%
   "cpu-i5-225": 64.4, // TH 62.5%
-  "cpu-i5-12600k": 62.7, // TH 60.8%
   "cpu-r5-8400f": 60.8, // CB test 05/2025, RTX 5090
   "cpu-i5-14400": 59.8, // TH 58.0%
-  "cpu-i3-12100f": 50.5, // CB test 05/2025, RTX 5090
 };
 
 export type GameKey = "cyberpunk" | "cs2" | "fortnite" | "aaa-avg";
@@ -150,7 +148,9 @@ function interpolateGpuFps(table: Record<string, number>, gpuId: string): number
   const rel = GPU_REL[gpuId];
   if (rel == null) return null;
   const points = Object.entries(table)
-    .map(([id, fps]) => ({ rel: GPU_REL[id], fps }))
+    // Los puntos medidos pueden ser GPUs descatalogadas: su índice rel
+    // se recupera de GPU_FPS_ANCHORS para seguir anclando la interpolación.
+    .map(([id, fps]) => ({ rel: GPU_REL[id] ?? GPU_FPS_ANCHORS[id], fps }))
     .filter((p) => p.rel != null)
     .sort((a, b) => a.rel - b.rel);
   if (points.length === 0) return null;

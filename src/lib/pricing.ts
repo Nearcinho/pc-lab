@@ -25,8 +25,9 @@ export const PART_PRICES: Record<string, PriceEntry> = {
   "gpu-rtx5070": { price: 622, source: "DropReference (mejor oferta en vivo)" },
   "gpu-rtx5070ti": { price: 943, source: "DropReference (mejor oferta en vivo)", note: "Stock raro en tienda grande" },
   "gpu-rtx5080": { price: 1150, source: "PCComponentes (Palit GamingPro 1.149,90 €)" },
-  // RX 7000: stock residual
-  "gpu-rx7900xtx": { price: 929, source: "DropReference (agregador ES)", note: "Stock residual" },
+  // RX 9000 — idealo.es, mejor precio nuevo con envío, 14-08-2026
+  "gpu-rx9070": { price: 637, source: "idealo.es (Sapphire Pulse, desde 636,86 €)" },
+  "gpu-rx9070xt": { price: 720, source: "idealo.es (Sapphire Pulse, desde 719,89 €)" },
   // Placas (chipset, gama media) — idealo.es / PCComponentes
   "mb-b650m": { price: 175, source: "idealo.es (MSI B650M Gaming Plus WiFi)" },
   "mb-x670e": { price: 289, source: "PCComponentes (MSI MAG X670E Tomahawk)" },
