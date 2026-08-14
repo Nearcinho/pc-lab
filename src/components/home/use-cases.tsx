@@ -106,48 +106,45 @@ export function UseCases() {
 
         <div className="mt-10 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {useCases.map((uc, i) => (
-            <motion.article
-              key={uc.n}
-              initial={reduced ? false : { opacity: 0, y: 22 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.06 * i }}
-              className="group"
-            >
-              <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-border bg-surface sm:aspect-[4/5]">
-                <Image
-                  src={uc.image}
-                  alt={`PC diseñado para ${uc.title}`}
-                  fill
-                  sizes="(max-width: 640px) 100vw, 25vw"
-                  className="photo-grade object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/70 via-transparent to-transparent opacity-80" aria-hidden />
-                <div className="photo-tint" aria-hidden />
-                <div className="photo-grain" aria-hidden />
-                <span className="absolute left-5 top-5 font-mono text-sm font-medium tracking-[0.2em] text-white/60">
-                  {uc.n}
-                </span>
-              </div>
-              <div className="mt-6">
-                <h3 className="font-display text-xl font-medium tracking-tight">{uc.title}</h3>
-                <p className="mt-2 max-w-[24ch] text-sm leading-relaxed text-muted-2">{uc.text}</p>
-                <ul className="mt-4 space-y-1 border-t border-border/60 pt-3">
-                  {presetSpecs(uc.preset).map((spec) => (
-                    <li key={spec} className="flex items-center gap-2 text-xs text-muted">
-                      <span className="size-1 shrink-0 rounded-full bg-brand" aria-hidden />
-                      {spec}
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href={uc.href}
-                  className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors hover:text-brand-2"
-                >
-                  {uc.cta} <ArrowRight className="size-3.5" aria-hidden />
-                </Link>
-              </div>
-            </motion.article>
+            <Link key={uc.n} href={uc.href} className="group block" aria-label={`${uc.cta}: ${uc.title}`}>
+              <motion.article
+                initial={reduced ? false : { opacity: 0, y: 22 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.06 * i }}
+              >
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-border bg-surface transition-colors duration-300 group-hover:border-brand/40 sm:aspect-[4/5]">
+                  <Image
+                    src={uc.image}
+                    alt={`PC diseñado para ${uc.title}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 25vw"
+                    className="photo-grade object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-[1.04]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/70 via-transparent to-transparent opacity-80" aria-hidden />
+                  <div className="photo-tint" aria-hidden />
+                  <div className="photo-grain" aria-hidden />
+                  <span className="absolute left-5 top-5 font-mono text-sm font-medium tracking-[0.2em] text-white/60">
+                    {uc.n}
+                  </span>
+                </div>
+                <div className="mt-6">
+                  <h3 className="font-display text-xl font-medium tracking-tight">{uc.title}</h3>
+                  <p className="mt-2 max-w-[24ch] text-sm leading-relaxed text-muted-2">{uc.text}</p>
+                  <ul className="mt-4 space-y-1 border-t border-border/60 pt-3">
+                    {presetSpecs(uc.preset).map((spec) => (
+                      <li key={spec} className="flex items-center gap-2 text-xs text-muted">
+                        <span className="size-1 shrink-0 rounded-full bg-brand" aria-hidden />
+                        {spec}
+                      </li>
+                    ))}
+                  </ul>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors group-hover:text-brand-2">
+                    {uc.cta} <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                  </span>
+                </div>
+              </motion.article>
+            </Link>
           ))}
         </div>
       </div>
