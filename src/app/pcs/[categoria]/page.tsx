@@ -78,13 +78,13 @@ export default async function PrebuildCategoryPage({ params }: Props) {
                 key={b.name}
                 className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-surface/50 transition-all duration-300 hover:border-border-strong hover:shadow-glow-sm"
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-brand/15 via-surface to-brand-2/10 p-6">
+                <div className="relative aspect-[4/3] overflow-hidden bg-black">
                   <Image
                     src={b.image}
                     alt={`PC ${cat.title} ${b.name}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-contain p-8 transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                    className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
                   />
                   <Badge variant="brand" className="absolute left-4 top-4 uppercase tracking-wider">
                     {b.tierLabel}

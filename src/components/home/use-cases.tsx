@@ -120,14 +120,14 @@ export function UseCases() {
                   {prebuilds.map((b) => (
                     <div
                       key={b.name + uc.n}
-                      className="relative aspect-square overflow-hidden rounded-xl border border-border bg-surface/60 transition-all duration-300 group-hover:border-brand/35 group-hover:bg-surface"
+                      className="relative aspect-square overflow-hidden rounded-xl border border-border bg-black transition-all duration-300 group-hover:border-brand/35"
                     >
                       <Image
                         src={b.image}
                         alt={`PC ${b.name}`}
                         fill
                         sizes="(max-width: 640px) 30vw, 10vw"
-                        className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.06]"
+                        className="object-cover transition-transform duration-500 group-hover:scale-[1.06]"
                       />
                     </div>
                   ))}
