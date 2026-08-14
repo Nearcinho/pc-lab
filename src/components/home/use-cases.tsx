@@ -20,7 +20,7 @@ const useCases: {
     n: "01",
     title: "Gaming",
     text: "Máximo rendimiento para jugar como quieres.",
-    cta: "Ver más PC gaming",
+    cta: "Ver PC Gaming",
     href: "/pcs/gaming",
     image: asset("/cases/gaming.jpg"),
   },
@@ -28,7 +28,7 @@ const useCases: {
     n: "02",
     title: "Creación",
     text: "Potencia para editar, diseñar y crear sin límites.",
-    cta: "Ver más PC para creadores",
+    cta: "Ver PC para Creadores",
     href: "/pcs/creadores",
     image: asset("/cases/creacion.jpg"),
   },
@@ -36,7 +36,7 @@ const useCases: {
     n: "03",
     title: "Trabajo",
     text: "Una estación de trabajo diseñada para tu día a día.",
-    cta: "Ver más PC de trabajo",
+    cta: "Ver PC de Trabajo",
     href: "/pcs/trabajo",
     image: asset("/cases/trabajo.jpg"),
   },
@@ -44,7 +44,7 @@ const useCases: {
     n: "04",
     title: "IA & Desarrollo",
     text: "Rendimiento para código, datos e inteligencia artificial.",
-    cta: "Ver más PC de IA y desarrollo",
+    cta: "Ver PC para IA & Desarrollo",
     href: "/pcs/ia",
     image: asset("/cases/ia-desarrollo.jpg"),
   },
@@ -114,6 +114,10 @@ export function UseCases() {
                   <span className="absolute left-5 top-5 font-mono text-sm font-medium tracking-[0.2em] text-white/60">
                     {uc.n}
                   </span>
+                  {/* CTA cyan integrado en la foto */}
+                  <span className="absolute inset-x-0 bottom-0 flex items-center justify-center gap-2 bg-brand py-2.5 text-sm font-semibold text-[#051018] transition-colors duration-300 group-hover:bg-[#8ae1ff]">
+                    {uc.cta} <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                  </span>
                 </div>
                 {/* Los PCs preconfigurados de la categoría, siempre visibles */}
                 <div className="mt-3 grid grid-cols-3 gap-2">
@@ -135,9 +139,6 @@ export function UseCases() {
                 <div className="mt-6">
                   <h3 className="font-display text-xl font-medium tracking-tight">{uc.title}</h3>
                   <p className="mt-2 max-w-[24ch] text-sm leading-relaxed text-muted-2">{uc.text}</p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors group-hover:text-brand-2">
-                    {uc.cta} <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
-                  </span>
                 </div>
               </motion.article>
             </Link>
