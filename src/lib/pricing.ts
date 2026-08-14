@@ -86,4 +86,11 @@ export function priceBuild(sel: BuildSelection, tier: BudgetTier): BuildPrice {
   return { components, fee, total: components + fee, missing };
 }
 
+/** Redondeo comercial hacia arriba: al 10 superior; si termina en 40, al 50. */
+export function displayPrice(total: number): number {
+  let rounded = Math.ceil(total / 10) * 10;
+  if (rounded % 100 === 40) rounded += 10;
+  return rounded;
+}
+
 export const PRICES_UPDATED = "agosto de 2026";

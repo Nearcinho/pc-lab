@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Settings2 } from "lucide-react";
 import { getPrebuildCategory, prebuildCategories } from "@/lib/prebuilds";
 import { PROFILES, BudgetTier } from "@/lib/profiles";
-import { priceBuild, PRICES_UPDATED } from "@/lib/pricing";
+import { priceBuild, displayPrice, PRICES_UPDATED } from "@/lib/pricing";
 import { formatNumber } from "@/lib/utils";
 import { partById } from "@/lib/parts";
 import { Badge } from "@/components/ui/badge";
@@ -100,9 +100,9 @@ export default async function PrebuildCategoryPage({ params }: Props) {
                   <p className="mt-1 text-sm text-muted">{b.tagline}</p>
 
                   <div className="mt-4 rounded-2xl border border-brand/25 bg-brand/5 px-4 py-3">
-                    <p className="font-display text-2xl font-semibold text-brand">{formatNumber(price.total)} €</p>
+                    <p className="font-display text-2xl font-semibold text-brand">{formatNumber(displayPrice(price.total))} €</p>
                     <p className="mt-0.5 text-[11px] leading-snug text-muted">
-                      Componentes {formatNumber(price.components)} € + montaje, test y configuración {price.fee} €
+                      IVA, montaje, test de 24 h y configuración incluidos
                     </p>
                   </div>
 
