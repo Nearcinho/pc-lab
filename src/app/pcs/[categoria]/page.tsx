@@ -84,7 +84,7 @@ export default async function PrebuildCategoryPage({ params }: Props) {
                     alt={`PC ${cat.title} ${b.name}`}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-contain transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+                    className="object-contain"
                   />
                   <Badge variant="brand" className="absolute left-4 top-4 uppercase tracking-wider">
                     {b.tierLabel}
