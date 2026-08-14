@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Cpu, CircuitBoard, Gauge, MemoryStick, HardDrive, Wind, PlugZap, Box, Disc,
@@ -909,11 +910,12 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
               <Rocket className="size-4" aria-hidden /> Ver rendimiento estimado
             </Button>
             <Button
+              asChild
               variant="secondary"
               className="mt-2 w-full"
               disabled={!calc.complete || calc.issues.some((i) => i.severity === "error")}
             >
-              Solicitar montaje
+              <Link href="/contacto">Solicitar cotización</Link>
             </Button>
             <p className="mt-2 text-center text-[11px] text-muted">
               {doneCount} de {ORDER.length} pasos completados.
