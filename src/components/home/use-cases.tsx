@@ -13,6 +13,7 @@ const useCases: {
   n: string;
   title: string;
   text: string;
+  cta: string;
   image: string;
   preset: `${UseCase}-${1 | 2 | 3 | 4 | 5}`;
 }[] = [
@@ -20,6 +21,7 @@ const useCases: {
     n: "01",
     title: "Gaming",
     text: "Máximo rendimiento para jugar como quieres.",
+    cta: "Ver más PC gaming",
     image: asset("/cases/gaming.jpg"),
     preset: "gaming-2",
   },
@@ -27,6 +29,7 @@ const useCases: {
     n: "02",
     title: "Creación",
     text: "Potencia para editar, diseñar y crear sin límites.",
+    cta: "Ver más PC para creadores",
     image: asset("/cases/creacion.jpg"),
     preset: "render-3",
   },
@@ -34,6 +37,7 @@ const useCases: {
     n: "03",
     title: "Trabajo",
     text: "Una estación de trabajo diseñada para tu día a día.",
+    cta: "Ver más PC de trabajo",
     image: asset("/cases/trabajo.jpg"),
     preset: "productividad-3",
   },
@@ -41,6 +45,7 @@ const useCases: {
     n: "04",
     title: "IA & Desarrollo",
     text: "Rendimiento para código, datos e inteligencia artificial.",
+    cta: "Ver más PC de IA y desarrollo",
     image: asset("/cases/ia-desarrollo.jpg"),
     preset: "ia-4",
   },
@@ -134,7 +139,7 @@ export function UseCases() {
                   href={`/configurador?preset=${uc.preset}`}
                   className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors hover:text-brand-2"
                 >
-                  Ver esta configuración <ArrowRight className="size-3.5" aria-hidden />
+                  {uc.cta} <ArrowRight className="size-3.5" aria-hidden />
                 </Link>
               </div>
             </motion.article>
