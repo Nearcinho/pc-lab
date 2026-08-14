@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Layers } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { asset } from "@/lib/base";
 import { PROFILES, UseCase } from "@/lib/profiles";
 import { partById } from "@/lib/parts";
@@ -130,25 +130,23 @@ export function UseCases() {
                   <span className="absolute left-5 top-5 font-mono text-sm font-medium tracking-[0.2em] text-white/60">
                     {uc.n}
                   </span>
-                  {/* Contador de PCs preconfigurados: siempre visible */}
-                  <span className="absolute right-4 top-4 flex items-center gap-1.5 rounded-full border border-white/15 bg-black/45 px-2.5 py-1 text-[10px] font-semibold text-white/85 backdrop-blur-sm">
-                    <Layers className="size-3" aria-hidden />
-                    {prebuilds.length} PCs
-                  </span>
-                  {/* Preview de los builds: se revela al hover */}
-                  <div
-                    className="absolute inset-x-3 bottom-3 flex translate-y-3 items-end justify-center gap-2 opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100"
-                    aria-hidden
-                  >
-                    {prebuilds.map((b) => (
-                      <span
-                        key={b.name + uc.n}
-                        className="relative block aspect-square w-1/3 max-w-20 overflow-hidden rounded-lg border border-white/15 bg-black/50 backdrop-blur-sm"
-                      >
-                        <Image src={b.image} alt="" fill sizes="80px" className="object-contain p-1.5" />
-                      </span>
-                    ))}
-                  </div>
+                </div>
+                {/* Los PCs preconfigurados de la categoría, siempre visibles */}
+                <div className="mt-3 grid grid-cols-3 gap-2">
+                  {prebuilds.map((b) => (
+                    <div
+                      key={b.name + uc.n}
+                      className="relative aspect-square overflow-hidden rounded-xl border border-border bg-surface/60 transition-all duration-300 group-hover:border-brand/35 group-hover:bg-surface"
+                    >
+                      <Image
+                        src={b.image}
+                        alt={`PC ${b.name}`}
+                        fill
+                        sizes="(max-width: 640px) 30vw, 10vw"
+                        className="object-contain p-2 transition-transform duration-500 group-hover:scale-[1.06]"
+                      />
+                    </div>
+                  ))}
                 </div>
                 <div className="mt-6">
                   <h3 className="font-display text-xl font-medium tracking-tight">{uc.title}</h3>
