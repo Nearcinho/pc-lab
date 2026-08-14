@@ -6,8 +6,6 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { asset } from "@/lib/base";
-import { PROFILES, UseCase } from "@/lib/profiles";
-import { partById } from "@/lib/parts";
 import { getPrebuildCategory } from "@/lib/prebuilds";
 
 const useCases: {
@@ -17,7 +15,6 @@ const useCases: {
   cta: string;
   href: string;
   image: string;
-  preset: `${UseCase}-${1 | 2 | 3 | 4 | 5}`;
 }[] = [
   {
     n: "01",
@@ -26,7 +23,6 @@ const useCases: {
     cta: "Ver más PC gaming",
     href: "/pcs/gaming",
     image: asset("/cases/gaming.jpg"),
-    preset: "gaming-2",
   },
   {
     n: "02",
@@ -35,7 +31,6 @@ const useCases: {
     cta: "Ver más PC para creadores",
     href: "/pcs/creadores",
     image: asset("/cases/creacion.jpg"),
-    preset: "render-3",
   },
   {
     n: "03",
@@ -44,7 +39,6 @@ const useCases: {
     cta: "Ver más PC de trabajo",
     href: "/pcs/trabajo",
     image: asset("/cases/trabajo.jpg"),
-    preset: "productividad-3",
   },
   {
     n: "04",
@@ -53,18 +47,8 @@ const useCases: {
     cta: "Ver más PC de IA y desarrollo",
     href: "/pcs/ia",
     image: asset("/cases/ia-desarrollo.jpg"),
-    preset: "ia-4",
   },
 ];
-
-// Specs destacadas de cada build pre-hecha (CPU · GPU · RAM · Refrigeración).
-const SPEC_KEYS = ["cpu", "gpu", "ram", "cooling"] as const;
-
-function presetSpecs(preset: (typeof useCases)[number]["preset"]) {
-  const [useKey, tier] = preset.split("-");
-  const profile = PROFILES[useKey as UseCase][Number(tier) as 1 | 2 | 3 | 4 | 5];
-  return SPEC_KEYS.map((k) => partById(profile[k] ?? "")?.name).filter((n): n is string => Boolean(n));
-}
 
 export function UseCases() {
   const reduced = useReducedMotion();
@@ -151,14 +135,6 @@ export function UseCases() {
                 <div className="mt-6">
                   <h3 className="font-display text-xl font-medium tracking-tight">{uc.title}</h3>
                   <p className="mt-2 max-w-[24ch] text-sm leading-relaxed text-muted-2">{uc.text}</p>
-                  <ul className="mt-4 space-y-1 border-t border-border/60 pt-3">
-                    {presetSpecs(uc.preset).map((spec) => (
-                      <li key={spec} className="flex items-center gap-2 text-xs text-muted">
-                        <span className="size-1 shrink-0 rounded-full bg-brand" aria-hidden />
-                        {spec}
-                      </li>
-                    ))}
-                  </ul>
                   <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors group-hover:text-brand-2">
                     {uc.cta} <ArrowRight className="size-3.5 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
                   </span>
