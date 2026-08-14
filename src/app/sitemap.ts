@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
 import { blogPosts } from "@/lib/blog";
+import { prebuildCategories } from "@/lib/prebuilds";
 
 export const dynamic = "force-static";
 
@@ -18,6 +19,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: p === "" ? 1 : 0.7,
   }));
 
+  const prebuilds: MetadataRoute.Sitemap = prebuildCategories.map((c) => ({
+    url: `${siteConfig.domain}/pcs/${c.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }));
+
   const posts: MetadataRoute.Sitemap = blogPosts.map((p) => ({
     url: `${siteConfig.domain}/blog/${p.slug}`,
     lastModified: new Date(p.date + "T00:00:00Z"),
@@ -25,5 +33,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...posts];
+  return [...staticPages, ...prebuilds, ...posts];
 }

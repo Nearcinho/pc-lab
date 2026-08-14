@@ -14,6 +14,7 @@ const useCases: {
   title: string;
   text: string;
   cta: string;
+  href: string;
   image: string;
   preset: `${UseCase}-${1 | 2 | 3 | 4 | 5}`;
 }[] = [
@@ -22,6 +23,7 @@ const useCases: {
     title: "Gaming",
     text: "Máximo rendimiento para jugar como quieres.",
     cta: "Ver más PC gaming",
+    href: "/pcs/gaming",
     image: asset("/cases/gaming.jpg"),
     preset: "gaming-2",
   },
@@ -30,6 +32,7 @@ const useCases: {
     title: "Creación",
     text: "Potencia para editar, diseñar y crear sin límites.",
     cta: "Ver más PC para creadores",
+    href: "/pcs/creadores",
     image: asset("/cases/creacion.jpg"),
     preset: "render-3",
   },
@@ -38,6 +41,7 @@ const useCases: {
     title: "Trabajo",
     text: "Una estación de trabajo diseñada para tu día a día.",
     cta: "Ver más PC de trabajo",
+    href: "/pcs/trabajo",
     image: asset("/cases/trabajo.jpg"),
     preset: "productividad-3",
   },
@@ -46,6 +50,7 @@ const useCases: {
     title: "IA & Desarrollo",
     text: "Rendimiento para código, datos e inteligencia artificial.",
     cta: "Ver más PC de IA y desarrollo",
+    href: "/pcs/ia",
     image: asset("/cases/ia-desarrollo.jpg"),
     preset: "ia-4",
   },
@@ -136,7 +141,7 @@ export function UseCases() {
                   ))}
                 </ul>
                 <Link
-                  href={`/configurador?preset=${uc.preset}`}
+                  href={uc.href}
                   className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors hover:text-brand-2"
                 >
                   {uc.cta} <ArrowRight className="size-3.5" aria-hidden />
