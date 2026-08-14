@@ -27,9 +27,9 @@ export const prebuildCategories: PrebuildCategory[] = [
       "Equipos montados y calibrados para exprimir cada fotograma: desde 1080p competitivo hasta 4K sin concesiones. Cada uno es un punto de partida totalmente ajustable.",
     use: "gaming",
     builds: [
-      { name: "PULSE", tagline: "Esencial · 1080p fluido", tierLabel: "Esencial", image: asset("/builds/pulse.svg"), preset: "gaming-1" },
-      { name: "APEX", tagline: "Avanzado · 1440p competitivo", tierLabel: "Avanzado", image: asset("/builds/apex.svg"), preset: "gaming-3" },
-      { name: "TITAN", tagline: "Extremo · 4K sin límites", tierLabel: "Extremo", image: asset("/builds/titan.svg"), preset: "gaming-5" },
+      { name: "PULSE", tagline: "Esencial · 1080p fluido", tierLabel: "Esencial", image: asset("/builds/pulse.jpg"), preset: "gaming-1" },
+      { name: "APEX", tagline: "Avanzado · 1440p competitivo", tierLabel: "Avanzado", image: asset("/builds/apex.jpg"), preset: "gaming-3" },
+      { name: "TITAN", tagline: "Extremo · 4K sin límites", tierLabel: "Extremo", image: asset("/builds/titan.jpg"), preset: "gaming-5" },
     ],
   },
   {
@@ -40,9 +40,9 @@ export const prebuildCategories: PrebuildCategory[] = [
       "Edición de vídeo, diseño 3D y render sin tiempos muertos: núcleos de sobra, VRAM generosa y almacenamiento rápido para que el proyecto mande, no la barra de progreso.",
     use: "render",
     builds: [
-      { name: "CASCADE", tagline: "Esencial · Edición Full HD", tierLabel: "Esencial", image: asset("/builds/cascade.svg"), preset: "render-1" },
-      { name: "FORGE", tagline: "Avanzado · Edición 4K y render", tierLabel: "Avanzado", image: asset("/builds/forge.svg"), preset: "render-3" },
-      { name: "MONO", tagline: "Extremo · Estudio 8K y 3D pesado", tierLabel: "Extremo", image: asset("/builds/mono.svg"), preset: "render-5" },
+      { name: "CASCADE", tagline: "Esencial · Edición Full HD", tierLabel: "Esencial", image: asset("/builds/cascade.jpg"), preset: "render-1" },
+      { name: "FORGE", tagline: "Avanzado · Edición 4K y render", tierLabel: "Avanzado", image: asset("/builds/forge.jpg"), preset: "render-3" },
+      { name: "MONO", tagline: "Extremo · Estudio 8K y 3D pesado", tierLabel: "Extremo", image: asset("/builds/mono.jpg"), preset: "render-5" },
     ],
   },
   {
@@ -53,9 +53,9 @@ export const prebuildCategories: PrebuildCategory[] = [
       "Estaciones de trabajo silenciosas y fiables para el día a día profesional: multitarea ágil, respuesta inmediata y cero dramas de mantenimiento.",
     use: "productividad",
     builds: [
-      { name: "MONO", tagline: "Esencial · Ofimática y multitarea", tierLabel: "Esencial", image: asset("/builds/mono.svg"), preset: "productividad-1" },
-      { name: "PULSE", tagline: "Avanzado · Multitarea pesada", tierLabel: "Avanzado", image: asset("/builds/pulse.svg"), preset: "productividad-3" },
-      { name: "CASCADE", tagline: "Extremo · Estación de datos", tierLabel: "Extremo", image: asset("/builds/cascade.svg"), preset: "productividad-5" },
+      { name: "MONO", tagline: "Esencial · Ofimática y multitarea", tierLabel: "Esencial", image: asset("/builds/mono.jpg"), preset: "productividad-1" },
+      { name: "PULSE", tagline: "Avanzado · Multitarea pesada", tierLabel: "Avanzado", image: asset("/builds/pulse.jpg"), preset: "productividad-3" },
+      { name: "CASCADE", tagline: "Extremo · Estación de datos", tierLabel: "Extremo", image: asset("/builds/cascade.jpg"), preset: "productividad-5" },
     ],
   },
   {
@@ -66,9 +66,9 @@ export const prebuildCategories: PrebuildCategory[] = [
       "Para desarrollo e inteligencia artificial local: mucha VRAM para modelos, núcleos para compilar y RAM para datasets sin salir de tu torre.",
     use: "ia",
     builds: [
-      { name: "FORGE", tagline: "Esencial · Código y scripts", tierLabel: "Esencial", image: asset("/builds/forge.svg"), preset: "ia-1" },
-      { name: "APEX", tagline: "Avanzado · IA local y contenedores", tierLabel: "Avanzado", image: asset("/builds/apex.svg"), preset: "ia-3" },
-      { name: "TITAN", tagline: "Extremo · Modelos grandes en local", tierLabel: "Extremo", image: asset("/builds/titan.svg"), preset: "ia-5" },
+      { name: "FORGE", tagline: "Esencial · Código y scripts", tierLabel: "Esencial", image: asset("/builds/forge.jpg"), preset: "ia-1" },
+      { name: "APEX", tagline: "Avanzado · IA local y contenedores", tierLabel: "Avanzado", image: asset("/builds/apex.jpg"), preset: "ia-3" },
+      { name: "TITAN", tagline: "Extremo · Modelos grandes en local", tierLabel: "Extremo", image: asset("/builds/titan.jpg"), preset: "ia-5" },
     ],
   },
 ];
