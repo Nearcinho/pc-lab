@@ -122,7 +122,7 @@ export default async function PrebuildCategoryPage({ params }: Props) {
                       </Link>
                     </Button>
                     <Button asChild variant="secondary" className="w-full">
-                      <Link href="/contacto">
+                      <Link href={`/cotizar?preset=${b.preset}`}>
                         Solicitar cotización <ArrowRight className="size-4" aria-hidden />
                       </Link>
                     </Button>

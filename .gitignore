@@ -42,3 +42,6 @@ next-env.d.ts
 
 # local
 dev-check.log
+
+# cotizaciones (datos locales del admin)
+data/

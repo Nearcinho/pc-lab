@@ -915,7 +915,18 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
               className="mt-2 w-full"
               disabled={!calc.complete || calc.issues.some((i) => i.severity === "error")}
             >
-              <Link href="/contacto">Solicitar cotización</Link>
+              <Link
+                href="/cotizar"
+                onClick={() => {
+                  try {
+                    sessionStorage.setItem("pclab:quote-build", JSON.stringify({ build: sel, notes }));
+                  } catch {
+                    // sin sessionStorage: /cotizar caerá al estado vacío
+                  }
+                }}
+              >
+                Solicitar cotización
+              </Link>
             </Button>
             <p className="mt-2 text-center text-[11px] text-muted">
               {doneCount} de {ORDER.length} pasos completados.
