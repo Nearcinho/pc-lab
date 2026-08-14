@@ -1,12 +1,14 @@
 "use client";
 
 import * as React from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Cpu, Wand2, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Builder } from "@/components/builder/builder";
 import { UsageBuilder } from "@/components/builder/usage-builder";
 import { Badge } from "@/components/ui/badge";
+import { PROFILES, UseCase, BudgetTier } from "@/lib/profiles";
 import type { BuildSelection } from "@/lib/build-engine";
 
 type Mode = "hardware" | "usage";
@@ -22,9 +24,20 @@ const MODES: {
   { key: "usage", label: "Según mi uso y presupuesto", desc: "Te proponemos una base de hardware en dos respuestas.", hint: "Recomendado si no sabes por dónde empezar", icon: Wand2 },
 ];
 
-export function Configurator() {
+// Preset por URL (p.ej. /configurador?preset=gaming-2) validado contra PROFILES.
+function usePreset(): BuildSelection | undefined {
+  const params = useSearchParams();
+  const raw = params.get("preset");
+  if (!raw) return undefined;
+  const [useKey, tierKey] = raw.split("-");
+  if (!(useKey in PROFILES) || !["1", "2", "3", "4", "5"].includes(tierKey)) return undefined;
+  return PROFILES[useKey as UseCase][Number(tierKey) as BudgetTier];
+}
+
+function ConfiguratorInner() {
+  const preset = usePreset();
   const [mode, setMode] = React.useState<Mode>("hardware");
-  const [initial, setInitial] = React.useState<BuildSelection | undefined>(undefined);
+  const [initial, setInitial] = React.useState<BuildSelection | undefined>(preset);
 
   const applyUsageSelection = (sel: BuildSelection) => {
     setInitial(sel);
@@ -87,5 +100,13 @@ export function Configurator() {
         {mode === "hardware" ? <Builder initial={initial} /> : <UsageBuilder onUseHardware={applyUsageSelection} />}
       </motion.div>
     </div>
+  );
+}
+
+export function Configurator() {
+  return (
+    <React.Suspense fallback={null}>
+      <ConfiguratorInner />
+    </React.Suspense>
   );
 }

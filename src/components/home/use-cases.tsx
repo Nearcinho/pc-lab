@@ -2,35 +2,58 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { asset } from "@/lib/base";
+import { PROFILES, UseCase } from "@/lib/profiles";
+import { partById } from "@/lib/parts";
 
-const useCases = [
+const useCases: {
+  n: string;
+  title: string;
+  text: string;
+  image: string;
+  preset: `${UseCase}-${1 | 2 | 3 | 4 | 5}`;
+}[] = [
   {
     n: "01",
     title: "Gaming",
     text: "Máximo rendimiento para jugar como quieres.",
     image: asset("/cases/gaming.jpg"),
+    preset: "gaming-2",
   },
   {
     n: "02",
     title: "Creación",
     text: "Potencia para editar, diseñar y crear sin límites.",
     image: asset("/cases/creacion.jpg"),
+    preset: "render-3",
   },
   {
     n: "03",
     title: "Trabajo",
     text: "Una estación de trabajo diseñada para tu día a día.",
     image: asset("/cases/trabajo.jpg"),
+    preset: "productividad-3",
   },
   {
     n: "04",
     title: "IA & Desarrollo",
     text: "Rendimiento para código, datos e inteligencia artificial.",
     image: asset("/cases/ia-desarrollo.jpg"),
+    preset: "ia-4",
   },
 ];
+
+// Specs destacadas de cada build pre-hecha (CPU · GPU · RAM · Refrigeración).
+const SPEC_KEYS = ["cpu", "gpu", "ram", "cooling"] as const;
+
+function presetSpecs(preset: (typeof useCases)[number]["preset"]) {
+  const [useKey, tier] = preset.split("-");
+  const profile = PROFILES[useKey as UseCase][Number(tier) as 1 | 2 | 3 | 4 | 5];
+  return SPEC_KEYS.map((k) => partById(profile[k] ?? "")?.name).filter((n): n is string => Boolean(n));
+}
 
 export function UseCases() {
   const reduced = useReducedMotion();
@@ -99,6 +122,20 @@ export function UseCases() {
               <div className="mt-6">
                 <h3 className="font-display text-xl font-medium tracking-tight">{uc.title}</h3>
                 <p className="mt-2 max-w-[24ch] text-sm leading-relaxed text-muted-2">{uc.text}</p>
+                <ul className="mt-4 space-y-1 border-t border-border/60 pt-3">
+                  {presetSpecs(uc.preset).map((spec) => (
+                    <li key={spec} className="flex items-center gap-2 text-xs text-muted">
+                      <span className="size-1 shrink-0 rounded-full bg-brand" aria-hidden />
+                      {spec}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href={`/configurador?preset=${uc.preset}`}
+                  className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-brand transition-colors hover:text-brand-2"
+                >
+                  Ver esta configuración <ArrowRight className="size-3.5" aria-hidden />
+                </Link>
               </div>
             </motion.article>
           ))}
