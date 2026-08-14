@@ -18,12 +18,14 @@ export const PART_PRICES: Record<string, PriceEntry> = {
   "cpu-r7-9800x3d": { price: 429, source: "Amazon.es (ryzen.es)" },
   "cpu-r7-9700x": { price: 254, source: "Amazon.es (ryzen.es)" },
   "cpu-r9-9950x": { price: 485, source: "Amazon.es (ryzen.es)" },
-  // GPUs — agregador ES (Amazon/PCComponentes), 14-08-2026.
-  // RTX 40 descatalogadas: precios de stock residual, muy volátiles.
-  "gpu-rtx4060": { price: 599, source: "DropReference (agregador ES)", note: "Stock escaso, precio inflado" },
-  "gpu-rtx4070": { price: 702, source: "DropReference (agregador ES)", note: "Descatalogada, stock residual" },
-  "gpu-rtx4080super": { price: 1500, source: "DropReference (agregador ES)", note: "Descatalogada, stock residual" },
-  "gpu-rtx4090": { price: 3390, source: "DropReference (agregador ES)", note: "Descatalogada, precio de reventa" },
+  // GPUs — serie RTX 50 actual (las RTX 40 están descatalogadas).
+  // Fuentes: Coolmod/Amazon vía chollometro (5060), DropReference en vivo
+  // (5070, 5070 Ti), PCComponentes Palit GamingPro (5080), 14-08-2026.
+  "gpu-rtx5060": { price: 300, source: "Coolmod 299,95 € (MSI Ventus 2X, iguala Amazon)" },
+  "gpu-rtx5070": { price: 622, source: "DropReference (mejor oferta en vivo)" },
+  "gpu-rtx5070ti": { price: 943, source: "DropReference (mejor oferta en vivo)", note: "Stock raro en tienda grande" },
+  "gpu-rtx5080": { price: 1150, source: "PCComponentes (Palit GamingPro 1.149,90 €)" },
+  // RX 7000: stock residual
   "gpu-rx7900xtx": { price: 929, source: "DropReference (agregador ES)", note: "Stock residual" },
   // Placas (chipset, gama media) — idealo.es / PCComponentes
   "mb-b650m": { price: 175, source: "idealo.es (MSI B650M Gaming Plus WiFi)" },
