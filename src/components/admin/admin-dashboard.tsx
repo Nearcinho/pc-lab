@@ -320,13 +320,12 @@ async function generateContractPdf(opts: {
   heading("CLÁUSULAS");
   const clausulas: [string, string][] = [
     ["1. Objeto", `El Vendedor se compromete a montar, testar y entregar al Cliente el equipo informático detallado en el Anexo I de este contrato, correspondiente a la cotización Nº ${quote.id}, con la configuración de componentes que en él se especifica.`],
-    ["2. Precio y forma de pago", `El precio total del equipo armado es de ${eur(displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount))}, IVA incluido. El precio incluye el montaje, el test de estabilidad de 24 horas y la puesta a punto del equipo. La forma y calendario de pago se acuerdan entre las partes antes del inicio del montaje.`],
+    ["2. Precio y forma de pago", `El precio total del equipo armado es de ${eur(displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount))}. El precio incluye el montaje, el test de estabilidad de 24 horas y la puesta a punto del equipo. La forma y calendario de pago se acuerdan entre las partes antes del inicio del montaje.`],
     ["3. Plazo de montaje y entrega", "El plazo estimado de montaje y pruebas es de 7 a 10 días laborables desde la confirmación del pedido, pudiendo variar por disponibilidad de componentes. El Vendedor informará al Cliente de cada fase del proceso."],
     ["4. Garantías", "El ensamblado del equipo tiene una garantía de 1 año por defectos de montaje, gestionada directamente por PC LAB. Cada componente conserva además la garantía oficial de su fabricante, cuyos trámites el Vendedor ayudará a gestionar. La garantía no cubre daños por mal uso, sobretensión ajena al equipo o manipulación no autorizada."],
     ["5. Precios y validez", "Los precios de los componentes se valoran a precio de mercado en la fecha de la cotización y son válidos durante 24 horas desde su emisión; pasado ese periodo el valor debe revalidarse por variaciones en el precio de los componentes."],
     ["6. Envío", "Si las partes acuerdan el envío a domicilio, el equipo viajará con embalaje de protección profesional y seguro de transporte. Los datos de entrega se recogen en la ficha del pedido."],
-    ["7. Protección de datos", "Los datos del Cliente se utilizan únicamente para la gestión del pedido, la facturación y la garantía, conforme al RGPD y la LOPDGDD."],
-    ["8. Legislación", "Este contrato se rige por la legislación española. Cualquier controversia se someterá a los juzgados del domicilio del Cliente, salvo pacto en contrario."],
+    ["7. Protección de datos", "Los datos del Cliente se utilizan únicamente para la gestión del pedido y la garantía, conforme al RGPD y la LOPDGDD."],
   ];
   for (const [t, c] of clausulas) {
     heading(t);
@@ -357,10 +356,6 @@ async function generateContractPdf(opts: {
   doc.setFontSize(13);
   const total = displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount);
   doc.text(`TOTAL: ${eur(total)}`, pageW - margin - 45, finalY + 16.5, { align: "center" });
-  doc.setTextColor(120, 120, 120);
-  doc.setFont("arial", "normal");
-  doc.setFontSize(8);
-  doc.text("IVA incluido", pageW - margin - 45, finalY + 21, { align: "center" });
 
   // Firmas
   let fy = finalY + 42;
