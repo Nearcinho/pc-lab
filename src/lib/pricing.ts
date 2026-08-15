@@ -53,7 +53,10 @@ export const PART_PRICES: Record<string, PriceEntry> = {
   "psu-gold-850": { price: 105, source: "idealo.es (MSI MAG A850GL)" },
   "psu-gold-1000": { price: 140, source: "idealo.es (Corsair RM1000e 2025)" },
   // Cajas — idealo.es
+  "case-itx": { price: 109, source: "idealo.es (típica Mini-ITX)" },
+  "case-matx": { price: 85, source: "idealo.es (típica Micro-ATX)" },
   "case-atx": { price: 105, source: "idealo.es (NZXT H5 Flow)" },
+  "case-atx-tg": { price: 115, source: "idealo.es (NZXT H5 Flow TG)" },
   "case-eatx": { price: 180, source: "idealo.es (Phanteks Enthoo Pro 2)" },
   // SO — licencia digital (G2A), Windows 11 Pro
   "os-win-pro": { price: 20, source: "G2A (Windows 11 Pro, clave digital global)" },

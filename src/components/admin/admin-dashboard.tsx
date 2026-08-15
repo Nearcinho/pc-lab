@@ -47,6 +47,8 @@ interface QuoteLine {
   key: string;
   category: string;
   name: string;
+  /** Nombre de catálogo sin personalizar: se usa para la búsqueda en Amazon. */
+  searchName: string;
   price: number | null; // null → "a confirmar"
 }
 
@@ -63,7 +65,9 @@ function quoteLines(build: Record<string, string>, labels?: Record<string, strin
       key,
       category: categories[key as Category]?.label ?? key,
       name: labels?.[key] ?? part?.name ?? id,
-      price: PART_PRICES[id]?.price ?? null,
+      searchName: part?.name ?? id,
+      // PART_PRICES (investigado) tiene prioridad; el precio de catálogo (p.ej. monitores) es el respaldo.
+      price: PART_PRICES[id]?.price ?? part?.price ?? null,
     });
   }
   return lines;
@@ -581,7 +585,15 @@ function QuoteEditor({
                         aria-label={`Editar nombre de ${l.category}`}
                       />
                     ) : (
-                      <span className="text-foreground/90">{l.name}</span>
+                      <a
+                        href={`https://www.amazon.es/s?k=${encodeURIComponent(l.searchName)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`Buscar «${l.searchName}» en Amazon`}
+                        className="text-foreground/90 underline decoration-transparent underline-offset-2 transition-colors hover:text-brand hover:decoration-brand"
+                      >
+                        {l.name}
+                      </a>
                     )}
                     {editLabel?.key !== l.key && (
                       <button
