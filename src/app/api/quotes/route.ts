@@ -103,20 +103,37 @@ export async function POST(request: Request) {
   return Response.json({ ok: true, id: record.id }, { status: 200 });
 }
 
+const SHIPPING_KEYS = ["name", "address", "city", "zip", "province", "phone", "carrier", "tracking"] as const;
+
+interface PatchBody {
+  id?: string;
+  status?: string;
+  build?: Record<string, unknown>;
+  fee?: number;
+  discount?: number;
+  quoteNotes?: string;
+  paid?: boolean | { at?: string };
+  shipping?: Record<string, unknown>;
+  comment?: string;
+}
+
 export async function PATCH(request: Request) {
   if (!isAuthorized(request)) {
     return Response.json({ ok: false, error: "PIN incorrecto." }, { status: 401 });
   }
 
-  let body: { id?: string; status?: string };
+  let body: PatchBody;
   try {
-    body = (await request.json()) as { id?: string; status?: string };
+    body = (await request.json()) as PatchBody;
   } catch {
     return Response.json({ ok: false, error: "Solicitud inválida." }, { status: 400 });
   }
 
-  if (!body.id || !body.status || !STATUSES.includes(body.status as QuoteStatus)) {
-    return Response.json({ ok: false, error: "Datos incompletos o estado no válido." }, { status: 422 });
+  if (!body.id) {
+    return Response.json({ ok: false, error: "Falta el id de la solicitud." }, { status: 422 });
+  }
+  if (body.status !== undefined && !STATUSES.includes(body.status as QuoteStatus)) {
+    return Response.json({ ok: false, error: "Estado no válido." }, { status: 422 });
   }
 
   const quotes = await readQuotes();
@@ -124,9 +141,45 @@ export async function PATCH(request: Request) {
   if (!quote) {
     return Response.json({ ok: false, error: "Solicitud no encontrada." }, { status: 404 });
   }
-  quote.status = body.status as QuoteStatus;
+
+  if (body.status !== undefined) quote.status = body.status as QuoteStatus;
+
+  if (body.build && typeof body.build === "object") {
+    const build: Record<string, string> = {};
+    for (const [k, v] of Object.entries(body.build)) {
+      if (typeof v === "string") build[k] = v;
+    }
+    quote.build = build;
+  }
+
+  if (typeof body.fee === "number" && Number.isFinite(body.fee) && body.fee >= 0) quote.fee = body.fee;
+  if (typeof body.discount === "number" && Number.isFinite(body.discount) && body.discount >= 0) {
+    quote.discount = body.discount;
+  }
+  if (typeof body.quoteNotes === "string") quote.quoteNotes = body.quoteNotes;
+
+  if (body.paid !== undefined) {
+    quote.paid =
+      typeof body.paid === "boolean"
+        ? body.paid
+        : { at: typeof body.paid?.at === "string" ? body.paid.at : new Date().toISOString() };
+  }
+
+  if (body.shipping && typeof body.shipping === "object") {
+    const shipping: QuoteRecord["shipping"] = {};
+    for (const key of SHIPPING_KEYS) {
+      const v = body.shipping[key];
+      if (typeof v === "string" && v.trim()) shipping[key] = v.trim();
+    }
+    quote.shipping = shipping;
+  }
+
+  if (typeof body.comment === "string" && body.comment.trim()) {
+    quote.comments = [...(quote.comments ?? []), { at: new Date().toISOString(), text: body.comment.trim() }];
+  }
+
   await writeQuotes(quotes);
-  return Response.json({ ok: true }, { status: 200 });
+  return Response.json({ ok: true, quote }, { status: 200 });
 }
 
 export async function DELETE(request: Request) {
