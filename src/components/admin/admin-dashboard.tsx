@@ -160,17 +160,15 @@ async function generateQuotePdf(opts: {
   }
   y += 8;
 
-  // Tabla de piezas
+  // Tabla de piezas (sin precios por componente: solo el total del equipo armado)
   const components = lines.reduce((s, l) => s + (l.price ?? 0), 0);
   const eur = (n: number) => `${formatNumber(n)} €`;
-  const body: string[][] = lines.map((l) => [l.category, l.name, l.price === null ? "A confirmar" : eur(l.price)]);
-  body.push(["", "Montaje, test de 24 h y configuración", eur(fee)]);
-  if (discount > 0) body.push(["", "Descuento", `-${eur(discount)}`]);
+  const body: string[][] = lines.map((l) => [l.category, l.name]);
 
   autoTable(doc, {
     startY: y,
     margin: { left: margin, right: margin },
-    head: [["Componente", "Pieza", "Precio"]],
+    head: [["Componente", "Pieza"]],
     body,
     theme: "grid",
     styles: { font: "arial", fontSize: 9, cellPadding: 2.5, textColor: [40, 40, 40] },
@@ -178,7 +176,6 @@ async function generateQuotePdf(opts: {
     alternateRowStyles: { fillColor: [245, 247, 250] },
     columnStyles: {
       0: { cellWidth: 40 },
-      2: { cellWidth: 30, halign: "right" },
     },
   });
 
@@ -214,9 +211,9 @@ async function generateQuotePdf(opts: {
   doc.setFontSize(8);
   doc.setTextColor(110, 110, 110);
   const legal = [
-    "Oferta válida durante 30 días desde la fecha de emisión.",
+    "Oferta válida durante 24 horas desde la fecha de emisión. Pasado ese periodo, el valor debe revalidarse por las variaciones en el precio de los componentes.",
     `Precios de componentes a precio de mercado (${PRICES_UPDATED}), sujetos a confirmación en el momento del pedido.`,
-    "El montaje, el test de estabilidad de 24 h y la puesta a punto están incluidos en todos los equipos PC LAB.",
+    "El precio corresponde al equipo completo armado: montaje, test de estabilidad de 24 h y puesta a punto incluidos.",
   ];
   for (const line of legal) {
     const wrapped = doc.splitTextToSize(line, pageW - margin * 2) as string[];
