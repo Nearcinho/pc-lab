@@ -4,7 +4,7 @@ import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   AlertCircle, ArrowLeft, ClipboardList, CreditCard, FileDown, Inbox, Loader2, Lock, LogOut,
-  MessageSquare, Plus, RefreshCw, Save, ShieldCheck, Trash2, Truck, Users, X,
+  MessageSquare, Pencil, Plus, RefreshCw, Save, ShieldCheck, Trash2, Truck, Users, X,
 } from "lucide-react";
 import { allParts, categories, partById, Category } from "@/lib/parts";
 import { PART_PRICES, ASSEMBLY_FEE, displayPrice, PRICES_UPDATED } from "@/lib/pricing";
@@ -50,7 +50,7 @@ interface QuoteLine {
   price: number | null; // null → "a confirmar"
 }
 
-function quoteLines(build: Record<string, string>): QuoteLine[] {
+function quoteLines(build: Record<string, string>, labels?: Record<string, string>): QuoteLine[] {
   const keys = [...BUILD_ORDER, ...Object.keys(build).filter((k) => !BUILD_ORDER.includes(k))];
   const seen = new Set<string>();
   const lines: QuoteLine[] = [];
@@ -62,7 +62,7 @@ function quoteLines(build: Record<string, string>): QuoteLine[] {
     lines.push({
       key,
       category: categories[key as Category]?.label ?? key,
-      name: part?.name ?? id,
+      name: labels?.[key] ?? part?.name ?? id,
       price: PART_PRICES[id]?.price ?? null,
     });
   }
@@ -391,6 +391,7 @@ async function generateContractPdf(opts: {
 
 interface Draft {
   build: Record<string, string>;
+  labels: Record<string, string>;
   fee: number;
   discount: number;
   notes: string;
@@ -413,6 +414,7 @@ function QuoteEditor({
 }) {
   const [draft, setDraft] = React.useState<Draft>(() => ({
     build: { ...quote.build },
+    labels: { ...(quote.labels ?? {}) },
     fee: quote.fee ?? defaultFee(quote),
     discount: quote.discount ?? 0,
     notes: quote.quoteNotes ?? quote.message ?? "",
@@ -429,11 +431,23 @@ function QuoteEditor({
   const [pdfBusy, setPdfBusy] = React.useState(false);
   const [addCat, setAddCat] = React.useState<string>("cpu");
   const [addPart, setAddPart] = React.useState("");
+  const [editLabel, setEditLabel] = React.useState<{ key: string; value: string } | null>(null);
 
   const update = (patch: Partial<Draft>) => setDraft((d) => ({ ...d, ...patch }));
   const setShip = (k: keyof ShippingInfo, v: string) => update({ shipping: { ...draft.shipping, [k]: v } });
 
-  const lines = quoteLines(draft.build);
+  // Guarda la etiqueta personalizada de un componente (vacío = volver al nombre del catálogo).
+  const applyLabel = () => {
+    if (!editLabel) return;
+    const labels = { ...draft.labels };
+    const value = editLabel.value.trim();
+    if (value) labels[editLabel.key] = value;
+    else delete labels[editLabel.key];
+    update({ labels });
+    setEditLabel(null);
+  };
+
+  const lines = quoteLines(draft.build, draft.labels);
   const components = lines.reduce((s, l) => s + (l.price ?? 0), 0);
   const total = displayPrice(components + draft.fee - draft.discount);
 
@@ -460,6 +474,7 @@ function QuoteEditor({
           id: quote.id,
           status: draft.status,
           build: draft.build,
+          labels: draft.labels,
           fee: draft.fee,
           discount: draft.discount,
           quoteNotes: draft.notes,
@@ -548,9 +563,35 @@ function QuoteEditor({
             <ul className="mt-5 space-y-2 border-t border-border/60 pt-4 text-sm">
               {lines.map((l) => (
                 <li key={l.key} className="flex items-baseline justify-between gap-3">
-                  <span className="text-muted">
+                  <span className="min-w-0 text-muted">
                     <span className="mr-2 text-xs font-semibold uppercase tracking-wide">{l.category}</span>
-                    <span className="text-foreground/90">{l.name}</span>
+                    {editLabel?.key === l.key ? (
+                      <input
+                        autoFocus
+                        value={editLabel.value}
+                        onChange={(e) => setEditLabel({ key: l.key, value: e.target.value })}
+                        onBlur={applyLabel}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") applyLabel();
+                          if (e.key === "Escape") setEditLabel(null);
+                        }}
+                        className="w-full max-w-md rounded-md border border-brand/50 bg-surface px-2 py-0.5 text-foreground outline-none"
+                        aria-label={`Editar nombre de ${l.category}`}
+                      />
+                    ) : (
+                      <span className="text-foreground/90">{l.name}</span>
+                    )}
+                    {editLabel?.key !== l.key && (
+                      <button
+                        type="button"
+                        onClick={() => setEditLabel({ key: l.key, value: l.name })}
+                        aria-label={`Editar nombre de ${l.name}`}
+                        title="Editar cómo aparece en la cotización"
+                        className="ml-1.5 inline-flex rounded-md p-1 align-middle text-muted/60 transition-colors hover:bg-brand/10 hover:text-brand"
+                      >
+                        <Pencil className="size-3" aria-hidden />
+                      </button>
+                    )}
                   </span>
                   <span className="flex shrink-0 items-center gap-2">
                     <span className={cn("font-medium", l.price === null && "text-amber-600")}>

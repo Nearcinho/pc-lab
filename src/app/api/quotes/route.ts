@@ -109,6 +109,7 @@ interface PatchBody {
   id?: string;
   status?: string;
   build?: Record<string, unknown>;
+  labels?: Record<string, unknown>;
   fee?: number;
   discount?: number;
   quoteNotes?: string;
@@ -150,6 +151,15 @@ export async function PATCH(request: Request) {
       if (typeof v === "string") build[k] = v;
     }
     quote.build = build;
+  }
+
+  // Etiquetas personalizadas por componente (p.ej. "GIGABYTE GeForce RTX 5080").
+  if (body.labels && typeof body.labels === "object") {
+    const labels: Record<string, string> = {};
+    for (const [k, v] of Object.entries(body.labels)) {
+      if (typeof v === "string" && v.trim()) labels[k] = v.trim();
+    }
+    quote.labels = labels;
   }
 
   if (typeof body.fee === "number" && Number.isFinite(body.fee) && body.fee >= 0) quote.fee = body.fee;

@@ -39,6 +39,8 @@ export interface QuoteRecord {
   fee?: number;
   discount?: number;
   quoteNotes?: string;
+  /** Texto personalizado por componente (clave de build → etiqueta). */
+  labels?: Record<string, string>;
   paid?: boolean | { at?: string };
   shipping?: ShippingInfo;
   comments?: QuoteComment[];
