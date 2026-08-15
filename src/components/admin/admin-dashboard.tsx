@@ -224,6 +224,173 @@ async function generateQuotePdf(opts: {
   doc.save(`cotizacion-${quote.id}-${slugify(quote.name)}.pdf`);
 }
 
+// Datos del representante de PC LAB que firman el contrato.
+const REPRESENTANTE = {
+  nombre: "Nicolás Ignacio Sánchez Negrete",
+  nie: "Z3884304T",
+};
+
+async function generateContractPdf(opts: {
+  quote: QuoteRecord;
+  lines: QuoteLine[];
+  fee: number;
+  discount: number;
+}) {
+  const { quote, lines, fee, discount } = opts;
+  const { jsPDF } = await import("jspdf");
+  const autoTable = (await import("jspdf-autotable")).default;
+  const { ARIAL_REGULAR_B64, ARIAL_BOLD_B64 } = await import("@/lib/pdf/pdf-fonts");
+
+  const doc = new jsPDF();
+  doc.addFileToVFS("arial.ttf", ARIAL_REGULAR_B64);
+  doc.addFont("arial.ttf", "arial", "normal");
+  doc.addFileToVFS("arialbd.ttf", ARIAL_BOLD_B64);
+  doc.addFont("arialbd.ttf", "arial", "bold");
+
+  const pageW = doc.internal.pageSize.getWidth();
+  const pageH = doc.internal.pageSize.getHeight();
+  const margin = 16;
+  const brand: [number, number, number] = [79, 209, 255];
+  const dark: [number, number, number] = [24, 28, 36];
+  const eur = (n: number) => `${formatNumber(n)} €`;
+
+  const footer = () => {
+    doc.setFont("arial", "normal");
+    doc.setFontSize(7.5);
+    doc.setTextColor(140, 140, 140);
+    doc.text(`PC LAB · Contrato vinculado a la cotización Nº ${quote.id} · Página ${doc.getCurrentPageInfo().pageNumber}`, pageW / 2, pageH - 8, { align: "center" });
+  };
+
+  // Cabecera
+  doc.setFillColor(...dark);
+  doc.rect(0, 0, pageW, 30, "F");
+  doc.setTextColor(...brand);
+  doc.setFont("arial", "bold");
+  doc.setFontSize(18);
+  doc.text("PC LAB", margin, 13);
+  doc.setTextColor(220, 220, 220);
+  doc.setFont("arial", "normal");
+  doc.setFontSize(8.5);
+  doc.text("Estudio de PC a medida", margin, 20);
+  doc.text(`${siteConfig.email} · ${siteConfig.phone}`, margin, 25.5);
+  doc.setTextColor(...brand);
+  doc.setFont("arial", "bold");
+  doc.setFontSize(11);
+  doc.text("CONTRATO DE SERVICIO", pageW - margin, 13, { align: "right" });
+  doc.setFont("arial", "normal");
+  doc.setFontSize(8.5);
+  doc.text(`Ref. cotización Nº ${quote.id}`, pageW - margin, 20, { align: "right" });
+  doc.text(`Fecha: ${formatDate(quote.createdAt)}`, pageW - margin, 25.5, { align: "right" });
+
+  let y = 42;
+  const heading = (t: string) => {
+    if (y > pageH - 40) { footer(); doc.addPage(); y = 20; }
+    doc.setFont("arial", "bold");
+    doc.setFontSize(10.5);
+    doc.setTextColor(30, 30, 30);
+    doc.text(t, margin, y);
+    y += 6;
+  };
+  const paragraph = (t: string) => {
+    doc.setFont("arial", "normal");
+    doc.setFontSize(9.5);
+    doc.setTextColor(60, 60, 60);
+    const wrapped = doc.splitTextToSize(t, pageW - margin * 2) as string[];
+    if (y + wrapped.length * 4.5 > pageH - 30) { footer(); doc.addPage(); y = 20; }
+    doc.text(wrapped, margin, y);
+    y += wrapped.length * 4.5 + 3;
+  };
+
+  // Título y partes
+  doc.setFont("arial", "bold");
+  doc.setFontSize(13);
+  doc.setTextColor(20, 20, 20);
+  doc.text("CONTRATO DE MONTAJE Y VENTA DE EQUIPO INFORMÁTICO", pageW / 2, y, { align: "center" });
+  y += 12;
+
+  heading("REUNIDOS");
+  paragraph(
+    `De una parte, PC LAB, en adelante "el Vendedor", representada en este acto por ${REPRESENTANTE.nombre}, con NIE ${REPRESENTANTE.nie}, en su calidad de representante de la empresa.`
+  );
+  paragraph(
+    `De otra parte, ${quote.name}, en adelante "el Cliente", con correo electrónico ${quote.email}${quote.phone ? ` y teléfono ${quote.phone}` : ""}, y con NIE/NIF: ______________________ (a cumplimentar por el Cliente).`
+  );
+  y += 3;
+
+  heading("CLÁUSULAS");
+  const clausulas: [string, string][] = [
+    ["1. Objeto", `El Vendedor se compromete a montar, testar y entregar al Cliente el equipo informático detallado en el Anexo I de este contrato, correspondiente a la cotización Nº ${quote.id}, con la configuración de componentes que en él se especifica.`],
+    ["2. Precio y forma de pago", `El precio total del equipo armado es de ${eur(displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount))}, IVA incluido. El precio incluye el montaje, el test de estabilidad de 24 horas y la puesta a punto del equipo. La forma y calendario de pago se acuerdan entre las partes antes del inicio del montaje.`],
+    ["3. Plazo de montaje y entrega", "El plazo estimado de montaje y pruebas es de 7 a 10 días laborables desde la confirmación del pedido, pudiendo variar por disponibilidad de componentes. El Vendedor informará al Cliente de cada fase del proceso."],
+    ["4. Garantías", "El ensamblado del equipo tiene una garantía de 1 año por defectos de montaje, gestionada directamente por PC LAB. Cada componente conserva además la garantía oficial de su fabricante, cuyos trámites el Vendedor ayudará a gestionar. La garantía no cubre daños por mal uso, sobretensión ajena al equipo o manipulación no autorizada."],
+    ["5. Precios y validez", "Los precios de los componentes se valoran a precio de mercado en la fecha de la cotización y son válidos durante 24 horas desde su emisión; pasado ese periodo el valor debe revalidarse por variaciones en el precio de los componentes."],
+    ["6. Envío", "Si las partes acuerdan el envío a domicilio, el equipo viajará con embalaje de protección profesional y seguro de transporte. Los datos de entrega se recogen en la ficha del pedido."],
+    ["7. Protección de datos", "Los datos del Cliente se utilizan únicamente para la gestión del pedido, la facturación y la garantía, conforme al RGPD y la LOPDGDD."],
+    ["8. Legislación", "Este contrato se rige por la legislación española. Cualquier controversia se someterá a los juzgados del domicilio del Cliente, salvo pacto en contrario."],
+  ];
+  for (const [t, c] of clausulas) {
+    heading(t);
+    paragraph(c);
+  }
+
+  // Anexo I
+  if (y > pageH - 90) { footer(); doc.addPage(); y = 20; }
+  heading("ANEXO I — EQUIPO A ENTREGAR");
+  autoTable(doc, {
+    startY: y,
+    margin: { left: margin, right: margin },
+    head: [["Componente", "Pieza"]],
+    body: lines.map((l) => [l.category, l.name]),
+    theme: "grid",
+    styles: { font: "arial", fontSize: 9, cellPadding: 2.5, textColor: [40, 40, 40] },
+    headStyles: { font: "arial", fillColor: dark, textColor: brand, fontStyle: "bold" },
+    alternateRowStyles: { fillColor: [245, 247, 250] },
+    columnStyles: { 0: { cellWidth: 40 } },
+  });
+  const finalY =
+    (doc as unknown as { lastAutoTable?: { finalY: number } }).lastAutoTable?.finalY ?? y + 60;
+
+  doc.setFillColor(...dark);
+  doc.roundedRect(pageW - margin - 90, finalY + 6, 90, 16, 2, 2, "F");
+  doc.setTextColor(...brand);
+  doc.setFont("arial", "bold");
+  doc.setFontSize(13);
+  const total = displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount);
+  doc.text(`TOTAL: ${eur(total)}`, pageW - margin - 45, finalY + 16.5, { align: "center" });
+  doc.setTextColor(120, 120, 120);
+  doc.setFont("arial", "normal");
+  doc.setFontSize(8);
+  doc.text("IVA incluido", pageW - margin - 45, finalY + 21, { align: "center" });
+
+  // Firmas
+  let fy = finalY + 42;
+  if (fy > pageH - 70) { footer(); doc.addPage(); fy = 24; }
+  doc.setFont("arial", "bold");
+  doc.setFontSize(10.5);
+  doc.setTextColor(30, 30, 30);
+  doc.text("FIRMAS", margin, fy);
+  fy += 14;
+  const colW = (pageW - margin * 2) / 2;
+  doc.setDrawColor(120, 120, 120);
+  doc.line(margin, fy + 18, margin + colW - 20, fy + 18);
+  doc.line(margin + colW + 10, fy + 18, pageW - margin, fy + 18);
+  doc.setFont("arial", "bold");
+  doc.setFontSize(9);
+  doc.text("El Vendedor (PC LAB)", margin, fy + 24);
+  doc.text("El Cliente", margin + colW + 10, fy + 24);
+  doc.setFont("arial", "normal");
+  doc.text(`${REPRESENTANTE.nombre}`, margin, fy + 29);
+  doc.text(`NIE: ${REPRESENTANTE.nie}`, margin, fy + 34);
+  doc.text("Nombre: ______________________________", margin + colW + 10, fy + 29);
+  doc.text("NIE/NIF: ______________________________", margin + colW + 10, fy + 34);
+  doc.setTextColor(110, 110, 110);
+  doc.setFontSize(8);
+  doc.text(`En ______________________, a ____ de ______________ de 20____`, margin, fy + 44);
+
+  footer();
+  doc.save(`contrato-${quote.id}-${slugify(quote.name)}.pdf`);
+}
+
 // ---------------------------------------------------------------------------
 // Editor de cotización
 // ---------------------------------------------------------------------------
@@ -343,6 +510,15 @@ function QuoteEditor({
     setPdfBusy(true);
     try {
       await generateQuotePdf({ quote, lines, fee: draft.fee, discount: draft.discount, notes: draft.notes });
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+
+  const downloadContract = async () => {
+    setPdfBusy(true);
+    try {
+      await generateContractPdf({ quote, lines, fee: draft.fee, discount: draft.discount });
     } finally {
       setPdfBusy(false);
     }
@@ -611,6 +787,10 @@ function QuoteEditor({
               <Button variant="secondary" onClick={() => void downloadPdf()} disabled={pdfBusy}>
                 {pdfBusy ? <Loader2 className="animate-spin" aria-hidden /> : <FileDown className="size-4" aria-hidden />}
                 Descargar cotización PDF
+              </Button>
+              <Button variant="secondary" onClick={() => void downloadContract()} disabled={pdfBusy}>
+                {pdfBusy ? <Loader2 className="animate-spin" aria-hidden /> : <FileDown className="size-4" aria-hidden />}
+                Descargar contrato PDF
               </Button>
             </div>
           </div>
