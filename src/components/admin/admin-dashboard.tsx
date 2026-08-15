@@ -50,6 +50,8 @@ interface QuoteLine {
   name: string;
   /** Nombre de catálogo sin personalizar: se usa para la búsqueda en Amazon. */
   searchName: string;
+  /** Dónde se compra: URL de la DB diaria, G2A para Windows, búsqueda de Amazon para el resto. */
+  href: string;
   price: number | null; // null → "a confirmar"
   /** Si el precio viene de la DB diaria: fecha de la última comprobación y fuente. */
   priceCheckedAt?: string;
@@ -75,6 +77,12 @@ function quoteLines(
       category: categories[key as Category]?.label ?? key,
       name: labels?.[key] ?? part?.name ?? id,
       searchName: part?.name ?? id,
+      // Windows se compra en G2A; el resto en Amazon (si la DB diaria tiene URL, manda ella).
+      href:
+        dbEntry?.url ??
+        (id === "os-win-pro"
+          ? "https://www.g2a.com/es/search?query=windows%2011%20pro"
+          : `https://www.amazon.es/s?k=${encodeURIComponent(part?.name ?? id)}`),
       // Prioridad: DB diaria (Amazon/G2A) > PART_PRICES (investigado) > precio de catálogo (p.ej. monitores).
       price: dbEntry?.price ?? PART_PRICES[id]?.price ?? part?.price ?? null,
       priceCheckedAt: dbEntry?.checkedAt,
@@ -599,10 +607,10 @@ function QuoteEditor({
                       />
                     ) : (
                       <a
-                        href={`https://www.amazon.es/s?k=${encodeURIComponent(l.searchName)}`}
+                        href={l.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        title={`Buscar «${l.searchName}» en Amazon`}
+                        title={`${l.priceSource === "g2a.com" ? "Comprar en G2A" : "Buscar en Amazon"}: ${l.searchName}`}
                         className="text-foreground/90 underline decoration-transparent underline-offset-2 transition-colors hover:text-brand hover:decoration-brand"
                       >
                         {l.name}
