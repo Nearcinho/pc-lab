@@ -55,8 +55,8 @@ export const PART_PRICES: Record<string, PriceEntry> = {
   // Cajas — idealo.es
   "case-atx": { price: 105, source: "idealo.es (NZXT H5 Flow)" },
   "case-eatx": { price: 180, source: "idealo.es (Phanteks Enthoo Pro 2)" },
-  // SO — PCComponentes (licencia OEM digital)
-  "os-win-home": { price: 110, source: "PCComponentes (Windows 11 Home OEM)" },
+  // SO — licencia digital (G2A), Windows 11 Pro
+  "os-win-pro": { price: 20, source: "G2A (Windows 11 Pro, clave digital global)" },
 };
 
 // Fee de montaje, test de 24 h y configuración según gama del equipo.

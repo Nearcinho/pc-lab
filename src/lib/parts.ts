@@ -1106,9 +1106,7 @@ export const psuParts: Part[] = [
 
 export const osParts: Part[] = [
   { id: "os-none", category: "os", brand: "—", name: "Sin sistema operativo", price: 0, power: 0, noOs: true },
-  { id: "os-win-home", category: "os", brand: "Microsoft", name: "Windows 11 Home", price: 129, power: 0 },
-  { id: "os-win-pro", category: "os", brand: "Microsoft", name: "Windows 11 Pro", price: 219, power: 0 },
-  { id: "os-ubuntu", category: "os", brand: "Canonical", name: "Ubuntu 24.04 LTS", price: 0, power: 0 },
+  { id: "os-win-pro", category: "os", brand: "Microsoft", name: "Windows 11 Pro · Licencia digital", price: 20, power: 0, recommended: true },
 ];
 
 // Monitores genéricos: sin marca, por pulgadas → tasa de refresco → panel.
