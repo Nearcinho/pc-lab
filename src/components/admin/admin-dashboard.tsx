@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { allParts, categories, partById, Category } from "@/lib/parts";
 import { PART_PRICES, ASSEMBLY_FEE, displayPrice, PRICES_UPDATED } from "@/lib/pricing";
+import type { PricesDb } from "@/lib/prices-db";
 import type { BudgetTier } from "@/lib/profiles";
 import type { QuoteRecord, QuoteStatus, ShippingInfo } from "@/lib/quotes";
 import { QUOTE_STATUSES, isPaid, paidAt, quoteNumber } from "@/lib/quotes";
@@ -50,9 +51,16 @@ interface QuoteLine {
   /** Nombre de catálogo sin personalizar: se usa para la búsqueda en Amazon. */
   searchName: string;
   price: number | null; // null → "a confirmar"
+  /** Si el precio viene de la DB diaria: fecha de la última comprobación y fuente. */
+  priceCheckedAt?: string;
+  priceSource?: string;
 }
 
-function quoteLines(build: Record<string, string>, labels?: Record<string, string>): QuoteLine[] {
+function quoteLines(
+  build: Record<string, string>,
+  labels?: Record<string, string>,
+  pricesDb?: PricesDb | null
+): QuoteLine[] {
   const keys = [...BUILD_ORDER, ...Object.keys(build).filter((k) => !BUILD_ORDER.includes(k))];
   const seen = new Set<string>();
   const lines: QuoteLine[] = [];
@@ -61,13 +69,16 @@ function quoteLines(build: Record<string, string>, labels?: Record<string, strin
     if (!id || id === "none" || seen.has(key)) continue;
     seen.add(key);
     const part = partById(id);
+    const dbEntry = pricesDb?.[id];
     lines.push({
       key,
       category: categories[key as Category]?.label ?? key,
       name: labels?.[key] ?? part?.name ?? id,
       searchName: part?.name ?? id,
-      // PART_PRICES (investigado) tiene prioridad; el precio de catálogo (p.ej. monitores) es el respaldo.
-      price: PART_PRICES[id]?.price ?? part?.price ?? null,
+      // Prioridad: DB diaria (Amazon/G2A) > PART_PRICES (investigado) > precio de catálogo (p.ej. monitores).
+      price: dbEntry?.price ?? PART_PRICES[id]?.price ?? part?.price ?? null,
+      priceCheckedAt: dbEntry?.checkedAt,
+      priceSource: dbEntry?.source,
     });
   }
   return lines;
@@ -410,11 +421,13 @@ interface Draft {
 function QuoteEditor({
   quote,
   pin,
+  pricesDb,
   onSaved,
   onBack,
 }: {
   quote: QuoteRecord;
   pin: string;
+  pricesDb: PricesDb | null;
   onSaved: (q: QuoteRecord) => void;
   onBack: () => void;
 }) {
@@ -453,7 +466,7 @@ function QuoteEditor({
     setEditLabel(null);
   };
 
-  const lines = quoteLines(draft.build, draft.labels);
+  const lines = quoteLines(draft.build, draft.labels, pricesDb);
   const components = lines.reduce((s, l) => s + (l.price ?? 0), 0);
   const total = displayPrice(components + draft.fee - draft.discount);
 
@@ -608,7 +621,14 @@ function QuoteEditor({
                     )}
                   </span>
                   <span className="flex shrink-0 items-center gap-2">
-                    <span className={cn("font-medium", l.price === null && "text-amber-600")}>
+                    <span
+                      className={cn("font-medium", l.price === null && "text-amber-600")}
+                      title={
+                        l.priceCheckedAt
+                          ? `Actualizado el ${formatDate(l.priceCheckedAt)} · ${l.priceSource}`
+                          : undefined
+                      }
+                    >
                       {l.price === null ? "A confirmar" : `${formatNumber(l.price)} €`}
                     </span>
                     <button
@@ -647,10 +667,10 @@ function QuoteEditor({
                   value={addPart}
                   onChange={setAddPart}
                   placeholder="Elige una pieza"
-                  options={addableParts.map((p) => ({
-                    value: p.id,
-                    label: `${p.name}${PART_PRICES[p.id] ? ` · ${formatNumber(PART_PRICES[p.id].price)} €` : ""}`,
-                  }))}
+                  options={addableParts.map((p) => {
+                    const price = pricesDb?.[p.id]?.price ?? PART_PRICES[p.id]?.price;
+                    return { value: p.id, label: `${p.name}${price ? ` · ${formatNumber(price)} €` : ""}` };
+                  })}
                 />
               </fieldset>
               <Button type="button" variant="secondary" size="sm" onClick={addComponent} disabled={!addPart}>
@@ -910,6 +930,7 @@ export function AdminDashboard() {
   const [view, setView] = React.useState<"quotes" | "clients">("quotes");
   const [clientEmail, setClientEmail] = React.useState<string | null>(null);
   const [selected, setSelected] = React.useState<QuoteRecord | null>(null);
+  const [pricesDb, setPricesDb] = React.useState<PricesDb | null>(null);
 
   const fetchQuotes = React.useCallback(async (pinValue: string): Promise<boolean> => {
     setLoading(true);
@@ -944,6 +965,21 @@ export function AdminDashboard() {
       if (ok) setPin(saved);
     })();
   }, [fetchQuotes]);
+
+  React.useEffect(() => {
+    // DB diaria de precios (Amazon/G2A): alimenta quoteLines con prioridad sobre PART_PRICES.
+    if (!authed || !pin) return;
+    void (async () => {
+      try {
+        const res = await fetch("/api/prices", { method: "POST", headers: { "x-admin-pin": pin } });
+        if (!res.ok) return;
+        const data = (await res.json()) as { ok: boolean; prices?: PricesDb };
+        if (data.ok && data.prices) setPricesDb(data.prices);
+      } catch {
+        // Sin DB de precios disponible: se usa PART_PRICES como respaldo.
+      }
+    })();
+  }, [authed, pin]);
 
   const login = async (ev: React.FormEvent) => {
     ev.preventDefault();
@@ -1053,6 +1089,7 @@ export function AdminDashboard() {
         key={selected.id}
         quote={selected}
         pin={pin}
+        pricesDb={pricesDb}
         onSaved={handleSaved}
         onBack={() => setSelected(null)}
       />
