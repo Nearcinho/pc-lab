@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AdminDashboard } from "@/components/admin/admin-dashboard";
 
 export const metadata: Metadata = {
-  title: "Admin · Cotizaciones | PC LAB",
+  title: "Admin · Cotizaciones",
   robots: { index: false, follow: false },
 };
 

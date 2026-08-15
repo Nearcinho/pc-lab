@@ -7,7 +7,7 @@ export const siteConfig = {
     "Diseñamos y ensamblamos tu PC a medida en Madrid: gaming, streaming, creación, trabajo e IA. Test de estabilidad de 24 h y garantía de 1 año en cada equipo.",
   email: "info@nexa-gaming.es",
   phone: "+34 910 123 456",
-  whatsapp: "+34 600 123 456",
+  whatsapp: "+34 645 44 38 41",
   hours: "Lun – Vie · 10:00 – 19:00",
   social: {
     instagram: "https://instagram.com/nexa.pc",

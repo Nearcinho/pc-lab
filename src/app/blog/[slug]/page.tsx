@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ChevronLeft, CalendarDays, Clock, Tags } from "lucide-react";
+import { ArrowLeft, ChevronLeft, CalendarDays, Clock, Tags, User } from "lucide-react";
 import { blogPosts, getPost } from "@/lib/blog";
+import { siteConfig } from "@/lib/site";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/ui/reveal";
 import { Cta } from "@/components/home/cta";
@@ -25,9 +26,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
-      title: `${post.title} | PC LAB`,
+      title: post.title,
       description: post.excerpt,
       type: "article",
+      url: `/blog/${post.slug}`,
     },
   };
 }
@@ -43,8 +45,39 @@ export default async function BlogPostPage({ params }: Props) {
 
   const related = blogPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
+  const postUrl = `${siteConfig.domain}/blog/${post.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `${postUrl}#article`,
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        image: `${siteConfig.domain}${post.cover}`,
+        inLanguage: "es-ES",
+        author: { "@type": "Person", name: post.author },
+        publisher: { "@id": `${siteConfig.domain}/#organization` },
+        mainEntityOfPage: postUrl,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Inicio", item: siteConfig.domain },
+          { "@type": "ListItem", position: 2, name: "Blog", item: `${siteConfig.domain}/blog` },
+          { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className="pt-32 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container-x max-w-3xl">
         <nav aria-label="Migajas de pan" className="mb-8">
           <ol className="flex items-center gap-2 text-sm text-muted">
@@ -71,6 +104,9 @@ export default async function BlogPostPage({ params }: Props) {
         <Reveal>
           <div className="flex flex-wrap items-center gap-3 text-sm text-muted">
             <Badge variant="brand">{post.category}</Badge>
+            <span className="flex items-center gap-1.5">
+              <User className="size-4" aria-hidden /> {post.author}
+            </span>
             <span className="flex items-center gap-1.5">
               <CalendarDays className="size-4" aria-hidden /> {formatDate(post.date)}
             </span>

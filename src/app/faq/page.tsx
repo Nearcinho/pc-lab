@@ -13,9 +13,34 @@ export const metadata: Metadata = {
   alternates: { canonical: "/faq" },
 };
 
+function slugify(text: string) {
+  return text
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
 export default function FaqPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqGroups.flatMap((group) =>
+      group.items.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: { "@type": "Answer", text: item.answer },
+      }))
+    ),
+  };
+
   return (
     <div className="pt-32 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container-x max-w-4xl">
         <SectionHeading
           as="h1"
@@ -26,16 +51,16 @@ export default function FaqPage() {
 
         <div className="mt-12 space-y-10">
           {faqGroups.map((group) => (
-            <section key={group.category} aria-labelledby={group.category}>
+            <section key={group.category} aria-labelledby={slugify(group.category)}>
               <Reveal>
-                <h2 id={group.category} className="font-display text-xl font-semibold text-brand-2">
+                <h2 id={slugify(group.category)} className="font-display text-xl font-semibold text-brand-2">
                   {group.category}
                 </h2>
               </Reveal>
               <Reveal delay={0.08} className="mt-4">
                 <Accordion
                   items={group.items.map((item, idx) => ({
-                    value: `${group.category}-${idx}`,
+                    value: `${slugify(group.category)}-${idx}`,
                     title: item.question,
                     content: item.answer,
                   }))}

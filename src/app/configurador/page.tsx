@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "Simulador de PC a medida | PC LAB",
+  title: "Simulador de PC a medida",
   description:
     "Configura tu PC pieza a pieza o cuéntanos para qué lo vas a usar y tu presupuesto. Compatibilidad automática y sin precios: la cotización llega tras la consultoría.",
   alternates: { canonical: "/configurador" },

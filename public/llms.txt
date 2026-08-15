@@ -1,0 +1,35 @@
+# PC LAB · Estudio de PC a medida
+
+> PC LAB es un estudio español (Madrid) de diseño y montaje de PCs a medida: gaming, streaming, creación de contenido, trabajo e inteligencia artificial local. Cada equipo se configura para el uso real del cliente, se ensambla a mano, pasa un test de estabilidad de 24 horas y se entrega con 1 año de garantía en el ensamblado.
+
+## Qué ofrece
+
+- Configurador interactivo de PC a medida con precio en tiempo real y validación de compatibilidad.
+- PCs preconfigurados por categoría como punto de partida ajustable: gaming, creadores, trabajo e IA/desarrollo.
+- Montaje premium con gestión de cableado, BIOS optimizada y perfiles de rendimiento.
+- Test de estabilidad de 24 h (CPU + GPU + RAM + SSD) con informe entregado al cliente.
+- Garantía de 1 año en el ensamblado; los componentes mantienen la garantía oficial del fabricante.
+- Envío asegurado a toda España y Portugal; gratis en Península en configuraciones superiores a 899 €.
+- Asesoría personalizada, upgrades de equipos, custom loop y modding estético.
+
+## Secciones principales
+
+- [Home](https://nexa-gaming.es/): presentación del estudio y propuesta de valor.
+- [Configurador](https://nexa-gaming.es/configurador): simulador de PC a medida pieza a pieza.
+- [PC Gaming](https://nexa-gaming.es/pcs/gaming): builds de 1080p competitivo a 4K.
+- [PC para creadores](https://nexa-gaming.es/pcs/creadores): edición, diseño 3D y render.
+- [PC de trabajo](https://nexa-gaming.es/pcs/trabajo): estaciones silenciosas y fiables.
+- [PC de IA y desarrollo](https://nexa-gaming.es/pcs/ia): VRAM y núcleos para IA local.
+- [Servicios](https://nexa-gaming.es/servicios): asesoría, montaje, custom loop, modding y upgrades.
+- [Calculadora de rendimiento](https://nexa-gaming.es/calculadora-rendimiento): FPS estimados por configuración.
+- [Blog](https://nexa-gaming.es/blog): guías técnicas (RAM, GPUs, refrigeración, presupuestos).
+- [FAQ](https://nexa-gaming.es/faq): plazos, envíos, garantía y soporte.
+- [Garantía](https://nexa-gaming.es/garantia): cobertura y condiciones.
+- [Contacto](https://nexa-gaming.es/contacto): formulario y canales directos.
+
+## Contacto
+
+- Email: info@nexa-gaming.es
+- Teléfono: +34 910 123 456
+- WhatsApp: +34 645 44 38 41
+- Horario: Lun – Vie · 10:00 – 19:00

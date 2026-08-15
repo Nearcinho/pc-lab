@@ -27,7 +27,7 @@ export default function ContactoPage() {
           as="h1"
           eyebrow="Contacto"
           title="Hablemos de tu próximo PC"
-          description="Configuración, asesoría, upgrades o empresa: respóndemos rápido y con criterio."
+          description="Configuración, asesoría, upgrades o empresa: respondemos rápido y con criterio."
         />
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">

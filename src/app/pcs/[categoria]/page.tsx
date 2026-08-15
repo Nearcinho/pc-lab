@@ -8,6 +8,7 @@ import { PROFILES, BudgetTier } from "@/lib/profiles";
 import { priceBuild, displayPrice, PRICES_UPDATED } from "@/lib/pricing";
 import { formatNumber } from "@/lib/utils";
 import { partById } from "@/lib/parts";
+import { siteConfig } from "@/lib/site";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Cta } from "@/components/home/cta";
@@ -25,9 +26,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const cat = getPrebuildCategory(categoria);
   if (!cat) return { title: "No encontrado" };
   return {
-    title: `${cat.title} a medida | PC LAB`,
+    title: `${cat.title} a medida`,
     description: cat.description,
     alternates: { canonical: `/pcs/${cat.slug}` },
+    openGraph: {
+      url: `/pcs/${cat.slug}`,
+      title: `${cat.title} a medida`,
+      description: cat.description,
+    },
   };
 }
 
@@ -44,8 +50,53 @@ export default async function PrebuildCategoryPage({ params }: Props) {
   const cat = getPrebuildCategory(categoria);
   if (!cat) notFound();
 
+  const pageUrl = `${siteConfig.domain}/pcs/${cat.slug}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Inicio", item: siteConfig.domain },
+          { "@type": "ListItem", position: 2, name: cat.title, item: pageUrl },
+        ],
+      },
+      {
+        "@type": "ItemList",
+        name: `${cat.title} a medida`,
+        itemListElement: cat.builds.map((b, i) => {
+          const tier = Number(b.preset.split("-")[1]) as BudgetTier;
+          const profile = PROFILES[cat.use][tier];
+          const price = priceBuild(profile, tier);
+          return {
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Product",
+              name: `${b.name} · ${cat.title}`,
+              description: b.tagline,
+              image: `${siteConfig.domain}${b.image}`,
+              brand: { "@type": "Brand", name: siteConfig.name },
+              offers: {
+                "@type": "Offer",
+                url: pageUrl,
+                priceCurrency: "EUR",
+                price: displayPrice(price.total),
+                availability: "https://schema.org/InStock",
+              },
+            },
+          };
+        }),
+      },
+    ],
+  };
+
   return (
     <div className="pt-32 pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container-x">
         <nav aria-label="Migajas de pan" className="mb-8">
           <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground">

@@ -30,7 +30,7 @@ const sections = [
     id: "envio",
     title: "3. Envío",
     paragraphs: [
-      "Envíamos a toda España peninsular en 24–48 h y a Baleares/Canarias en 2–4 días, siempre con embalaje de espuma a medida y seguro incluido. El transporte es gratuito a partir de 1.000 €.",
+      "Envíamos a toda España peninsular en 24–48 h y a Baleares/Canarias en 2–4 días, siempre con embalaje de espuma a medida y seguro incluido. El transporte es gratuito en configuraciones superiores a 899 €.",
       "Los equipos custom se aseguran contra daños durante el transporte; revisa el paquete a la entrega y avísanos en las primeras 48 h si algo no cuadra.",
     ],
   },

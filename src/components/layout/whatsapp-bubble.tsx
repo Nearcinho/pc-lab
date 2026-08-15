@@ -4,9 +4,10 @@ import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MessageCircle, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/site";
 
 const WHATSAPP_URL =
-  "https://wa.me/34645443841?text=" +
+  `https://wa.me/${siteConfig.whatsapp.replace(/[\s+]/g, "")}?text=` +
   encodeURIComponent("Hola PC LAB, quiero información sobre un equipo a medida.");
 
 export function WhatsappBubble() {

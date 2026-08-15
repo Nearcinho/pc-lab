@@ -4,7 +4,7 @@ import { QuoteForm } from "@/components/quote/quote-form";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export const metadata: Metadata = {
-  title: "Solicitar cotización | PC LAB",
+  title: "Solicitar cotización",
   description:
     "Revisa tu configuración y pídenos cotización: te enviamos un presupuesto cerrado en menos de 24 horas laborables.",
   robots: { index: false },

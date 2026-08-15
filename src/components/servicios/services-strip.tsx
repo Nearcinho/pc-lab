@@ -40,7 +40,7 @@ const services: Service[] = [
     line: "Montaje · Configuración · Testing",
     cta: "Ensamblar mi PC",
     href: "/contacto",
-    image: asset("/cases/ensamblado.png"),
+    image: asset("/cases/ensamblado.jpg"),
     alt: "Ensamblado profesional de un PC en PC LAB",
   },
   {
@@ -51,7 +51,7 @@ const services: Service[] = [
     line: "GPU · CPU · RAM · SSD",
     cta: "Mejorar mi PC",
     href: "/contacto",
-    image: asset("/cases/upgrade.png"),
+    image: asset("/cases/upgrade.jpg"),
     alt: "Mejora de rendimiento de un PC en PC LAB",
   },
   {
@@ -61,7 +61,7 @@ const services: Service[] = [
     line: undefined,
     cta: "Mantener mi PC",
     href: "/contacto",
-    image: asset("/cases/mantenimiento.png"),
+    image: asset("/cases/mantenimiento.jpg"),
     alt: "Mantenimiento de un PC en PC LAB",
   },
 ];

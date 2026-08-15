@@ -1,17 +1,24 @@
 import * as React from "react";
 import Link from "next/link";
-import { ArrowUpRight, Camera, Play, AtSign, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Camera, Play, AtSign, MessageCircle, Mail, Phone } from "lucide-react";
 import { LinkedInIcon } from "@/components/ui/linkedin-icon";
 import { Brand } from "@/components/brand/brand";
-import { siteConfig } from "@/lib/site";
+import { siteConfig, formatMailHref, formatPhoneHref } from "@/lib/site";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Configurador", href: "/configurador" },
+  { label: "PC Gaming", href: "/pcs/gaming" },
+  { label: "PC para creadores", href: "/pcs/creadores" },
+  { label: "PC de trabajo", href: "/pcs/trabajo" },
+  { label: "PC de IA y desarrollo", href: "/pcs/ia" },
+  { label: "Calculadora de rendimiento", href: "/calculadora-rendimiento" },
+  { label: "Garantía", href: "/garantia" },
   { label: "Servicios", href: "/#servicios" },
   { label: "Quiénes somos", href: "/nosotros" },
   { label: "Blog", href: "/blog" },
   { label: "FAQ", href: "/faq" },
+  { label: "Contacto", href: "/contacto" },
 ];
 
 const legalLinks = [
@@ -40,6 +47,22 @@ export function Footer() {
               Un estudio de Madrid que diseña y ensambla PCs a medida. Nada de catálogo: cada equipo se
               piensa para lo que tú vas a hacer con él.
             </p>
+            <div className="mt-5 space-y-2 text-sm">
+              <a
+                href={formatMailHref(siteConfig.email)}
+                className="flex items-center gap-2 text-muted-2 transition-colors hover:text-foreground"
+              >
+                <Mail className="size-4 text-brand" aria-hidden />
+                {siteConfig.email}
+              </a>
+              <a
+                href={formatPhoneHref(siteConfig.phone)}
+                className="flex items-center gap-2 text-muted-2 transition-colors hover:text-foreground"
+              >
+                <Phone className="size-4 text-brand" aria-hidden />
+                {siteConfig.phone}
+              </a>
+            </div>
           </div>
 
           <nav aria-label="Navegación" className="grid grid-cols-2 gap-x-16 gap-y-3 sm:grid-cols-3 lg:grid-cols-2">

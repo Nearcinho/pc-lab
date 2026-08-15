@@ -72,6 +72,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@nexa_pc",
+    creator: "@nexa_pc",
     title: "PC LAB·Estudio | PCs a medida en Madrid",
     description: siteConfig.description,
     images: [`${siteConfig.domain}/og.png`],

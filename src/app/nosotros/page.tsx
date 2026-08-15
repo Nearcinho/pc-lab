@@ -4,7 +4,7 @@ import { asset } from "@/lib/base";
 import { Reveal } from "@/components/ui/reveal";
 
 export const metadata: Metadata = {
-  title: "Quiénes somos | PC LAB",
+  title: "Quiénes somos",
   description:
     "PC LAB aplica a tu ordenador el mismo cuidado que pondría en el suyo: diseño a medida, montaje cuidadoso, configuración y pruebas antes de entregar.",
   alternates: { canonical: "/nosotros" },
@@ -123,7 +123,7 @@ export default function NosotrosPage() {
                   loop
                   playsInline
                   preload="auto"
-                  poster={asset("/cases/ensamblado.png")}
+                  poster={asset("/cases/ensamblado.jpg")}
                   className="h-full w-full object-cover"
                 >
                   <source src={asset("/videos/cable-management.mp4")} type="video/mp4" />
