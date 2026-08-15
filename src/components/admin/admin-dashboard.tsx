@@ -308,15 +308,17 @@ async function generateContractPdf(opts: {
   paragraph(
     `De una parte, PC LAB, en adelante "el Vendedor", representada en este acto por ${REPRESENTANTE.nombre}, con NIE ${REPRESENTANTE.nie}, en su calidad de representante de la empresa.`
   );
+  const sh = quote.shipping ?? {};
+  const direccion = [sh.address, sh.city, sh.zip, sh.province].filter(Boolean).join(", ");
   paragraph(
-    `De otra parte, ${quote.name}, en adelante "el Cliente", con correo electrónico ${quote.email}${quote.phone ? ` y teléfono ${quote.phone}` : ""}, y con NIE/NIF: ______________________ (a cumplimentar por el Cliente).`
+    `De otra parte, ${quote.name}, en adelante "el Cliente", con correo electrónico ${quote.email}${quote.phone ? ` y teléfono ${quote.phone}` : ""}, con NIE/NIF: ______________________ (a cumplimentar por el Cliente), y con dirección: ${direccion || "______________________ (a cumplimentar por el Cliente)"}.`
   );
   y += 3;
 
   heading("CLÁUSULAS");
   const clausulas: [string, string][] = [
     ["1. Objeto", `El Vendedor se compromete a montar, testar y entregar al Cliente el equipo informático detallado en el Anexo I de este contrato, correspondiente a la cotización Nº ${quoteNumber(quote)}, con la configuración de componentes que en él se especifica.`],
-    ["2. Precio y forma de pago", `El precio total del equipo armado es de ${eur(displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount))}. El precio incluye el montaje, el test de estabilidad de 24 horas y la puesta a punto del equipo. La forma y calendario de pago se acuerdan entre las partes antes del inicio del montaje.`],
+    ["2. Precio y forma de pago", `El precio total del equipo armado es de ${eur(displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount))}. El precio incluye el montaje, el test de estabilidad de 24 horas y la puesta a punto del equipo. Se confirmará el pedido una vez recepcionado el pago posterior a la firma del contrato.`],
     ["3. Plazo de montaje y entrega", "El plazo de montaje y entrega es de máximo 7 días hábiles desde la confirmación del pedido, a excepción de solicitud de componentes que tengan retraso en la distribución; en ese caso se informará al Cliente del periodo de retraso."],
     ["4. Garantías", "El ensamblado del equipo tiene una garantía de 1 año por defectos de montaje, gestionada directamente por PC LAB. Cada componente conserva además la garantía oficial de su fabricante, cuyos trámites el Vendedor ayudará a gestionar. La garantía no cubre daños por mal uso, sobretensión ajena al equipo o manipulación no autorizada."],
     ["5. Precios y validez", "Los precios de los componentes se valoran a precio de mercado en la fecha de la cotización y son válidos durante 24 horas desde su emisión; pasado ese periodo el valor debe revalidarse por variaciones en el precio de los componentes."],
