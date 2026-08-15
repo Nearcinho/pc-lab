@@ -28,6 +28,16 @@ export type NavItem = {
 export const mainNav: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Configurador", href: "/configurador" },
+  {
+    label: "Nuestros PCs",
+    href: "/pcs/gaming",
+    children: [
+      { label: "PC Gaming", href: "/pcs/gaming", description: "De 1080p competitivo a 4K sin límites." },
+      { label: "PC para creadores", href: "/pcs/creadores", description: "Edición, diseño 3D y render sin esperas." },
+      { label: "PC de trabajo", href: "/pcs/trabajo", description: "Estaciones silenciosas para el día a día." },
+      { label: "PC de IA y desarrollo", href: "/pcs/ia", description: "Código, datos e IA local con VRAM de sobra." },
+    ],
+  },
   { label: "Servicios", href: "/servicios" },
   { label: "Quiénes somos", href: "/nosotros" },
   { label: "Blog", href: "/blog" },
