@@ -5,12 +5,12 @@ import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   Cpu, CircuitBoard, Gauge, MemoryStick, HardDrive, Wind, PlugZap, Box, Disc,
-  Headphones, Sparkles, Check, AlertTriangle, Info, Rocket, ChevronRight, RotateCcw, Monitor, ArrowLeft,
+  Sparkles, Check, AlertTriangle, Info, Rocket, ChevronRight, RotateCcw, Monitor, ArrowLeft,
 } from "lucide-react";
 import {
   categories, Category, Part, partById,
   cpuParts, motherboardParts, gpuParts, ramParts, storageParts,
-  coolingParts, psuParts, caseParts, osParts, peripheralParts, extraParts, allParts,
+  coolingParts, psuParts, caseParts, osParts, peripheralParts, allParts,
 } from "@/lib/parts";
 import { computeBuild, BuildSelection, BuildIssue } from "@/lib/build-engine";
 import type { Resolution } from "@/lib/benchmarks";
@@ -509,16 +509,6 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
     if (idx > 0) setActive(ORDER[idx - 1]);
   };
 
-  const toggleAddon = (slot: "peripheral" | "extra", id: string) =>
-    setSel((prev) => {
-      if (prev[slot] === id) {
-        const next = { ...prev };
-        delete next[slot];
-        return next;
-      }
-      return { ...prev, [slot]: id };
-    });
-
   const meta = stepMeta(active);
   const cur = chain[active] ?? [];
   const view = stepView(active, cur, sel);
@@ -779,59 +769,7 @@ export function Builder({ initial }: { initial?: BuildSelection }) {
 
           {active === "os" && (
             <div className="mt-6 border-t border-border pt-5">
-              <div className="mb-3 flex items-center gap-3">
-                <span className="flex size-9 items-center justify-center rounded-lg border border-border bg-surface-2/50 text-muted">
-                  <Headphones className="size-4" aria-hidden />
-                  <Sparkles className="size-3 -ml-1" aria-hidden />
-                </span>
-                <div>
-                  <h3 className="font-display text-sm font-semibold">Opcionales</h3>
-                  <p className="text-[11px] text-muted">No afectan al montaje: se suman a la configuración.</p>
-                </div>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {[...peripheralParts.filter((p) => p.kind !== "monitor"), ...extraParts].map((p) => {
-                  const slot: "peripheral" | "extra" = p.category === "peripheral" ? "peripheral" : "extra";
-                  const selected = sel[slot] === p.id;
-                  return (
-                    <motion.button
-                      key={p.id}
-                      initial={reduced ? false : { opacity: 0, scale: 0.97 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.25 }}
-                      onClick={() => toggleAddon(slot, p.id)}
-                      aria-pressed={selected}
-                      className={cn(
-                        "flex flex-col rounded-2xl border p-4 text-left transition-all duration-300",
-                        selected
-                          ? "border-brand/60 bg-brand/5 shadow-glow-sm"
-                          : "border-border bg-surface-2/40 hover:border-border-strong hover:bg-surface-2/70"
-                      )}
-                    >
-                      <div className="flex items-start justify-between gap-2">
-                        <span className="rounded-md border border-border bg-surface-2/60 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-muted">
-                          {p.category === "peripheral" ? "Periférico" : "Extra"}
-                        </span>
-                        <span
-                          className={cn(
-                            "flex size-5 shrink-0 items-center justify-center rounded-full border transition-all",
-                            selected ? "border-brand bg-brand text-white" : "border-border text-transparent"
-                          )}
-                        >
-                          <Check className="size-3" strokeWidth={3} aria-hidden />
-                        </span>
-                      </div>
-                      <p className="mt-2.5 font-display text-[15px] font-semibold leading-snug">{p.name}</p>
-                      <p className="mt-1 text-[11px] text-muted">{p.brand}</p>
-                      <span className="mt-2 text-[10px] uppercase tracking-wide text-muted/60">
-                        {selected ? "Añadido" : "Añadir"}
-                      </span>
-                    </motion.button>
-                  );
-                })}
-              </div>
-
-              <div className="mt-6 border-t border-border pt-5">
+              <div className="mt-0">
                 <div className="mb-3 flex items-center gap-3">
                   <span className="flex size-9 items-center justify-center rounded-lg border border-border bg-surface-2/50 text-muted">
                     <Sparkles className="size-4" aria-hidden />
