@@ -280,7 +280,7 @@ async function generateContractPdf(opts: {
   doc.setFont("arial", "normal");
   doc.setFontSize(8.5);
   doc.text(`Ref. cotización Nº ${quote.id}`, pageW - margin, 20, { align: "right" });
-  doc.text(`Fecha: ${formatDate(quote.createdAt)}`, pageW - margin, 25.5, { align: "right" });
+  doc.text(`Fecha de generación: ${formatDate(new Date().toISOString())}`, pageW - margin, 25.5, { align: "right" });
 
   let y = 42;
   const heading = (t: string) => {
@@ -366,6 +366,9 @@ async function generateContractPdf(opts: {
   doc.text("FIRMAS", margin, fy);
   fy += 14;
   const colW = (pageW - margin * 2) / 2;
+  const { FIRMA_NICOLAS_B64 } = await import("@/lib/pdf/signature");
+  // Firma escaneada del representante sobre la línea de firma del vendedor.
+  doc.addImage(`data:image/png;base64,${FIRMA_NICOLAS_B64}`, "PNG", margin + 2, fy - 4, 40, 15.7);
   doc.setDrawColor(120, 120, 120);
   doc.line(margin, fy + 18, margin + colW - 20, fy + 18);
   doc.line(margin + colW + 10, fy + 18, pageW - margin, fy + 18);
