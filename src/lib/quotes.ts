@@ -51,3 +51,22 @@ export function isPaid(q: QuoteRecord): boolean {
 export function paidAt(q: QuoteRecord): string | undefined {
   return typeof q.paid === "object" ? q.paid.at : undefined;
 }
+
+/**
+ * Nº de cotización público: iniciales de cada parte del nombre + fecha de
+ * solicitud (DDMMYY). P.ej. José Ramírez García, 15/08/2026 → "JRG-150826".
+ */
+export function quoteNumber(q: { name: string; createdAt: string }): string {
+  const initials = q.name
+    .trim()
+    .split(/\s+/)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+  const d = new Date(q.createdAt);
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${initials || "CL"}-${dd}${mm}${yy}`;
+}

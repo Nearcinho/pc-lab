@@ -10,7 +10,7 @@ import { allParts, categories, partById, Category } from "@/lib/parts";
 import { PART_PRICES, ASSEMBLY_FEE, displayPrice, PRICES_UPDATED } from "@/lib/pricing";
 import type { BudgetTier } from "@/lib/profiles";
 import type { QuoteRecord, QuoteStatus, ShippingInfo } from "@/lib/quotes";
-import { QUOTE_STATUSES, isPaid, paidAt } from "@/lib/quotes";
+import { QUOTE_STATUSES, isPaid, paidAt, quoteNumber } from "@/lib/quotes";
 import { ASSEMBLY_WARRANTY, CATEGORY_WARRANTY } from "@/lib/warranty";
 import { siteConfig } from "@/lib/site";
 import { cn, formatNumber } from "@/lib/utils";
@@ -133,7 +133,7 @@ async function generateQuotePdf(opts: {
   doc.text("COTIZACIÓN", pageW - margin, 15, { align: "right" });
   doc.setFont("arial", "normal");
   doc.setFontSize(9);
-  doc.text(`Nº ${quote.id}`, pageW - margin, 21, { align: "right" });
+  doc.text(`Nº ${quoteNumber(quote)}`, pageW - margin, 21, { align: "right" });
   doc.text(`Fecha: ${formatDate(quote.createdAt)}`, pageW - margin, 27, { align: "right" });
 
   // Datos del cliente
@@ -221,7 +221,7 @@ async function generateQuotePdf(opts: {
     fy += wrapped.length * 4 + 1;
   }
 
-  doc.save(`cotizacion-${quote.id}-${slugify(quote.name)}.pdf`);
+  doc.save(`cotizacion-${quoteNumber(quote)}-${slugify(quote.name)}.pdf`);
 }
 
 // Datos del representante de PC LAB que firman el contrato.
@@ -258,7 +258,7 @@ async function generateContractPdf(opts: {
     doc.setFont("arial", "normal");
     doc.setFontSize(7.5);
     doc.setTextColor(140, 140, 140);
-    doc.text(`PC LAB · Contrato vinculado a la cotización Nº ${quote.id} · Página ${doc.getCurrentPageInfo().pageNumber}`, pageW / 2, pageH - 8, { align: "center" });
+    doc.text(`PC LAB · Contrato vinculado a la cotización Nº ${quoteNumber(quote)} · Página ${doc.getCurrentPageInfo().pageNumber}`, pageW / 2, pageH - 8, { align: "center" });
   };
 
   // Cabecera
@@ -279,7 +279,7 @@ async function generateContractPdf(opts: {
   doc.text("CONTRATO DE SERVICIO", pageW - margin, 13, { align: "right" });
   doc.setFont("arial", "normal");
   doc.setFontSize(8.5);
-  doc.text(`Ref. cotización Nº ${quote.id}`, pageW - margin, 20, { align: "right" });
+  doc.text(`Ref. cotización Nº ${quoteNumber(quote)}`, pageW - margin, 20, { align: "right" });
   doc.text(`Fecha de generación: ${formatDate(new Date().toISOString())}`, pageW - margin, 25.5, { align: "right" });
 
   let y = 42;
@@ -319,7 +319,7 @@ async function generateContractPdf(opts: {
 
   heading("CLÁUSULAS");
   const clausulas: [string, string][] = [
-    ["1. Objeto", `El Vendedor se compromete a montar, testar y entregar al Cliente el equipo informático detallado en el Anexo I de este contrato, correspondiente a la cotización Nº ${quote.id}, con la configuración de componentes que en él se especifica.`],
+    ["1. Objeto", `El Vendedor se compromete a montar, testar y entregar al Cliente el equipo informático detallado en el Anexo I de este contrato, correspondiente a la cotización Nº ${quoteNumber(quote)}, con la configuración de componentes que en él se especifica.`],
     ["2. Precio y forma de pago", `El precio total del equipo armado es de ${eur(displayPrice(lines.reduce((s, l) => s + (l.price ?? 0), 0) + fee - discount))}. El precio incluye el montaje, el test de estabilidad de 24 horas y la puesta a punto del equipo. La forma y calendario de pago se acuerdan entre las partes antes del inicio del montaje.`],
     ["3. Plazo de montaje y entrega", "El plazo estimado de montaje y pruebas es de 7 a 10 días laborables desde la confirmación del pedido, pudiendo variar por disponibilidad de componentes. El Vendedor informará al Cliente de cada fase del proceso."],
     ["4. Garantías", "El ensamblado del equipo tiene una garantía de 1 año por defectos de montaje, gestionada directamente por PC LAB. Cada componente conserva además la garantía oficial de su fabricante, cuyos trámites el Vendedor ayudará a gestionar. La garantía no cubre daños por mal uso, sobretensión ajena al equipo o manipulación no autorizada."],
@@ -386,7 +386,7 @@ async function generateContractPdf(opts: {
   doc.text(`En ______________________, a ____ de ______________ de 20____`, margin, fy + 44);
 
   footer();
-  doc.save(`contrato-${quote.id}-${slugify(quote.name)}.pdf`);
+  doc.save(`contrato-${quoteNumber(quote)}-${slugify(quote.name)}.pdf`);
 }
 
 // ---------------------------------------------------------------------------
@@ -542,7 +542,7 @@ function QuoteEditor({
         <div className="space-y-6">
           {/* Configuración editable */}
           <div className="rounded-3xl border border-border bg-surface/50 p-6 backdrop-blur">
-            <h2 className="font-display text-lg font-semibold">Cotización {quote.id}</h2>
+            <h2 className="font-display text-lg font-semibold">Cotización {quoteNumber(quote)}</h2>
             <p className="mt-1 text-sm text-muted">
               {quote.name} · {quote.email}
               {quote.phone && ` · ${quote.phone}`} · {formatDate(quote.createdAt)}
@@ -1057,6 +1057,9 @@ export function AdminDashboard() {
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-center gap-2">
           <p className="font-medium">{q.name}</p>
+          <span className="rounded-md border border-border bg-surface-2/60 px-1.5 py-0.5 font-mono text-[10px] text-muted">
+            {quoteNumber(q)}
+          </span>
           <Badge variant={STATUS_VARIANT[q.status]}>
             {QUOTE_STATUSES.find((s) => s.value === q.status)?.label ?? q.status}
           </Badge>
