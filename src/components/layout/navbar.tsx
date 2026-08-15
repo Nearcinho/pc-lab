@@ -46,7 +46,7 @@ function NavItem({ label, href, items }: { label: string; href: string; items?: 
             transition={{ duration: 0.2, ease: "easeOut" }}
             className="absolute left-1/2 top-full w-72 -translate-x-1/2 pt-3"
           >
-            <div className="glass-strong overflow-hidden rounded-2xl p-2 shadow-card">
+            <div className="overflow-hidden rounded-2xl border border-border bg-[#0b0d13]/95 p-2 shadow-card backdrop-blur-md">
               {items!.map((child) => {
                 const childActive = pathname === child.href;
                 return (
