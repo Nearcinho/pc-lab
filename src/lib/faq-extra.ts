@@ -52,7 +52,7 @@ export const legalData = [
     id: "precios",
     title: "Precios y forma de pago",
     paragraphs: [
-      "Los precios mostrados incluyen IVA. Ofrecemos pago con tarjeta, PayPal, transferencia y financiación a plazos sin intereses a 3, 6 y 12 meses.",
+      "Los precios se muestran en euros. Ofrecemos pago con tarjeta, PayPal, transferencia y financiación a plazos sin intereses a 3, 6 y 12 meses.",
       "Los precios del configurador son estimaciones orientativas y pueden variar ligeramente por disponibilidad de las piezas. En PC LAB te confirmamos el precio cerrado antes de cobrar.",
     ],
   },

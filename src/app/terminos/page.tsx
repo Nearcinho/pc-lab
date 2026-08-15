@@ -13,7 +13,7 @@ const sections = [
     id: "compra",
     title: "1. Realizar un pedido",
     paragraphs: [
-      "Al realizar un pedido aceptas estas condiciones. Los precios incluyen IVA y se muestran en euros. Tras confirmar el pago, recibirás un email con el resumen y el plazo estimado.",
+      "Al realizar un pedido aceptas estas condiciones. Los precios se muestran en euros. Tras confirmar el pago, recibirás un email con el resumen y el plazo estimado.",
       "Los equipos se configuran y montan a medida: el plazo estimado aparece en tu confirmación y puede variar ±3 días si hay rotura de stock en algún componente (te avisamos antes).",
     ],
   },
@@ -45,7 +45,7 @@ const sections = [
     id: "precios",
     title: "5. Precios e impuestos",
     paragraphs: [
-      "Los precios pueden variar por cambios en el mercado de componentes. Si suben más de un 5% entre tu pedido y el montaje, te lo confirmamos antes de proceder. El IVA incluido figura siempre en el carrito y en la factura.",
+      "Los precios pueden variar por cambios en el mercado de componentes. Si suben más de un 5% entre tu pedido y el montaje, te lo confirmamos antes de proceder.",
     ],
   },
   {

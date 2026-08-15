@@ -190,10 +190,6 @@ async function generateQuotePdf(opts: {
   doc.setFont("arial", "bold");
   doc.setFontSize(13);
   doc.text(`TOTAL: ${eur(total)}`, pageW - margin - 45, finalY + 16.5, { align: "center" });
-  doc.setTextColor(120, 120, 120);
-  doc.setFont("arial", "normal");
-  doc.setFontSize(8);
-  doc.text("IVA incluido", pageW - margin - 45, finalY + 21, { align: "center" });
 
   // Notas y condiciones
   let fy = finalY + 32;
@@ -368,7 +364,7 @@ async function generateContractPdf(opts: {
   const colW = (pageW - margin * 2) / 2;
   const { FIRMA_NICOLAS_B64 } = await import("@/lib/pdf/signature");
   // Firma escaneada del representante sobre la línea de firma del vendedor.
-  doc.addImage(`data:image/png;base64,${FIRMA_NICOLAS_B64}`, "PNG", margin + 2, fy - 4, 40, 15.7);
+  doc.addImage(`data:image/png;base64,${FIRMA_NICOLAS_B64}`, "PNG", margin + 2, fy - 6, 36, 25.8);
   doc.setDrawColor(120, 120, 120);
   doc.line(margin, fy + 18, margin + colW - 20, fy + 18);
   doc.line(margin + colW + 10, fy + 18, pageW - margin, fy + 18);

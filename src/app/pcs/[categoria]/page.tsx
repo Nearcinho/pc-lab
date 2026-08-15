@@ -63,7 +63,7 @@ export default async function PrebuildCategoryPage({ params }: Props) {
           </h1>
           <p className="mt-5 text-base leading-relaxed text-muted-2">{cat.description}</p>
           <p className="mt-4 text-xs text-muted">
-            Precios orientativos con IVA: componentes a precio de mercado (Amazon/idealo, {PRICES_UPDATED}) más el
+            Precios orientativos: componentes a precio de mercado (Amazon/idealo, {PRICES_UPDATED}) más el
             montaje, test de 24 h y configuración incluidos. La cotización final se confirma en la consultoría.
           </p>
         </header>
@@ -102,7 +102,7 @@ export default async function PrebuildCategoryPage({ params }: Props) {
                   <div className="mt-4 rounded-2xl border border-brand/25 bg-brand/5 px-4 py-3">
                     <p className="font-display text-2xl font-semibold text-brand">{formatNumber(displayPrice(price.total))} €</p>
                     <p className="mt-0.5 text-[11px] leading-snug text-muted">
-                      IVA, montaje, test de 24 h y configuración incluidos
+                      Montaje, test de 24 h y configuración incluidos
                     </p>
                   </div>
 

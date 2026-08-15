@@ -231,7 +231,7 @@ export function QuoteForm() {
                 {estimate ? `${formatNumber(estimate)} €` : "A confirmar"}
               </p>
               <p className="mt-0.5 text-[11px] leading-snug text-muted">
-                Estimación orientativa con IVA: componentes a precio de mercado ({PRICES_UPDATED}) más montaje, test de
+                Estimación orientativa: componentes a precio de mercado ({PRICES_UPDATED}) más montaje, test de
                 24 h y configuración. La cotización final se confirma contigo.
               </p>
             </div>
