@@ -6,7 +6,7 @@ const DATA_DIR = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "quotes.json");
 
 export function adminPin() {
-  return process.env.ADMIN_PIN ?? "1234";
+  return process.env.ADMIN_PIN ?? "Pclab26!";
 }
 
 export async function readQuotes(): Promise<QuoteRecord[]> {
