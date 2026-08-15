@@ -103,8 +103,14 @@ async function generateQuotePdf(opts: {
   const { quote, lines, fee, discount, notes } = opts;
   const { jsPDF } = await import("jspdf");
   const autoTable = (await import("jspdf-autotable")).default;
+  const { ARIAL_REGULAR_B64, ARIAL_BOLD_B64 } = await import("@/lib/pdf/pdf-fonts");
 
   const doc = new jsPDF();
+  // Fuente Unicode embebida: las fuentes estándar de jsPDF corrompen acentos y el símbolo €.
+  doc.addFileToVFS("arial.ttf", ARIAL_REGULAR_B64);
+  doc.addFont("arial.ttf", "arial", "normal");
+  doc.addFileToVFS("arialbd.ttf", ARIAL_BOLD_B64);
+  doc.addFont("arialbd.ttf", "arial", "bold");
   const pageW = doc.internal.pageSize.getWidth();
   const margin = 16;
   const brand: [number, number, number] = [79, 209, 255];
@@ -114,18 +120,18 @@ async function generateQuotePdf(opts: {
   doc.setFillColor(...dark);
   doc.rect(0, 0, pageW, 34, "F");
   doc.setTextColor(...brand);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("arial", "bold");
   doc.setFontSize(20);
   doc.text("PC LAB", margin, 15);
   doc.setTextColor(220, 220, 220);
   doc.setFontSize(9);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("arial", "normal");
   doc.text("Estudio de PC a medida", margin, 22);
   doc.text(`${siteConfig.email} · ${siteConfig.phone}`, margin, 28);
   doc.setFontSize(11);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("arial", "bold");
   doc.text("COTIZACIÓN", pageW - margin, 15, { align: "right" });
-  doc.setFont("helvetica", "normal");
+  doc.setFont("arial", "normal");
   doc.setFontSize(9);
   doc.text(`Nº ${quote.id}`, pageW - margin, 21, { align: "right" });
   doc.text(`Fecha: ${formatDate(quote.createdAt)}`, pageW - margin, 27, { align: "right" });
@@ -134,9 +140,9 @@ async function generateQuotePdf(opts: {
   let y = 44;
   doc.setTextColor(40, 40, 40);
   doc.setFontSize(11);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("arial", "bold");
   doc.text("Cliente", margin, y);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("arial", "normal");
   doc.setFontSize(10);
   y += 6;
   doc.text(quote.name, margin, y);
@@ -147,9 +153,9 @@ async function generateQuotePdf(opts: {
     doc.text(quote.phone, margin, y);
   }
   if (quote.presetLabel) {
-    doc.setFont("helvetica", "bold");
+    doc.setFont("arial", "bold");
     doc.text("Configuración", pageW / 2 + 10, 44);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("arial", "normal");
     doc.text(quote.presetLabel, pageW / 2 + 10, 50);
   }
   y += 8;
@@ -167,8 +173,8 @@ async function generateQuotePdf(opts: {
     head: [["Componente", "Pieza", "Precio"]],
     body,
     theme: "grid",
-    styles: { fontSize: 9, cellPadding: 2.5, textColor: [40, 40, 40] },
-    headStyles: { fillColor: dark, textColor: brand, fontStyle: "bold" },
+    styles: { font: "arial", fontSize: 9, cellPadding: 2.5, textColor: [40, 40, 40] },
+    headStyles: { font: "arial", fillColor: dark, textColor: brand, fontStyle: "bold" },
     alternateRowStyles: { fillColor: [245, 247, 250] },
     columnStyles: {
       0: { cellWidth: 40 },
@@ -184,11 +190,11 @@ async function generateQuotePdf(opts: {
   doc.setFillColor(...dark);
   doc.roundedRect(pageW - margin - 90, finalY + 6, 90, 16, 2, 2, "F");
   doc.setTextColor(...brand);
-  doc.setFont("helvetica", "bold");
+  doc.setFont("arial", "bold");
   doc.setFontSize(13);
   doc.text(`TOTAL: ${eur(total)}`, pageW - margin - 45, finalY + 16.5, { align: "center" });
   doc.setTextColor(120, 120, 120);
-  doc.setFont("helvetica", "normal");
+  doc.setFont("arial", "normal");
   doc.setFontSize(8);
   doc.text("IVA incluido", pageW - margin - 45, finalY + 21, { align: "center" });
 
@@ -197,9 +203,9 @@ async function generateQuotePdf(opts: {
   doc.setTextColor(60, 60, 60);
   doc.setFontSize(9);
   if (notes.trim()) {
-    doc.setFont("helvetica", "bold");
+    doc.setFont("arial", "bold");
     doc.text("Notas", margin, fy);
-    doc.setFont("helvetica", "normal");
+    doc.setFont("arial", "normal");
     fy += 5;
     const wrapped = doc.splitTextToSize(notes.trim(), pageW - margin * 2) as string[];
     doc.text(wrapped, margin, fy);
